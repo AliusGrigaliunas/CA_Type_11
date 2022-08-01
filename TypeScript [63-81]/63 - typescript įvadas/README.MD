@@ -10,7 +10,7 @@
 
 ## Lounch project
 1. open __public/index.html__ in browser (best with __Live Server__)
-2. open CLI in current folder and lounch command:
+2. open CLI in current folder and launch command:
 ```
 npm start
 ```
