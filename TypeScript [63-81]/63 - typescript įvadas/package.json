@@ -4,7 +4,7 @@
   "description": "labai geras ivadas",
   "main": "src/main.ts",
   "scripts": {
-    "tsc-v": "tsc -v"
+    "start": "tsc -w"
   },
   "author": "Zilvinas Vidmantas",
   "license": "ISC",
