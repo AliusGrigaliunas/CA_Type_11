@@ -1,0 +1,14 @@
+{
+  "name": "ts-ivadas",
+  "version": "1.0.0",
+  "description": "labai geras ivadas",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "tsc -w"
+  },
+  "author": "Zilvinas Vidmantas",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
