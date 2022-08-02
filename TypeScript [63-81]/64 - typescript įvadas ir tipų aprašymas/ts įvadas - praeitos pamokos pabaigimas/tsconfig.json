@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext", // į kokią JavaScript versiją paversti kodą                 
-    "rootDir": "./src", // aplankas, kuriame ieškoti TypeScript failų                           
+    // "rootDir": "./src", // aplankas, kuriame ieškoti TypeScript failų   
     "outDir": "./public/js", // aplankas į kurį sudėti transpiliuotus JavaScript failus                                    
     "sourceMap": true, // ar susieti transpiliuoto JavaScript failų eilutes su orginalių failų eilutėmis                           
     "forceConsistentCasingInFileNames": true, // ar versti vadinti failus pagal vienodą failų įvardinimo sintaksę
@@ -21,4 +21,7 @@
     "removeComments": true, // ar pašalinti komentarus sukompiliuotuose failuose                    
     "skipLibCheck": true // ar praleisti tipų tikrinimą naudojant bibliotekas
   },
+  "include": [
+    "./src/main.ts",
+  ]
 }

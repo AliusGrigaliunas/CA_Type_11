@@ -7,5 +7,4 @@ console.log({
     'add(a, b)': add(a, b),
     'add(3, 10)': add(3, 10),
 });
-console.log('aaaaaaaaaaaaa');
 //# sourceMappingURL=main.js.map

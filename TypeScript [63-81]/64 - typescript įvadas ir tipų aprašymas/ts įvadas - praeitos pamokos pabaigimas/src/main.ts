@@ -1,12 +1,5 @@
-const add = (a: number, b: number): number => a + b;
+const numbers: number[] = [1, 2, 3, 4, 5, 6];
 
-let a: number = 7;
-let b: number = 8;
+const doubleNumbers = numbers.map((num) => num * 2);
 
-console.log({ a, b });
-console.log({
-  'add(a, b)': add(a, b),
-  'add(3, 10)': add(3, 10),
-});
-
-console.log('aaaaaaaaaaaaa');
+console.log(doubleNumbers);
