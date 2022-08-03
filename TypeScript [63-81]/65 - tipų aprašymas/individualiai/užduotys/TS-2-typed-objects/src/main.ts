@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /*
   Objektų tipai aprašomi aprašant kiekvieną savybę atskirai.
    Jeigu savybė nėra privaloma, prie savybės pavadinimo rašome klaustuką
@@ -54,7 +55,7 @@ printCouple(person1, person2);
 // Atlikite užduotis, funkcijas aprašydami tipais
 console.group('1. Sukurkite funkciją kuri patikrina ar žmogus yra pilnametis');
 {
-  const isAdult = () => { };
+  const isAdult = ({ age }: Person): boolean => age >= 18;
 
   console.log({
     [createFullname(person1)]: isAdult(person1),
@@ -66,7 +67,7 @@ console.groupEnd();
 
 console.group('2. Sukurkite funkciją, kuri patikrina ar Person tipo objektas turi ūgį ir svorį');
 {
-  const isFullyDescribedPerson = () => { };
+  const isFullyDescribedPerson = (p: Person): boolean => Boolean(p.height && p.weight);
 
   console.log({
     [createFullname(person1)]: isFullyDescribedPerson(person1),
@@ -78,7 +79,7 @@ console.groupEnd();
 
 console.group('3. Sukurkite funkciją, kuri grąžina žmogaus incialus');
 {
-  const createInitials = () => { };
+  const createInitials = (p: Person) => `${p.name[0]}.${p.surname[0]}.`;
 
   console.log({
     [createFullname(person1)]: createInitials(person1),

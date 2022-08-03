@@ -30,7 +30,7 @@ const printCouple = (p1, p2) => {
 printCouple(person1, person2);
 console.group('1. Sukurkite funkciją kuri patikrina ar žmogus yra pilnametis');
 {
-    const isAdult = () => { };
+    const isAdult = ({ age }) => age >= 18;
     console.log({
         [createFullname(person1)]: isAdult(person1),
         [createFullname(person2)]: isAdult(person2),
@@ -40,7 +40,7 @@ console.group('1. Sukurkite funkciją kuri patikrina ar žmogus yra pilnametis')
 console.groupEnd();
 console.group('2. Sukurkite funkciją, kuri patikrina ar Person tipo objektas turi ūgį ir svorį');
 {
-    const isFullyDescribedPerson = () => { };
+    const isFullyDescribedPerson = (p) => Boolean(p.height && p.weight);
     console.log({
         [createFullname(person1)]: isFullyDescribedPerson(person1),
         [createFullname(person2)]: isFullyDescribedPerson(person2),
@@ -50,7 +50,7 @@ console.group('2. Sukurkite funkciją, kuri patikrina ar Person tipo objektas tu
 console.groupEnd();
 console.group('3. Sukurkite funkciją, kuri grąžina žmogaus incialus');
 {
-    const createInitials = () => { };
+    const createInitials = (p) => `${p.name[0]}.${p.surname[0]}.`;
     console.log({
         [createFullname(person1)]: createInitials(person1),
         [createFullname(person2)]: createInitials(person2),
