@@ -21,16 +21,14 @@ const people = [{
         height: 1.45,
         weight: 45,
     }];
+const printString = (str) => console.log(str);
 const printStrings = (strings) => {
-    const printString = (str) => console.log(str);
     strings.forEach(printString);
 };
-const sumNumbers = (nums) => {
-    const numberSumReducer = (sum, num) => sum + num;
-    return nums.reduce(numberSumReducer, 0);
-};
+const numberSumReducer = (sum, num) => sum + num;
+const sumNumbers = (nums) => nums.reduce(numberSumReducer, 0);
 const createPeopleArray = (p1, p2) => [p1, p2];
-console.group('Panaudojimo pavyzdžiai:');
+console.groupCollapsed('Panaudojimo pavyzdžiai:');
 {
     console.group('printStrings');
     {
@@ -58,23 +56,42 @@ console.group('Užduotys');
 {
     console.group('1. Aprašykite funkcijoms ir kintamiesiems tipus');
     {
-        const numbers = [1, -8, -6, 7, 5, 1];
+        const nums = [1, -8, -6, 7, 5, 1];
+        const positiveNumberReducer = (sum, num) => (num > 0 ? sum + num : sum);
         function addPositiveNumbers(arr) {
-            const positiveNumberReducer = (sum, num) => (num > 0 ? sum + num : sum);
             return arr.reduce(positiveNumberReducer, 0);
         }
         console.log({
-            numbers,
-            sumOfPositiveNumbers: addPositiveNumbers(numbers),
+            nums,
+            sumOfPositiveNumbers: addPositiveNumbers(nums),
         });
     }
     console.groupEnd();
     console.group('2. Sukurkite ir tipais aprašykite funkciją, kuri sudarytų string\'ą iš string\'ų masyvo elementų pirmųjų raidžių');
     {
+        const createAbbrevation = (words) => words
+            .reduce((prevAbbrv, word) => prevAbbrv + word[0], '');
+        const stringMatrix = [
+            ['Lietuviškas', 'Nepriklausomas', 'Kanalas'],
+            ['Lietuvos', 'Respublikos', 'Televizija'],
+            ['Loughing', 'Out', 'Loud'],
+        ];
+        stringMatrix.forEach((words) => {
+            console.log(`[ ${words.join(', ')}] ->`, createAbbrevation(words));
+        });
     }
     console.groupEnd();
     console.group('3. Sukurkite ir tipais aprašykite funkciją, kuri saudaugintų visus number masyvo skaičius');
     {
+        const multiplyNumbers = (nums) => nums.reduce((prevProduct, num) => prevProduct * num);
+        const numberMatrix = [
+            [1, 7, 8],
+            [98, 74, 5, 0],
+            [17, 10, 5],
+        ];
+        numberMatrix.forEach((nums) => {
+            console.log(`[ ${nums.join(', ')}] ->`, multiplyNumbers(nums));
+        });
     }
     console.groupEnd();
 }
