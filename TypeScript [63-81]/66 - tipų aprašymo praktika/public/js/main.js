@@ -55,7 +55,7 @@ console.groupCollapsed('4. Sukurkite funkciją, kuri grąžina <true>, jeigu žo
     });
 }
 console.groupEnd();
-console.group('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
+console.groupCollapsed('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
 {
     const VOWEL_REGEX = /[aeiyouAEIOUYąęėįųūĄĘĖĮŲŪ]/g;
     const countVowels = (str) => {
@@ -78,8 +78,26 @@ console.group('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
     });
 }
 console.groupEnd();
-console.groupCollapsed('6. Sukurkite funkciją, kuri grąžina bet kokios raidės kiekį žodyje');
+console.group('6. Sukurkite funkciją, kuri grąžina bet kokios raidės kiekį žodyje');
 {
+    const recurrenceCount = (str, letter) => {
+        let count = 0;
+        for (let i = 0; i < str.length; i += 1) {
+            if (str[i] === letter) {
+                count += 1;
+            }
+        }
+        return count;
+    };
+    const args1 = ['labas', 'a'];
+    const args2 = ['labas', 'b'];
+    const args3 = ['labas', 'p'];
+    console.table({
+        [`recurrenceCount(${JSON.stringify(args1)})`]: recurrenceCount(...args1),
+        [`recurrenceCount(${JSON.stringify(args2)})`]: recurrenceCount(...args2),
+        [`recurrenceCount(${JSON.stringify(args3)})`]: recurrenceCount(...args3),
+        empty: undefined,
+    });
 }
 console.groupEnd();
 console.groupCollapsed('7. Sukurkite funkciją, kuri ištrintų pirmą surastą simbolį žodyje ir grąžintų pakeistą žodį');

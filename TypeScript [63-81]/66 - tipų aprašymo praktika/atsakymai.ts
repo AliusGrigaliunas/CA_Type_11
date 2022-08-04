@@ -139,10 +139,10 @@ console.groupCollapsed('7. Sukurkite funkciją, kuri ištrintų pirmą surastą 
 console.groupEnd();
 
 // 20 min
-//  7. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.
+//  8. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.
 //  Ši funkcija turi žodyje ištrinti visas raides, kurios perduotos antruoju parametru.
 //  Atlikus veiksmus, grąžinti pakeistą žodį
-console.groupCollapsed('7. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.');
+console.groupCollapsed('8. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.');
 {
   const filterLetters = (str: string, letters: string[]): string => letters
     .reduce((prevStr, letter) => prevStr.replaceAll(letter, ''), str);
@@ -153,12 +153,12 @@ console.groupCollapsed('7. Sukurkite funkciją, kuri pirmu parametru priimtų ž
 console.groupEnd();
 
 // 60 min
-// 8. Sukurkite funkciją, kuri taiso teksto klaidas, pagal tokius reikalavimus:
+// 9. Sukurkite funkciją, kuri taiso teksto klaidas, pagal tokius reikalavimus:
 //  * Pirma sakinio raidė didžioji.
 //  * Po skiriamojo ženklo tarpas, o prieš skiriamajį ženklą nėra tarpo (skiriamieji ženklai: .,!?)
 //  * Bet koks kiekis tarpų pakeičiamas vienu tarpu
 //  * Pašalinti tarpus aplink visą tekstą
-console.groupCollapsed('8. Sukurkite funkciją, kuri taiso pastraipos klaidas');
+console.groupCollapsed('9. Sukurkite funkciją, kuri taiso pastraipos klaidas');
 {
   type StringModifier = (str: string) => string;
   type DecomposedText = {
@@ -222,7 +222,7 @@ console.groupCollapsed('8. Sukurkite funkciją, kuri taiso pastraipos klaidas');
       .map((sentence) => sentence.trim())
       .map(capitalize);
 
-    result = composeText({ ...decomposedText, sentences });
+    result = composeText({ sentences, separators: decomposedText.separators });
 
     return result;
   };

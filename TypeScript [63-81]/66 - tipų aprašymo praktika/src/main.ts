@@ -114,7 +114,7 @@ console.groupEnd();
 
 // 15 min - 10:43
 // hint: regex
-console.group('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
+console.groupCollapsed('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
 {
   const VOWEL_REGEX = /[aeiyouAEIOUYąęėįųūĄĘĖĮŲŪ]/g;
 
@@ -144,10 +144,30 @@ console.group('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
 }
 console.groupEnd();
 
-// 15 min
-console.groupCollapsed('6. Sukurkite funkciją, kuri grąžina bet kokios raidės kiekį žodyje');
+// 15 min - 11:50
+console.group('6. Sukurkite funkciją, kuri grąžina bet kokios raidės kiekį žodyje');
 {
+  const recurrenceCount = (str: string, letter: string): number => {
+    let count = 0;
+    for (let i = 0; i < str.length; i += 1) {
+      if (str[i] === letter) {
+        count += 1;
+      }
+    }
 
+    return count;
+  };
+
+  const args1: StringPair = ['labas', 'a'];
+  const args2: StringPair = ['labas', 'b'];
+  const args3: StringPair = ['labas', 'p'];
+
+  console.table({
+    [`recurrenceCount(${JSON.stringify(args1)})`]: recurrenceCount(...args1),
+    [`recurrenceCount(${JSON.stringify(args2)})`]: recurrenceCount(...args2),
+    [`recurrenceCount(${JSON.stringify(args3)})`]: recurrenceCount(...args3),
+    empty: undefined,
+  });
 }
 console.groupEnd();
 
