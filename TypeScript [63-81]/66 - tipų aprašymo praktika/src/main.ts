@@ -38,42 +38,82 @@
     * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
 */
 
+type StringPair = [string, string];
+
 // 10 min - 8:45
-console.group('1. Sukurkite funkciją, kuri atspausdiną tekstą didžiosiomis raidėmis');
+console.groupCollapsed('1. Sukurkite funkciją, kuri atspausdiną tekstą didžiosiomis raidėmis');
 {
   const toUpperCase = (str: string): string => str.toUpperCase();
 
+  const arg1 = 'labas';
+  const arg2 = 'visogero';
+  const arg3 = 'man patinka bananai';
+
   console.table({
-    'toUpperCase(\'labas\')': toUpperCase('labas'),
-    'toUpperCase(\'visogero\')': toUpperCase('visogero'),
-    'toUpperCase(\'man patinka bananai\')': toUpperCase('man patinka bananai'),
+    [`toUpperCase(${arg1})`]: toUpperCase(arg1),
+    [`toUpperCase(${arg2})`]: toUpperCase(arg2),
+    [`toUpperCase(${arg3})`]: toUpperCase(arg3),
     empty: undefined,
   });
 }
 console.groupEnd();
 
-// 10 min
+// 10 min - 9:13
 console.groupCollapsed('2. Sukurkite funkciją, kuri grąžina pirmo ir antro parametro bendrą simbolių skaičių');
 {
+  const symbolCount = (str1: string, str2: string): number => str1.length + str2.length;
 
+  const args1: StringPair = ['labas', 'vakaras'];
+  const args2: StringPair = ['viso', 'gero'];
+  const args3: StringPair = ['laba', 'diena'];
+
+  console.table({
+    [`symbolCount(${JSON.stringify(args1)})`]: symbolCount(...args1),
+    [`symbolCount(${JSON.stringify(args2)})`]: symbolCount(...args2),
+    [`symbolCount(${JSON.stringify(args3)})`]: symbolCount(...args3),
+    empty: undefined,
+  });
 }
 console.groupEnd();
 
-// 10 min
+// 10 min - 9:45
 console.groupCollapsed('3. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra 2 parametru perduoda raidė, priešingu atveju false');
 {
+  const includesLetter = (str: string, letter: string): boolean => str.includes(letter);
 
+  const args1: StringPair = ['labas', 'l'];
+  const args2: StringPair = ['labas', 'z'];
+  const args3: StringPair = ['kepenys', 'e'];
+
+  console.table({
+    [`includesLetter(${JSON.stringify(args1)})`]: includesLetter(...args1),
+    [`includesLetter(${JSON.stringify(args2)})`]: includesLetter(...args2),
+    [`includesLetter(${JSON.stringify(args3)})`]: includesLetter(...args3),
+    empty: undefined,
+  });
 }
 console.groupEnd();
 
-// 10 min
-console.groupCollapsed('4. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra lyginis skaičius simbolių');
+// 10 min - 10:17
+console.group('4. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra lyginis skaičius simbolių');
 {
+  const equalSymbolCount = (str: string): boolean => str.length % 2 === 0;
 
+  const arg1 = 'labas';
+  const arg2 = 'visogero';
+  const arg3 = 'man patinka bananai';
+
+  console.table({
+    [`equalSymbolCount(${arg1})`]: equalSymbolCount(arg1),
+    [`equalSymbolCount(${arg2})`]: equalSymbolCount(arg2),
+    [`equalSymbolCount(${arg3})`]: equalSymbolCount(arg3),
+    empty: undefined,
+  });
 }
 console.groupEnd();
 
-// 15 min
+// 15 min - 10:43
+// hint: regex
 console.groupCollapsed('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
 {
 
@@ -95,7 +135,7 @@ console.groupCollapsed('7. Sukurkite funkciją, kuri ištrintų pirmą surastą 
 console.groupEnd();
 
 // 20 min
-//  7. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.
+//  8. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.
 //  Ši funkcija turi žodyje ištrinti visas raides, kurios perduotos antruoju parametru.
 //  Atlikus veiksmus, grąžinti pakeistą žodį
 console.groupCollapsed('8. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.');
@@ -105,7 +145,7 @@ console.groupCollapsed('8. Sukurkite funkciją, kuri pirmu parametru priimtų ž
 console.groupEnd();
 
 // 60 min
-// 8. Sukurkite funkciją, kuri taiso teksto klaidas, pagal tokius reikalavimus:
+// 9. Sukurkite funkciją, kuri taiso teksto klaidas, pagal tokius reikalavimus:
 //  * Pirma sakinio raidė didžioji.
 //  * Po skiriamojo ženklo tarpas, o prieš skiriamajį ženklą nėra tarpo (skiriamieji ženklai: .,!?)
 //  * Bet koks kiekis tarpų pakeičiamas vienu tarpu
