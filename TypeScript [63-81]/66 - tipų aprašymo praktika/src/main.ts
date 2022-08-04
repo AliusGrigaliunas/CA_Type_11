@@ -38,10 +38,17 @@
     * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
 */
 
-// 10 min
+// 10 min - 8:45
 console.group('1. Sukurkite funkciją, kuri atspausdiną tekstą didžiosiomis raidėmis');
 {
+  const toUpperCase = (str: string): string => str.toUpperCase();
 
+  console.table({
+    'toUpperCase(\'labas\')': toUpperCase('labas'),
+    'toUpperCase(\'visogero\')': toUpperCase('visogero'),
+    'toUpperCase(\'man patinka bananai\')': toUpperCase('man patinka bananai'),
+    empty: undefined,
+  });
 }
 console.groupEnd();
 

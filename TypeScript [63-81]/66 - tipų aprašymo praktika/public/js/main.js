@@ -1,6 +1,13 @@
 "use strict";
 console.group('1. Sukurkite funkciją, kuri atspausdiną tekstą didžiosiomis raidėmis');
 {
+    const toUpperCase = (str) => str.toUpperCase();
+    console.table({
+        'toUpperCase(\'labas\')': toUpperCase('labas'),
+        'toUpperCase(\'visogero\')': toUpperCase('visogero'),
+        'toUpperCase(\'man patinka bananai\')': toUpperCase('man patinka bananai'),
+        empty: undefined,
+    });
 }
 console.groupEnd();
 console.groupCollapsed('2. Sukurkite funkciją, kuri grąžina pirmo ir antro parametro bendrą simbolių skaičių');
