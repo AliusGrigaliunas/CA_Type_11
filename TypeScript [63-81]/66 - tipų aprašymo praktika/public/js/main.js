@@ -1,89 +1,38 @@
 "use strict";
-console.groupCollapsed('Masyvų užduotys');
+console.group('1. Sukurkite funkciją, kuri atspausdiną tekstą didžiosiomis raidėmis');
 {
-    const students = [{
-            name: 'Valius',
-            surname: 'Koridas',
-            course: 1,
-            avg: 7.2,
-        }, {
-            name: 'Virga',
-            surname: 'Maikaitė',
-            course: 2,
-            avg: 6.3,
-        }, {
-            name: 'Šurna',
-            surname: 'Mauzytė',
-            course: 1,
-            avg: 8.1,
-        }, {
-            name: 'Grybas',
-            surname: 'Beržauskas',
-            course: 1,
-            avg: 8.1,
-        }, {
-            name: 'Surtė',
-            surname: 'Koridaitė',
-            course: 3,
-            avg: 9.7,
-        }, {
-            name: 'Vazonius',
-            surname: 'Sėkla',
-            course: 4,
-            avg: 5.2,
-        }];
-    console.group('pilnų vardų masyvas');
-    const fullnames = students.map(({ name, surname }) => `${name} ${surname}`);
-    console.table(fullnames);
-    console.groupEnd();
-    console.group('pirmo kurso studentai');
-    const studentsFirstCourse = students
-        .filter(({ course }) => course === 1);
-    console.table(studentsFirstCourse);
-    console.groupEnd();
-    console.group('visų studentų vidurkis');
-    const avg = students
-        .reduce((prevSum, student) => prevSum + student.avg, 0) / students.length;
-    console.table(avg);
-    console.groupEnd();
 }
 console.groupEnd();
-console.group('Funkcijų užduotys');
+console.groupCollapsed('2. Sukurkite funkciją, kuri grąžina pirmo ir antro parametro bendrą simbolių skaičių');
 {
-    const numbers = [1, 2, 3, 4, 5];
-    const numbers2 = [3, 9, 5, 7];
-    console.group('Funkciją, kuri grąžina skaičių padauginta iš 2');
-    {
-        const double = (num) => num * 2;
-        console.table({
-            'double(2)': double(2),
-            'double(4)': double(4),
-            empty: undefined,
-        });
-        const numbersDoubled = numbers.map(double);
-        console.table(numbersDoubled);
-    }
-    console.groupEnd();
-    console.group('Funkciją, kuri tarpus sakinyje pakeičia brūkšneliais');
-    {
-        const replaceSpacesWithDash = (str) => str.replaceAll(' ', '-');
-        console.table({
-            'replaceSpacesWithDash(\'labas vakaras\')': replaceSpacesWithDash('labas vakaras'),
-            'replaceSpacesWithDash(\'labas rytas\')': replaceSpacesWithDash('labas rytas'),
-            empty: undefined,
-        });
-    }
-    console.groupEnd();
-    console.group('Funkciją, kuri skaičiuoja skaičių masyvo vidurkį');
-    {
-        const calcAvg = (arr) => arr.reduce((sum, num) => sum + num) / arr.length;
-        console.table({
-            'calcAvg([1, 2, 3, 4, 5])': calcAvg(numbers),
-            'calcAvg([3, 9, 5, 7])': calcAvg(numbers2),
-            empty: undefined,
-        });
-    }
-    console.groupEnd();
+}
+console.groupEnd();
+console.groupCollapsed('3. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra 2 parametru perduoda raidė, priešingu atveju false');
+{
+}
+console.groupEnd();
+console.groupCollapsed('4. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra lyginis skaičius simbolių');
+{
+}
+console.groupEnd();
+console.groupCollapsed('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
+{
+}
+console.groupEnd();
+console.groupCollapsed('6. Sukurkite funkciją, kuri grąžina bet kokios raidės kiekį žodyje');
+{
+}
+console.groupEnd();
+console.groupCollapsed('7. Sukurkite funkciją, kuri ištrintų pirmą surastą simbolį žodyje ir grąžintų pakeistą žodį');
+{
+}
+console.groupEnd();
+console.groupCollapsed('8. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.');
+{
+}
+console.groupEnd();
+console.groupCollapsed('9. Sukurkite funkciją, kuri taiso pastraipos klaidas');
+{
 }
 console.groupEnd();
 //# sourceMappingURL=main.js.map

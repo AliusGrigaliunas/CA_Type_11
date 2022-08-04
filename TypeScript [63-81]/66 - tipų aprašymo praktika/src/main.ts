@@ -1,115 +1,110 @@
+/* eslint-disable no-console */
+/* eslint-disable no-inner-declarations */
 /* eslint-disable no-lone-blocks */
 
-console.groupCollapsed('Masyvų užduotys');
+/*
+  Užduočių atlikimo eiga:
+  * Pirmiausiai perskaitykite visą užduotį:
+  * Klauskite dėstytojo užduoties paaiškinimo, jeigu užduotis nėra aiški.
+  * Galvoje susidarytkite sprendimo planą:
+    * Kaip atliksiu užduotį? Galbūt verta pasibraižyti sprendimo idėją ant lapelio?
+    * Kokių tipų reikės? Parametrų tipai, rezultatų tipai, funkcijų tipai.
+    * Kaip aiškiai ir tvarkingai pateiksiu rezultatus?
+  * Bandykite atlikti užduotį:
+    * Pavyko:
+      * Atspausdinkite rezultatus ir/arba veikimo pavyzdžius
+      * Pabandykite patobulinti savo kodą:
+        * pabandykite aiškiau aprašyti kintamųjų/tipų pavadinimus
+        * sužiūrėkite ar tikrai naudojate vieningą sintaksę
+      * Palyginkite savo sprendimą su užuočių atsakymų failu.
+      * Suformuokite klausimus dėstytojui, pagal sprendimų skirtumus
+    * Nepavyko:
+      * pažiūrėkite atsakymų failą ir PO VIENĄ EILUTĘ nusirašykite sprendimą
+      * rašant kiekvieną eilutę smulkmeniškai suformuokite klausimus.
+    * Spręskite kitus uždavinius, o kai dėstytojas aiškins užduoties sprendimą, klausykitės
+      * Po dėstytojo sprendimo ir aiškinimo užduokite klausimus, kurių vis dar nesuprantate.
+  Patarimai:
+    * Paspauskite komandą: ALT + Z - tai padės lengviau skaityti užduočių tekstą
+    * Nežiūrėkite į atsakymų failus anksčiau laiko.
+      jūsų tikslas lavinti inžinerinį mąstymą, o ne atlikti užduotis.
+    * Nesedėkite prie kompiuterio ilgiau nei 1 val iš eilės, darykite pertraukas po 10 min
+    * Klauskite visko ko nesuprantate. Neklausdami eikvojat savo laiką, kurį šie kursai taupo.
+      Gerbiat savo laiką - gerbiat save.
+    * Kodo tvarka ir aiškumas tiek pat svarbūs kiek funkcionalumas. Išmoksite tai dabar,
+      arba kuomet negausite darbo dėl netvarkingo kodo.
+    * Atlikę užduotį, užduokite sau klausimą: "Ar tai geriausia ką galėjau?"
+    * Įsigilinimas jūsų žinias iš supratimo perkelia į suvokimą. Tik suvokiant dalykus, galite
+      žinias pritaikyti kūrybiškai. Iš to seka, kad užduoties atlikimo kokybė >>> užduočių kiekis
+    * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
+*/
+
+// 10 min
+console.group('1. Sukurkite funkciją, kuri atspausdiną tekstą didžiosiomis raidėmis');
 {
-  type Student = {
-    name: string,
-    surname: string,
-    course: number,
-    avg: number,
-  }
 
-  type StudentFirstCourse = {
-    name: string,
-    surname: string,
-    course: 1,
-    avg: number,
-  }
-
-  type Fullname = string;
-
-  const students: Student[] = [{
-    name: 'Valius',
-    surname: 'Koridas',
-    course: 1,
-    avg: 7.2,
-  }, {
-    name: 'Virga',
-    surname: 'Maikaitė',
-    course: 2,
-    avg: 6.3,
-  }, {
-    name: 'Šurna',
-    surname: 'Mauzytė',
-    course: 1,
-    avg: 8.1,
-  }, {
-    name: 'Grybas',
-    surname: 'Beržauskas',
-    course: 1,
-    avg: 8.1,
-  }, {
-    name: 'Surtė',
-    surname: 'Koridaitė',
-    course: 3,
-    avg: 9.7,
-  }, {
-    name: 'Vazonius',
-    surname: 'Sėkla',
-    course: 4,
-    avg: 5.2,
-  }];
-
-  console.group('pilnų vardų masyvas');
-  const fullnames: Fullname[] = students.map<Fullname>(({ name, surname }) => `${name} ${surname}`);
-  console.table(fullnames);
-  console.groupEnd();
-
-  console.group('pirmo kurso studentai');
-  const studentsFirstCourse: StudentFirstCourse[] = students
-    .filter(({ course }) => course === 1) as StudentFirstCourse[];
-  console.table(studentsFirstCourse);
-  console.groupEnd();
-
-  console.group('visų studentų vidurkis');
-  const avg: number = students
-    .reduce((prevSum, student) => prevSum + student.avg, 0) / students.length;
-  console.table(avg);
-  console.groupEnd();
 }
 console.groupEnd();
 
-console.group('Funkcijų užduotys');
+// 10 min
+console.groupCollapsed('2. Sukurkite funkciją, kuri grąžina pirmo ir antro parametro bendrą simbolių skaičių');
 {
-  const numbers = [1, 2, 3, 4, 5];
-  const numbers2 = [3, 9, 5, 7];
 
-  console.group('Funkciją, kuri grąžina skaičių padauginta iš 2');
-  {
-    const double = (num: number): number => num * 2;
+}
+console.groupEnd();
 
-    console.table({
-      'double(2)': double(2),
-      'double(4)': double(4),
-      empty: undefined,
-    });
-    const numbersDoubled: number[] = numbers.map(double);
-    console.table(
-      numbersDoubled,
-    );
-  }
-  console.groupEnd();
+// 10 min
+console.groupCollapsed('3. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra 2 parametru perduoda raidė, priešingu atveju false');
+{
 
-  console.group('Funkciją, kuri tarpus sakinyje pakeičia brūkšneliais');
-  {
-    const replaceSpacesWithDash = (str: string): string => str.replaceAll(' ', '-');
-    console.table({
-      'replaceSpacesWithDash(\'labas vakaras\')': replaceSpacesWithDash('labas vakaras'),
-      'replaceSpacesWithDash(\'labas rytas\')': replaceSpacesWithDash('labas rytas'),
-      empty: undefined,
-    });
-  }
-  console.groupEnd();
+}
+console.groupEnd();
 
-  console.group('Funkciją, kuri skaičiuoja skaičių masyvo vidurkį');
-  {
-    const calcAvg = (arr: number[]): number => arr.reduce((sum, num) => sum + num) / arr.length;
-    console.table({
-      'calcAvg([1, 2, 3, 4, 5])': calcAvg(numbers),
-      'calcAvg([3, 9, 5, 7])': calcAvg(numbers2),
-      empty: undefined,
-    });
-  }
-  console.groupEnd();
+// 10 min
+console.groupCollapsed('4. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra lyginis skaičius simbolių');
+{
+
+}
+console.groupEnd();
+
+// 15 min
+console.groupCollapsed('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
+{
+
+}
+console.groupEnd();
+
+// 15 min
+console.groupCollapsed('6. Sukurkite funkciją, kuri grąžina bet kokios raidės kiekį žodyje');
+{
+
+}
+console.groupEnd();
+
+// 15 min
+console.groupCollapsed('7. Sukurkite funkciją, kuri ištrintų pirmą surastą simbolį žodyje ir grąžintų pakeistą žodį');
+{
+
+}
+console.groupEnd();
+
+// 20 min
+//  7. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.
+//  Ši funkcija turi žodyje ištrinti visas raides, kurios perduotos antruoju parametru.
+//  Atlikus veiksmus, grąžinti pakeistą žodį
+console.groupCollapsed('8. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.');
+{
+
+}
+console.groupEnd();
+
+// 60 min
+// 8. Sukurkite funkciją, kuri taiso teksto klaidas, pagal tokius reikalavimus:
+//  * Pirma sakinio raidė didžioji.
+//  * Po skiriamojo ženklo tarpas, o prieš skiriamajį ženklą nėra tarpo (skiriamieji ženklai: .,!?)
+//  * Bet koks kiekis tarpų pakeičiamas vienu tarpu
+//  * Pašalinti tarpus aplink visą tekstą
+console.groupCollapsed('9. Sukurkite funkciją, kuri taiso pastraipos klaidas');
+{
+
 }
 console.groupEnd();
