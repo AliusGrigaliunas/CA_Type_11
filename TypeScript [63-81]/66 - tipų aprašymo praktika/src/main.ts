@@ -95,7 +95,7 @@ console.groupCollapsed('3. Sukurkite funkciją, kuri grąžina <true>, jeigu žo
 console.groupEnd();
 
 // 10 min - 10:17
-console.group('4. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra lyginis skaičius simbolių');
+console.groupCollapsed('4. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra lyginis skaičius simbolių');
 {
   const equalSymbolCount = (str: string): boolean => str.length % 2 === 0;
 
@@ -114,9 +114,33 @@ console.groupEnd();
 
 // 15 min - 10:43
 // hint: regex
-console.groupCollapsed('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
+console.group('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
 {
+  const VOWEL_REGEX = /[aeiyouAEIOUYąęėįųūĄĘĖĮŲŪ]/g;
 
+  // const countVowels = (str: string): number => [...str.matchAll(VOWEL_REGEX)].length;
+
+  const countVowels = (str: string): number => {
+    let count = 0;
+    for (let i = 0; i < str.length; i += 1) {
+      if (VOWEL_REGEX.test(str[i])) {
+        count += 1;
+      }
+    }
+
+    return count;
+  };
+
+  const arg1 = 'labas';
+  const arg2 = 'visogero';
+  const arg3 = 'man patinka bananai';
+
+  console.table({
+    [`countVowels(${arg1})`]: countVowels(arg1),
+    [`countVowels(${arg2})`]: countVowels(arg2),
+    [`countVowels(${arg3})`]: countVowels(arg3),
+    empty: undefined,
+  });
 }
 console.groupEnd();
 
