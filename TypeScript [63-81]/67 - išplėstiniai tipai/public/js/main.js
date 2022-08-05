@@ -1,115 +1,58 @@
 "use strict";
-console.groupCollapsed('1. Sukurkite funkciją, kuri atspausdiną tekstą didžiosiomis raidėmis');
+console.group('1. Sąjungos operatorius - UNIONS');
 {
-    const toUpperCase = (str) => str.toUpperCase();
-    const arg1 = 'labas';
-    const arg2 = 'visogero';
-    const arg3 = 'man patinka bananai';
-    console.table({
-        [`toUpperCase(${arg1})`]: toUpperCase(arg1),
-        [`toUpperCase(${arg2})`]: toUpperCase(arg2),
-        [`toUpperCase(${arg3})`]: toUpperCase(arg3),
-        empty: undefined,
-    });
+    console.groupCollapsed('1.1 Sukurkite funkciją "print" kuri priimą string, number arba boolean ir jį atspausdiną');
+    {
+    }
+    console.groupEnd();
+    console.groupCollapsed('1.2 Sukurkite funkciją "getLength" kuri priimą string arba masyvą ir grąžina elementų skaičių');
+    {
+    }
+    console.groupEnd();
+    console.groupCollapsed('1.3 Sukurkite funkciją "isEmpty" kuri priimą string arba masyvą ir grąžiną true, jei parametras tuščias, priešingu atveju - false');
+    {
+    }
+    console.groupEnd();
 }
 console.groupEnd();
-console.groupCollapsed('2. Sukurkite funkciją, kuri grąžina pirmo ir antro parametro bendrą simbolių skaičių');
+console.group('2. Tipų rinkiniai - TUPLES');
 {
-    const symbolCount = (str1, str2) => str1.length + str2.length;
-    const args1 = ['labas', 'vakaras'];
-    const args2 = ['viso', 'gero'];
-    const args3 = ['laba', 'diena'];
-    console.table({
-        [`symbolCount(${JSON.stringify(args1)})`]: symbolCount(...args1),
-        [`symbolCount(${JSON.stringify(args2)})`]: symbolCount(...args2),
-        [`symbolCount(${JSON.stringify(args3)})`]: symbolCount(...args3),
-        empty: undefined,
-    });
+    console.groupCollapsed('2.1. Sukurkite funkciją "getMinMax" kuri priima skaičių masyvą ir grąžina dviejų vietų tipų rinkinį. Pirmas grąžinamo rinkinio elementas - mažiausias skaičių masyvas, antras - didžiausias');
+    {
+    }
+    console.groupEnd();
+    console.groupCollapsed('2.2 Sukurkite funkciją "calcDistance", kuri pagal 2 taškus (Coordinate2D), suskaičiuotų atstumą tarp taškų');
+    {
+    }
+    console.groupEnd();
 }
 console.groupEnd();
-console.groupCollapsed('3. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra 2 parametru perduoda raidė, priešingu atveju false');
+console.group('3. Prielaidos - ASSERTIONS');
 {
-    const includesLetter = (str, letter) => str.includes(letter);
-    const args1 = ['labas', 'l'];
-    const args2 = ['labas', 'z'];
-    const args3 = ['kepenys', 'e'];
-    console.table({
-        [`includesLetter(${JSON.stringify(args1)})`]: includesLetter(...args1),
-        [`includesLetter(${JSON.stringify(args2)})`]: includesLetter(...args2),
-        [`includesLetter(${JSON.stringify(args3)})`]: includesLetter(...args3),
-        empty: undefined,
-    });
+    console.groupCollapsed('3.1 Parašykite kodą, kuris parsiųstų skelbimus pasiekiamus šiuo adresu: "https://jsonplaceholder.typicode.com/posts?userId=1". Parsiųstus duomenis įrašykite į kintamajį "posts", darant parsiųstų duomenų tipo prielaidą. Prieš parsiunčiant duomenis apsirašykite "Post" tipą.');
+    {
+    }
+    console.groupEnd();
+    console.groupCollapsed('3.2 Parašykite kodą, kuris parsiųstų vartotojus pasiekiamus šiuo adresu: "https://jsonplaceholder.typicode.com/users". Parsiųstus duomenis įrašykite į kintamajį "users", darant parsiųstų duomenų tipo prielaidą. Prieš siunčiant duomenis apsirašykite "User" tipą.');
+    {
+    }
+    console.groupEnd();
 }
 console.groupEnd();
-console.groupCollapsed('4. Sukurkite funkciją, kuri grąžina <true>, jeigu žodyje yra lyginis skaičius simbolių');
+console.group('4. Konkretūs tipai - LITERAL TYPES');
 {
-    const equalSymbolCount = (str) => str.length % 2 === 0;
-    const arg1 = 'labas';
-    const arg2 = 'visogero';
-    const arg3 = 'man patinka bananai';
-    console.table({
-        [`equalSymbolCount(${arg1})`]: equalSymbolCount(arg1),
-        [`equalSymbolCount(${arg2})`]: equalSymbolCount(arg2),
-        [`equalSymbolCount(${arg3})`]: equalSymbolCount(arg3),
-        empty: undefined,
-    });
+    console.groupCollapsed('4.1 Sukurkite objektą saugoti produktams, Product, pagal kategorijas: "food", "clothes" ir "other". "products" objektas turi 3 savybės pagal kategorijų pavadinimus, kurių reikšmės - Product[]. Sukūrus ir tipais aprašius "products" struktūrą, sukurkite funkciją "addProduct", kuri pridės produktą pagal kategoriją į "products" objektą. Ši funkcija turi priimti 2 parametrus: 1 - produktas, 2 - kategorijos pavadinimas. Kategorijos pavadinimas turi būti konkretus string tipas, pagal galimas produktų objekto kategorijas. Produkto tipą apsirašykite laisvai.');
+    {
+    }
+    console.groupEnd();
 }
 console.groupEnd();
-console.groupCollapsed('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
+console.group('5. Išvardinimai - ENUMS');
 {
-    const VOWEL_REGEX = /[aeiyouAEIOUYąęėįųūĄĘĖĮŲŪ]/g;
-    const countVowels = (str) => {
-        let count = 0;
-        for (let i = 0; i < str.length; i += 1) {
-            if (VOWEL_REGEX.test(str[i])) {
-                count += 1;
-            }
-        }
-        return count;
-    };
-    const arg1 = 'labas';
-    const arg2 = 'visogero';
-    const arg3 = 'man patinka bananai';
-    console.table({
-        [`countVowels(${arg1})`]: countVowels(arg1),
-        [`countVowels(${arg2})`]: countVowels(arg2),
-        [`countVowels(${arg3})`]: countVowels(arg3),
-        empty: undefined,
-    });
-}
-console.groupEnd();
-console.group('6. Sukurkite funkciją, kuri grąžina bet kokios raidės kiekį žodyje');
-{
-    const recurrenceCount = (str, letter) => {
-        let count = 0;
-        for (let i = 0; i < str.length; i += 1) {
-            if (str[i] === letter) {
-                count += 1;
-            }
-        }
-        return count;
-    };
-    const args1 = ['labas', 'a'];
-    const args2 = ['labas', 'b'];
-    const args3 = ['labas', 'p'];
-    console.table({
-        [`recurrenceCount(${JSON.stringify(args1)})`]: recurrenceCount(...args1),
-        [`recurrenceCount(${JSON.stringify(args2)})`]: recurrenceCount(...args2),
-        [`recurrenceCount(${JSON.stringify(args3)})`]: recurrenceCount(...args3),
-        empty: undefined,
-    });
-}
-console.groupEnd();
-console.groupCollapsed('7. Sukurkite funkciją, kuri ištrintų pirmą surastą simbolį žodyje ir grąžintų pakeistą žodį');
-{
-}
-console.groupEnd();
-console.groupCollapsed('8. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.');
-{
-}
-console.groupEnd();
-console.groupCollapsed('9. Sukurkite funkciją, kuri taiso pastraipos klaidas');
-{
+    console.groupCollapsed('5.1 Sukurkite artmetinių veiksmų konstantų išvardinimą: Operation -> Add, Subtract, Multiply, Divide. Parašykite funkciją "calc" kuri priima 2 skaičius ir operaciją "Operation". Pagal perduotą operaciją atlikite veiksmus ir grąžinkite rezultatą');
+    {
+    }
+    console.groupEnd();
 }
 console.groupEnd();
 //# sourceMappingURL=main.js.map
