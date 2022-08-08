@@ -145,14 +145,24 @@ console.group('1. Tipų indeksai');
   // 10 min
   console.groupCollapsed('1.1. Sukurkite tipą Address naudodami tipą User. Parašykite funkciją "getUserAddress", kuri priima vartotoją (User) ir grąžina vartotojo adresą (Address)');
   {
+    type Address = User['address'];
+    const getAddress = ({ address }: User): Address => address;
 
+    const addresses: Address[] = users.map(getAddress);
+
+    console.table(addresses);
   }
   console.groupEnd();
 
   // 5 min
   console.groupCollapsed('1.2. Sukurkite tipą Company naudodami tipą User. Parašykite funkciją "getUserCompany", kuri priima vartotoją (User) ir grąžina vartotojo kompaniją (Company)');
   {
+    type Company = User['company'];
+    const getCompany = ({ company }: User): Company => company;
 
+    const companies: Company[] = users.map(getCompany);
+
+    console.table(companies);
   }
   console.groupEnd();
 }
@@ -182,7 +192,21 @@ console.group('2. Pagalbiniai tipai');
   // 10 min
   console.groupCollapsed('2.1. Sukurkite funkciją "selectWithColor" kurti atrenka visas mašinas turinčias aprašytą spalvą, ir aprašykite joms tipą BMWCarFull su visomis privalomomis savybėmis');
   {
+    type BMWCarFull = Required<BMWCar>;
 
+    const selectWithColor = (allCars: BMWCar[], color: string): BMWCarFull[] => {
+      const filteredCars = allCars.filter((car) => car.color === color) as BMWCarFull[];
+
+      return filteredCars;
+    };
+
+    const redCars = selectWithColor(cars, 'red');
+    const blackCars = selectWithColor(cars, 'black');
+
+    console.log({
+      redCars,
+      blackCars,
+    });
   }
   console.groupEnd();
 

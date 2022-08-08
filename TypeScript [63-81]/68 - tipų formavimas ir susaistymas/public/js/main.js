@@ -74,10 +74,16 @@ console.group('1. Tipų indeksai');
     ];
     console.groupCollapsed('1.1. Sukurkite tipą Address naudodami tipą User. Parašykite funkciją "getUserAddress", kuri priima vartotoją (User) ir grąžina vartotojo adresą (Address)');
     {
+        const getAddress = ({ address }) => address;
+        const addresses = users.map(getAddress);
+        console.table(addresses);
     }
     console.groupEnd();
     console.groupCollapsed('1.2. Sukurkite tipą Company naudodami tipą User. Parašykite funkciją "getUserCompany", kuri priima vartotoją (User) ir grąžina vartotojo kompaniją (Company)');
     {
+        const getCompany = ({ company }) => company;
+        const companies = users.map(getCompany);
+        console.table(companies);
     }
     console.groupEnd();
 }
@@ -96,6 +102,16 @@ console.group('2. Pagalbiniai tipai');
     ];
     console.groupCollapsed('2.1. Sukurkite funkciją "selectWithColor" kurti atrenka visas mašinas turinčias aprašytą spalvą, ir aprašykite joms tipą BMWCarFull su visomis privalomomis savybėmis');
     {
+        const selectWithColor = (allCars, color) => {
+            const filteredCars = allCars.filter((car) => car.color === color);
+            return filteredCars;
+        };
+        const redCars = selectWithColor(cars, 'red');
+        const blackCars = selectWithColor(cars, 'black');
+        console.log({
+            redCars,
+            blackCars,
+        });
     }
     console.groupEnd();
     console.groupCollapsed('2.2. Sukurkite funkciją "refactorBmwCar" kurti perkuria mašiną.  Pašalina mašinos savybė brand, o model savybę pakeičia taip, kad joje būtų markė ir modelis atskirta tarpu. Visos kitos savybės paliekamos tokios pat');
