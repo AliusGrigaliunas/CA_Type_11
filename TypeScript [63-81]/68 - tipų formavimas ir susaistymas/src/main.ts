@@ -5,11 +5,14 @@
 /*
   Užduočių atlikimo eiga:
   * Pirmiausiai perskaitykite visą užduotį:
+
   * Klauskite dėstytojo užduoties paaiškinimo, jeigu užduotis nėra aiški.
+
   * Galvoje susidarytkite sprendimo planą:
     * Kaip atliksiu užduotį? Galbūt verta pasibraižyti sprendimo idėją ant lapelio?
     * Kokių tipų reikės? Parametrų tipai, rezultatų tipai, funkcijų tipai.
     * Kaip aiškiai ir tvarkingai pateiksiu rezultatus?
+
   * Bandykite atlikti užduotį:
     * Pavyko:
       * Atspausdinkite rezultatus ir/arba veikimo pavyzdžius
@@ -21,8 +24,10 @@
     * Nepavyko:
       * pažiūrėkite atsakymų failą ir PO VIENĄ EILUTĘ nusirašykite sprendimą
       * rašant kiekvieną eilutę smulkmeniškai suformuokite klausimus.
+
     * Spręskite kitus uždavinius, o kai dėstytojas aiškins užduoties sprendimą, klausykitės
       * Po dėstytojo sprendimo ir aiškinimo užduokite klausimus, kurių vis dar nesuprantate.
+
   Patarimai:
     * Paspauskite komandą: ALT + Z - tai padės lengviau skaityti užduočių tekstą
     * Nežiūrėkite į atsakymų failus anksčiau laiko.
@@ -35,28 +40,117 @@
     * Atlikę užduotį, užduokite sau klausimą: "Ar tai geriausia ką galėjau?"
     * Įsigilinimas jūsų žinias iš supratimo perkelia į suvokimą. Tik suvokiant dalykus, galite
       žinias pritaikyti kūrybiškai. Iš to seka, kad užduoties atlikimo kokybė >>> užduočių kiekis
-    * Užduočių rezultatų pateikimas tiek pat svarbus, kiek sprendimas.
+    * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
 */
 
-// 30min
-console.group('1. Sąjungos operatorius - UNIONS');
+// 15 min
+console.group('1. Tipų indeksai');
 {
-  // 10min
-  console.groupCollapsed('1.1 Sukurkite funkciją "print" kuri priimą string, number arba boolean ir jį atspausdiną');
+  type User = {
+    id: number,
+    name: string,
+    username: string,
+    email: string,
+    address: {
+      street: string,
+      suite: string,
+      city: string,
+      zipcode: string,
+      geo: {
+        lat: string,
+        lng: string,
+      },
+    };
+    phone: string,
+    website: string,
+    company: {
+      name: string,
+      catchPhrase: string,
+      bs: string,
+    }
+  };
+
+  const users: User[] = [
+    {
+      id: 1,
+      name: 'Leanne Graham',
+      username: 'Bret',
+      email: 'Sincere@april.biz',
+      address: {
+        street: 'Kulas Light',
+        suite: 'Apt. 556',
+        city: 'Gwenborough',
+        zipcode: '92998-3874',
+        geo: {
+          lat: '-37.3159',
+          lng: '81.1496',
+        },
+      },
+      phone: '1-770-736-8031 x56442',
+      website: 'hildegard.org',
+      company: {
+        name: 'Romaguera-Crona',
+        catchPhrase: 'Multi-layered client-server neural-net',
+        bs: 'harness real-time e-markets',
+      },
+    },
+    {
+      id: 2,
+      name: 'Ervin Howell',
+      username: 'Antonette',
+      email: 'Shanna@melissa.tv',
+      address: {
+        street: 'Victor Plains',
+        suite: 'Suite 879',
+        city: 'Wisokyburgh',
+        zipcode: '90566-7771',
+        geo: {
+          lat: '-43.9509',
+          lng: '-34.4618',
+        },
+      },
+      phone: '010-692-6593 x09125',
+      website: 'anastasia.net',
+      company: {
+        name: 'Deckow-Crist',
+        catchPhrase: 'Proactive didactic contingency',
+        bs: 'synergize scalable supply-chains',
+      },
+    },
+    {
+      id: 3,
+      name: 'Clementine Bauch',
+      username: 'Samantha',
+      email: 'Nathan@yesenia.net',
+      address: {
+        street: 'Douglas Extension',
+        suite: 'Suite 847',
+        city: 'McKenziehaven',
+        zipcode: '59590-4157',
+        geo: {
+          lat: '-68.6102',
+          lng: '-47.0653',
+        },
+      },
+      phone: '1-463-123-4447',
+      website: 'ramiro.info',
+      company: {
+        name: 'Romaguera-Jacobson',
+        catchPhrase: 'Face to face bifurcated interface',
+        bs: 'e-enable strategic applications',
+      },
+    },
+  ];
+
+  // 10 min
+  console.groupCollapsed('1.1. Sukurkite tipą Address naudodami tipą User. Parašykite funkciją "getUserAddress", kuri priima vartotoją (User) ir grąžina vartotojo adresą (Address)');
   {
 
   }
   console.groupEnd();
 
-  // 10min
-  console.groupCollapsed('1.2 Sukurkite funkciją "getLength" kuri priimą string arba masyvą ir grąžina elementų skaičių');
-  {
-
-  }
-  console.groupEnd();
-
-  // 10min
-  console.groupCollapsed('1.3 Sukurkite funkciją "isEmpty" kuri priimą string arba masyvą ir grąžiną true, jei parametras tuščias, priešingu atveju - false');
+  // 5 min
+  console.groupCollapsed('1.2. Sukurkite tipą Company naudodami tipą User. Parašykite funkciją "getUserCompany", kuri priima vartotoją (User) ir grąžina vartotojo kompaniją (Company)');
   {
 
   }
@@ -64,18 +158,36 @@ console.group('1. Sąjungos operatorius - UNIONS');
 }
 console.groupEnd();
 
-// 30min
-console.group('2. Tipų rinkiniai - TUPLES');
+// 25 min
+console.group('2. Pagalbiniai tipai');
 {
-  // 15min
-  console.groupCollapsed('2.1. Sukurkite funkciją "getMinMax" kuri priima skaičių masyvą ir grąžina dviejų vietų tipų rinkinį. Pirmas grąžinamo rinkinio elementas - mažiausias skaičių masyvas, antras - didžiausias');
+  type BMWCar = {
+    brand: 'BMW',
+    model: 'X1' | 'X2' | 'X3' | 'X4' | 'X5',
+    make: number,
+    color?: string,
+  };
+
+  const cars: BMWCar[] = [
+    {
+      brand: 'BMW', model: 'X1', make: 2000, color: 'black',
+    },
+    { brand: 'BMW', model: 'X2', make: 2001 },
+    {
+      brand: 'BMW', model: 'X3', make: 2002, color: 'red',
+    },
+    { brand: 'BMW', model: 'X4', make: 2003 },
+  ];
+
+  // 10 min
+  console.groupCollapsed('2.1. Sukurkite funkciją "selectWithColor" kurti atrenka visas mašinas turinčias aprašytą spalvą, ir aprašykite joms tipą BMWCarFull su visomis privalomomis savybėmis');
   {
 
   }
   console.groupEnd();
 
-  // 15min
-  console.groupCollapsed('2.2 Sukurkite funkciją "calcDistance", kuri pagal 2 taškus (Coordinate2D), suskaičiuotų atstumą tarp taškų');
+  // 15 min
+  console.groupCollapsed('2.2. Sukurkite funkciją "refactorBmwCar" kurti perkuria mašiną.  Pašalina mašinos savybė brand, o model savybę pakeičia taip, kad joje būtų markė ir modelis atskirta tarpu. Visos kitos savybės paliekamos tokios pat');
   {
 
   }
@@ -83,30 +195,25 @@ console.group('2. Tipų rinkiniai - TUPLES');
 }
 console.groupEnd();
 
-// 35min
-console.group('3. Prielaidos - ASSERTIONS');
+// 30 min
+console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
 {
-  // 15min
-  console.groupCollapsed('3.1 Parašykite kodą, kuris parsiųstų skelbimus pasiekiamus šiuo adresu: "https://jsonplaceholder.typicode.com/posts?userId=1". Parsiųstus duomenis įrašykite į kintamajį "posts", darant parsiųstų duomenų tipo prielaidą. Prieš parsiunčiant duomenis apsirašykite "Post" tipą.');
-  {
+  type User = {
+    email: string,
+    password: string,
+    name?: string,
+    surname?: string,
+    image?: string,
+    cartItems: string[],
+  };
 
-  }
-  console.groupEnd();
-
-  // 20min
-  console.groupCollapsed('3.2 Parašykite kodą, kuris parsiųstų vartotojus pasiekiamus šiuo adresu: "https://jsonplaceholder.typicode.com/users". Parsiųstus duomenis įrašykite į kintamajį "users", darant parsiųstų duomenų tipo prielaidą. Prieš siunčiant duomenis apsirašykite "User" tipą.');
-  {
-
-  }
-  console.groupEnd();
-}
-console.groupEnd();
-
-// 25min
-console.group('4. Konkretūs tipai - LITERAL TYPES');
-{
-  // 25min
-  console.groupCollapsed('4.1 Sukurkite objektą saugoti produktams, Product, pagal kategorijas: "food", "clothes" ir "other". "products" objektas turi 3 savybės pagal kategorijų pavadinimus, kurių reikšmės - Product[]. Sukūrus ir tipais aprašius "products" struktūrą, sukurkite funkciją "addProduct", kuri pridės produktą pagal kategoriją į "products" objektą. Ši funkcija turi priimti 2 parametrus: 1 - produktas, 2 - kategorijos pavadinimas. Kategorijos pavadinimas turi būti konkretus string tipas, pagal galimas produktų objekto kategorijas. Produkto tipą apsirašykite laisvai.');
+  // 30 min
+  console.groupCollapsed('3.1. Sukurkite tipą UserRegistration naudodami tipą User. UserRegistration tipas turi turėti papildomas ir privalomas savybes emailConfirmation ir passwordConfirmation, bei pašalintą savybę cartItems. Sukūrus tipą UserRegistration sukurkite funkciją "registerUser" kuri priimtų UserRegistration tipo parametrą ir grąžintų User tipo objektą, jeigu sutampa email su emailConfirmation ir password su passwordConfirmation. Jeigu pakartotinės savybės nesutampa turi būti grąžinama "null" reikšmė');
+  /* Hints:
+    * Omit<Type, Keys>
+    * X extends Y || &
+    * Type index'es
+  */
   {
 
   }
@@ -114,11 +221,26 @@ console.group('4. Konkretūs tipai - LITERAL TYPES');
 }
 console.groupEnd();
 
-// 25min
-console.group('5. Išvardinimai - ENUMS');
+// 50 min
+console.group('4. Tipų susaistymas');
 {
-  // 25min
-  console.groupCollapsed('5.1 Sukurkite artmetinių veiksmų konstantų išvardinimą: Operation -> Add, Subtract, Multiply, Divide. Parašykite funkciją "calc" kuri priima 2 skaičius ir operaciją "Operation". Pagal perduotą operaciją atlikite veiksmus ir grąžinkite rezultatą');
+  type Accommodation = {
+    address: string,
+    squares: number,
+    type: 'Flat' | 'House' | 'Cottage',
+  }
+
+  // 50 min
+  console.groupCollapsed('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
+  /* Hints:
+     * TS: mapped types
+     * TS: keyof operator
+     * TS: Key Remapping via "as"
+     * TS: index Types
+     * TS: intersection operator &
+     * JS: lexical scope
+     * OOP: encapsulation
+   */
   {
 
   }
