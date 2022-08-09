@@ -88,7 +88,7 @@ console.group('1. Tipų indeksai');
     console.groupEnd();
 }
 console.groupEnd();
-console.group('2. Pagalbiniai tipai');
+console.groupCollapsed('2. Pagalbiniai tipai');
 {
     const cars = [
         {
@@ -126,10 +126,41 @@ console.group('2. Pagalbiniai tipai');
     console.groupEnd();
 }
 console.groupEnd();
-console.groupCollapsed('3. Tipų apjungimas ir “&” sankirtos operatorius');
+console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
 {
-    console.groupCollapsed('3.1. Sukurkite tipą UserRegistration naudodami tipą User. UserRegistration tipas turi turėti papildomas ir privalomas savybes emailConfirmation ir passwordConfirmation, bei pašalintą savybę cartItems. Sukūrus tipą UserRegistration sukurkite funkciją "registerUser" kuri priimtų UserRegistration tipo parametrą ir grąžintų User tipo objektą, jeigu sutampa email su emailConfirmation ir password su passwordConfirmation. Jeigu pakartotinės savybės nesutampa turi būti grąžinama "null" reikšmė');
+    console.group('3.1. Sukurkite tipą UserRegistration naudodami tipą User. UserRegistration tipas turi turėti papildomas ir privalomas savybes emailConfirmation ir passwordConfirmation, bei pašalintą savybę cartItems. Sukūrus tipą UserRegistration sukurkite funkciją "registerUser" kuri priimtų UserRegistration tipo parametrą ir grąžintų User tipo objektą, jeigu sutampa email su emailConfirmation ir password su passwordConfirmation. Jeigu pakartotinės savybės nesutampa turi būti grąžinama "null" reikšmė');
     {
+        const registerUser = ({ email, emailConfirmation, password, passwordConfirmation, ...userProps }) => {
+            if (email === emailConfirmation && password === passwordConfirmation) {
+                return {
+                    ...userProps,
+                    email,
+                    password,
+                    cartItems: [],
+                };
+            }
+            return null;
+        };
+        const userRegistrationValid = {
+            surname: 'Dykuminis',
+            email: 'dziungliu.sniurs@maurum.lt',
+            emailConfirmation: 'dziungliu.sniurs@maurum.lt',
+            password: 'Tarzanas123',
+            passwordConfirmation: 'Tarzanas123',
+        };
+        const userRegistrationInvalid = {
+            name: 'Skrebutis',
+            email: 'skrebutis.varsketis@sviestuotas.lt',
+            emailConfirmation: 'skrebutis.varsketis@sviestuotas.lt',
+            password: 'Su200gGrietines',
+            passwordConfirmation: 'Su250gGrietines',
+        };
+        console.log('Registration atempt:', JSON.stringify(userRegistrationValid, null, 4));
+        const registrationResult1 = registerUser(userRegistrationValid);
+        console.log('Result:', registrationResult1);
+        console.log('Registration atempt:', JSON.stringify(userRegistrationInvalid, null, 4));
+        const registrationResult2 = registerUser(userRegistrationInvalid);
+        console.log('Result:', registrationResult2);
     }
     console.groupEnd();
 }

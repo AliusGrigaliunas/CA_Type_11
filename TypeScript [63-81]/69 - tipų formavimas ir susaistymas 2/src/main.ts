@@ -169,7 +169,7 @@ console.group('1. Tipų indeksai');
 console.groupEnd();
 
 // 25 min
-console.group('2. Pagalbiniai tipai');
+console.groupCollapsed('2. Pagalbiniai tipai');
 {
   type BMWCar = {
     brand: 'BMW',
@@ -236,7 +236,7 @@ console.group('2. Pagalbiniai tipai');
 console.groupEnd();
 
 // 30 min
-console.groupCollapsed('3. Tipų apjungimas ir “&” sankirtos operatorius');
+console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
 {
   type User = {
     email: string,
@@ -248,14 +248,65 @@ console.groupCollapsed('3. Tipų apjungimas ir “&” sankirtos operatorius');
   };
 
   // 30 min
-  console.groupCollapsed('3.1. Sukurkite tipą UserRegistration naudodami tipą User. UserRegistration tipas turi turėti papildomas ir privalomas savybes emailConfirmation ir passwordConfirmation, bei pašalintą savybę cartItems. Sukūrus tipą UserRegistration sukurkite funkciją "registerUser" kuri priimtų UserRegistration tipo parametrą ir grąžintų User tipo objektą, jeigu sutampa email su emailConfirmation ir password su passwordConfirmation. Jeigu pakartotinės savybės nesutampa turi būti grąžinama "null" reikšmė');
+  console.group('3.1. Sukurkite tipą UserRegistration naudodami tipą User. UserRegistration tipas turi turėti papildomas ir privalomas savybes emailConfirmation ir passwordConfirmation, bei pašalintą savybę cartItems. Sukūrus tipą UserRegistration sukurkite funkciją "registerUser" kuri priimtų UserRegistration tipo parametrą ir grąžintų User tipo objektą, jeigu sutampa email su emailConfirmation ir password su passwordConfirmation. Jeigu pakartotinės savybės nesutampa turi būti grąžinama "null" reikšmė');
   /* Hints:
     * Omit<Type, Keys>
     * X extends Y || &
     * Type index'es
   */
   {
+    // interface UserRegistration extends Omit<User, 'cartItems'> {
+    //   emailConfirmation: User['email'],
+    //   passwordConfirmation: User['password'],
+    // }
 
+    type UserRegistration = Omit<User, 'cartItems'> & {
+      emailConfirmation: User['email'],
+      passwordConfirmation: User['password'],
+    }
+
+    const registerUser = ({
+      email,
+      emailConfirmation,
+      password,
+      passwordConfirmation,
+      ...userProps
+    }: UserRegistration): User | null => {
+      if (email === emailConfirmation && password === passwordConfirmation) {
+        return {
+          ...userProps,
+          email,
+          password,
+          cartItems: [],
+        };
+      }
+
+      return null;
+    };
+
+    const userRegistrationValid: UserRegistration = {
+      surname: 'Dykuminis',
+      email: 'dziungliu.sniurs@maurum.lt',
+      emailConfirmation: 'dziungliu.sniurs@maurum.lt',
+      password: 'Tarzanas123',
+      passwordConfirmation: 'Tarzanas123',
+    };
+
+    const userRegistrationInvalid: UserRegistration = {
+      name: 'Skrebutis',
+      email: 'skrebutis.varsketis@sviestuotas.lt',
+      emailConfirmation: 'skrebutis.varsketis@sviestuotas.lt',
+      password: 'Su200gGrietines',
+      passwordConfirmation: 'Su250gGrietines',
+    };
+
+    console.log('Registration atempt:', JSON.stringify(userRegistrationValid, null, 4));
+    const registrationResult1 = registerUser(userRegistrationValid);
+    console.log('Result:', registrationResult1);
+
+    console.log('Registration atempt:', JSON.stringify(userRegistrationInvalid, null, 4));
+    const registrationResult2 = registerUser(userRegistrationInvalid);
+    console.log('Result:', registrationResult2);
   }
   console.groupEnd();
 }
@@ -288,5 +339,4 @@ console.groupCollapsed('4. Tipų susaistymas');
 }
 console.groupEnd();
 
-// 9:35
-// TODO: "Kodėl negalima keisti parametro"
+// 10:30
