@@ -114,13 +114,19 @@ console.group('2. Pagalbiniai tipai');
         });
     }
     console.groupEnd();
-    console.groupCollapsed('2.2. Sukurkite funkciją "refactorBmwCar" kurti perkuria mašiną.  Pašalina mašinos savybė brand, o model savybę pakeičia taip, kad joje būtų markė ir modelis atskirta tarpu. Visos kitos savybės paliekamos tokios pat');
+    console.group('2.2. Sukurkite funkciją "refactorBmwCar" kurti perkuria mašiną.  Pašalina mašinos savybė brand, o model savybę pakeičia taip, kad joje būtų markė ir modelis atskirta tarpu. Visos kitos savybės paliekamos tokios pat');
     {
+        const refactorCar = ({ brand, model, ...rest }) => ({
+            model: `${brand} ${model}`,
+            ...rest,
+        });
+        const refactoredCars = cars.map(refactorCar);
+        console.table(refactoredCars);
     }
     console.groupEnd();
 }
 console.groupEnd();
-console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
+console.groupCollapsed('3. Tipų apjungimas ir “&” sankirtos operatorius');
 {
     console.groupCollapsed('3.1. Sukurkite tipą UserRegistration naudodami tipą User. UserRegistration tipas turi turėti papildomas ir privalomas savybes emailConfirmation ir passwordConfirmation, bei pašalintą savybę cartItems. Sukūrus tipą UserRegistration sukurkite funkciją "registerUser" kuri priimtų UserRegistration tipo parametrą ir grąžintų User tipo objektą, jeigu sutampa email su emailConfirmation ir password su passwordConfirmation. Jeigu pakartotinės savybės nesutampa turi būti grąžinama "null" reikšmė');
     {
@@ -128,7 +134,7 @@ console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
     console.groupEnd();
 }
 console.groupEnd();
-console.group('4. Tipų susaistymas');
+console.groupCollapsed('4. Tipų susaistymas');
 {
     console.groupCollapsed('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
     {

@@ -211,16 +211,32 @@ console.group('2. Pagalbiniai tipai');
   console.groupEnd();
 
   // 15 min
-  console.groupCollapsed('2.2. Sukurkite funkciją "refactorBmwCar" kurti perkuria mašiną.  Pašalina mašinos savybė brand, o model savybę pakeičia taip, kad joje būtų markė ir modelis atskirta tarpu. Visos kitos savybės paliekamos tokios pat');
+  console.group('2.2. Sukurkite funkciją "refactorBmwCar" kurti perkuria mašiną.  Pašalina mašinos savybė brand, o model savybę pakeičia taip, kad joje būtų markė ir modelis atskirta tarpu. Visos kitos savybės paliekamos tokios pat');
   {
+    type BMWCarRefactored = Omit<BMWCar, 'brand' | 'model'> & {
+      model: `${BMWCar['brand']} ${BMWCar['model']}`
+    }
 
+    // type BMWCarRefactored = {
+    //   [Key in keyof BMWCar as Key extends 'brand' ? never : Key]: Key extends 'model'
+    //   ? `${BMWCar['brand']} ${BMWCar['model']}`
+    //   : BMWCar[Key]
+    // }
+
+    const refactorCar = ({ brand, model, ...rest }: BMWCar): BMWCarRefactored => ({
+      model: `${brand} ${model}`,
+      ...rest,
+    });
+
+    const refactoredCars = cars.map(refactorCar);
+    console.table(refactoredCars);
   }
   console.groupEnd();
 }
 console.groupEnd();
 
 // 30 min
-console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
+console.groupCollapsed('3. Tipų apjungimas ir “&” sankirtos operatorius');
 {
   type User = {
     email: string,
@@ -246,7 +262,7 @@ console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
 console.groupEnd();
 
 // 50 min
-console.group('4. Tipų susaistymas');
+console.groupCollapsed('4. Tipų susaistymas');
 {
   type Accommodation = {
     address: string,
@@ -271,3 +287,6 @@ console.group('4. Tipų susaistymas');
   console.groupEnd();
 }
 console.groupEnd();
+
+// 9:35
+// TODO: "Kodėl negalima keisti parametro"
