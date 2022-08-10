@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-inner-declarations */
 /* eslint-disable no-lone-blocks */
+/* eslint-disable */
 
 /*
   Užduočių atlikimo eiga:
@@ -46,9 +47,59 @@
 // 75min
 console.group('1. Naudojant "getter" ir "setter" NESUTRUMPINTAS funkcijas:');
 {
-  class Person { }
+  type Item = { title: string, price: number };
+  class Person {
+    private name!: string;
+    private surname!: string;
+    private items!: Item[];
+    private age!: number;
 
-  const person = new Person();
+    constructor(
+      name: string,
+      surname: string,
+      items: Item[],
+      age: number,
+    ) {
+      this.setName(name);
+      this.setSurname(surname);
+      this.setItems(items);
+      this.setAge(age);
+    }
+
+    public setName(name: string): void {
+      this.name = name;
+    }
+
+    public getName() {
+      return this.name;
+    }
+
+    public setSurname(surname: string): void {
+      this.surname = surname;
+    }
+
+    public getSurname() {
+      return this.surname;
+    }
+
+    public setItems(items: Item[]): void {
+      this.items = JSON.parse(JSON.stringify(items));
+    }
+
+    public getItems() {
+      return JSON.parse(JSON.stringify(this.items)) as Item[];
+    }
+
+    public setAge(age: number): void {
+      this.age = age;
+    }
+
+    public getAge() {
+      return this.age;
+    }
+  }
+
+  const person = new Person('Veibraidis', 'Klynka', [], 25);
 
   // 15min
   console.groupCollapsed(`1.1. Sukurkite klasę Person, kuri turėtų privačias savybes:
@@ -59,6 +110,7 @@ console.group('1. Naudojant "getter" ir "setter" NESUTRUMPINTAS funkcijas:');
     Aprašykite konstruktorių kuris priimtų šiom savybėms skirtus parametrus ir nustatytų reikšmes naudojant "setter" funkcijas.
   `);
   {
+    console.log(person);
   }
   console.groupEnd();
 
