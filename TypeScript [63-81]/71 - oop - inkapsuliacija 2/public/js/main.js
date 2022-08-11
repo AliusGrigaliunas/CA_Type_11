@@ -5,18 +5,20 @@ const capitalize = (word) => {
     return capitalizedWords.join(' ');
 };
 class Person {
-    name;
+    privateName;
     surname;
-    constructor(name, surname) {
+    age;
+    constructor(name, surname, age) {
         this.setName(name);
         this.setSurname(surname);
+        this.setAge(age);
     }
     setName(name) {
         if (name === '')
             throw new Error('Negali būti tuščias');
         if (name.length < 2)
             throw new Error('Vardas turi būti bent iš 2 raidžių');
-        this.name = capitalize(name);
+        this.privateName = capitalize(name);
     }
     setSurname(surname) {
         if (surname === '')
@@ -25,23 +27,37 @@ class Person {
             throw new Error('Pavardė turi būti bent iš 2 raidžių');
         this.surname = capitalize(surname);
     }
+    setAge(age) {
+        if (age % 1 !== 0)
+            throw new Error('Amžius turi būti sveikas skaičius');
+        if (age < 1)
+            throw new Error('Amžius negali būti mažesnis nei 1');
+        if (age > 150)
+            throw new Error('Amžius negali būti didesnis už 150');
+        this.age = age;
+    }
     getFullname() {
-        return `${this.name} ${this.surname}`;
+        return `${this.privateName} ${this.surname}`;
+    }
+    getAge() {
+        return this.age;
     }
 }
-console.group('1. Sukurkite Person klasei savybes "name" ir "surname". Kiekvienai iš jų sukurkite setterius, ir bendrą getterį fullname');
+const people = [
+    new Person('Liudvikas', 'XVIII', 31),
+    new Person('varaloja', 'karksė barsė', 35),
+    new Person('Ana maria', 'Laikauskaitė', 39),
+];
+console.groupCollapsed('1. Sukurkite Person klasei savybes "name" ir "surname". Kiekvienai iš jų sukurkite setterius, ir bendrą getterį fullname');
 {
-    const people = [
-        new Person('Liudvikas', 'XVIII'),
-        new Person('varaloja', 'karksė barsė'),
-        new Person('Ana maria', 'Laikauskaitė'),
-    ];
     const fullnames = people.map((p) => p.getFullname());
     console.log(fullnames);
 }
 console.groupEnd();
-console.group('2. Sukurkite Person klasei savybę "age". Inkapsuliuokite šią savybę taip, jog reikšmė galėtų būti tik sveiki skaičiai nuo 1 iki 150');
+console.groupCollapsed('2. Sukurkite Person klasei savybę "age". Inkapsuliuokite šią savybę taip, jog reikšmė galėtų būti tik sveiki skaičiai nuo 1 iki 150');
 {
+    const ages = people.map((p) => p.getAge());
+    console.log(ages);
 }
 console.groupEnd();
 console.group('3. Sukurkite Person klasei savybę "height" kurios vertė būtų saugoma centimetrais. Sukurkite šiai savybei setterį, kuris pirmu parametru priimtų reikšmę, o antru parametru priimtų matavimo vienetus: "cm" | "m" | "in". Jeigu antras parametras nėra perduotas, numatytas(default) matavimo vienetas turi būti cm. Getteris turi grąžinti reikšmę centimetrais.');
