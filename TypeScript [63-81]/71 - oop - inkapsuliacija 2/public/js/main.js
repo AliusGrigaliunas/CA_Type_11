@@ -1,4 +1,10 @@
 "use strict";
+var HeightUnits;
+(function (HeightUnits) {
+    HeightUnits["CENTIMETERS"] = "cm";
+    HeightUnits["METERS"] = "m";
+    HeightUnits["INCHES"] = "in";
+})(HeightUnits || (HeightUnits = {}));
 const capitalize = (word) => {
     const words = word.trim().split(' ');
     const capitalizedWords = words.map((w) => w[0].toUpperCase() + w.slice(1));
@@ -8,10 +14,12 @@ class Person {
     privateName;
     surname;
     age;
-    constructor(name, surname, age) {
+    height;
+    constructor(name, surname, age, height, heightUnits) {
         this.setName(name);
         this.setSurname(surname);
         this.setAge(age);
+        this.setHeight(height, heightUnits);
     }
     setName(name) {
         if (name === '')
@@ -36,17 +44,34 @@ class Person {
             throw new Error('Amžius negali būti didesnis už 150');
         this.age = age;
     }
+    setHeight(height, units = HeightUnits.CENTIMETERS) {
+        switch (units) {
+            case HeightUnits.CENTIMETERS:
+                this.height = height;
+                break;
+            case HeightUnits.METERS:
+                this.height = height * 100;
+                break;
+            case HeightUnits.INCHES:
+                this.height = height * 2.54;
+                break;
+            default: break;
+        }
+    }
     getFullname() {
         return `${this.privateName} ${this.surname}`;
     }
     getAge() {
         return this.age;
     }
+    getHeight() {
+        return this.height;
+    }
 }
 const people = [
-    new Person('Liudvikas', 'XVIII', 31),
-    new Person('varaloja', 'karksė barsė', 35),
-    new Person('Ana maria', 'Laikauskaitė', 39),
+    new Person('Liudvikas', 'XVIII', 31, 190),
+    new Person('varaloja', 'karksė barsė', 35, 1.7, HeightUnits.METERS),
+    new Person('Ana maria', 'Laikauskaitė', 39, 70, HeightUnits.INCHES),
 ];
 console.groupCollapsed('1. Sukurkite Person klasei savybes "name" ir "surname". Kiekvienai iš jų sukurkite setterius, ir bendrą getterį fullname');
 {
@@ -62,6 +87,8 @@ console.groupCollapsed('2. Sukurkite Person klasei savybę "age". Inkapsuliuokit
 console.groupEnd();
 console.group('3. Sukurkite Person klasei savybę "height" kurios vertė būtų saugoma centimetrais. Sukurkite šiai savybei setterį, kuris pirmu parametru priimtų reikšmę, o antru parametru priimtų matavimo vienetus: "cm" | "m" | "in". Jeigu antras parametras nėra perduotas, numatytas(default) matavimo vienetas turi būti cm. Getteris turi grąžinti reikšmę centimetrais.');
 {
+    const heights = people.map((p) => p.getHeight());
+    console.log(heights);
 }
 console.groupEnd();
 console.group('4. Sukurkite Person klasei statinę savybę "heightUnits". Jos tipas turi būti išvardinimas(enum), kurio pasirinkimai yra: "CM", "M", "IN". Numatytoji(default) "heightUnits" reikšmė turi būti centimetrai');
