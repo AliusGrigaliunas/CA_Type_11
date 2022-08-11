@@ -11,6 +11,7 @@ const capitalize = (word) => {
     return capitalizedWords.join(' ');
 };
 class Person {
+    static heightUnits = HeightUnits.CENTIMETERS;
     privateName;
     surname;
     age;
@@ -65,7 +66,12 @@ class Person {
         return this.age;
     }
     getHeight() {
-        return this.height;
+        switch (Person.heightUnits) {
+            case HeightUnits.CENTIMETERS: return this.height;
+            case HeightUnits.METERS: return this.height / 100;
+            case HeightUnits.INCHES: return this.height / 2.54;
+            default: return this.height;
+        }
     }
 }
 const people = [
@@ -91,13 +97,31 @@ console.group('3. Sukurkite Person klasei savybę "height" kurios vertė būtų 
     console.log(heights);
 }
 console.groupEnd();
-console.group('4. Sukurkite Person klasei statinę savybę "heightUnits". Jos tipas turi būti išvardinimas(enum), kurio pasirinkimai yra: "CM", "M", "IN". Numatytoji(default) "heightUnits" reikšmė turi būti centimetrai');
+console.group('4. Sukurkite Person klasei statinę savybę "heightUnits". Jos tipas turi būti išvardinimas(enum), kurio pasirinkimai yra: "cm", "m", "in". Numatytoji(default) "heightUnits" reikšmė turi būti centimetrai');
 {
+    Person.heightUnits = HeightUnits.METERS;
+    console.log('Matavimo vienetai pakeisti į:', HeightUnits.METERS);
+    console.log({ 'Person.heightUnits': Person.heightUnits });
+    Person.heightUnits = HeightUnits.INCHES;
+    console.log('Matavimo vienetai pakeisti į:', HeightUnits.INCHES);
+    console.log({ 'Person.heightUnits': Person.heightUnits });
+    Person.heightUnits = HeightUnits.CENTIMETERS;
+    console.log('Matavimo vienetai pakeisti į:', HeightUnits.CENTIMETERS);
+    console.log({ 'Person.heightUnits': Person.heightUnits });
 }
 console.groupEnd();
 console.group('5. "height" setterio antram parametrui pakeiskite sąjungos tipą į [4.] užduotyje sukurtą išvardinimą(enum). Priderinkite pavyzdžius ir metodą.');
 console.group('6. "height" geteriui sukurkite logiką, jog jis grąžintų matavimo vienetus, pagal statinės savybės "heightUnits" reikšmę.');
 {
+    Person.heightUnits = HeightUnits.METERS;
+    console.log('Matavimo vienetai pakeisti į:', HeightUnits.METERS);
+    console.log(people.map((p) => p.getHeight()));
+    Person.heightUnits = HeightUnits.INCHES;
+    console.log('Matavimo vienetai pakeisti į:', HeightUnits.INCHES);
+    console.log(people.map((p) => p.getHeight()));
+    Person.heightUnits = HeightUnits.CENTIMETERS;
+    console.log('Matavimo vienetai pakeisti į:', HeightUnits.CENTIMETERS);
+    console.log(people.map((p) => p.getHeight()));
 }
 console.groupEnd();
 console.group('7. Analogiškai pagal [4.]-[6.] punktus sukurkite savybę weight su statiniu išvardinimu "weightUnits", kurio pasirinkimai turi būti: "KG", "LBS"');
