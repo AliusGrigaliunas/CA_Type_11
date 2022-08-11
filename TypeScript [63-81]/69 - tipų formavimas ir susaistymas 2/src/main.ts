@@ -313,7 +313,7 @@ console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
 console.groupEnd();
 
 // 50 min
-console.groupCollapsed('4. Tipų susaistymas');
+console.group('4. Tipų susaistymas');
 {
   type Accommodation = {
     address: string,
@@ -321,8 +321,19 @@ console.groupCollapsed('4. Tipų susaistymas');
     type: 'Flat' | 'House' | 'Cottage',
   }
 
+  type AccommodationSetters = {
+    // eslint-disable-next-line no-unused-vars
+    [Key in keyof Accommodation as `set${Capitalize<Key>}`]: (value: Accommodation[Key]) => void
+  }
+
+  type AccommodationGetters = {
+    [Key in keyof Accommodation as `get${Capitalize<Key>}`]: () => Accommodation[Key]
+  }
+
+  type EncapsulatedAccomodation = AccommodationSetters & AccommodationGetters;
+
   // 50 min
-  console.groupCollapsed('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
+  console.group('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
   /* Hints:
      * TS: mapped types
      * TS: keyof operator
@@ -333,10 +344,55 @@ console.groupCollapsed('4. Tipų susaistymas');
      * OOP: encapsulation
    */
   {
+    const encapsulateAccomodation = (accomodation: Accommodation): EncapsulatedAccomodation => {
+      let { address, squares, type } = accomodation;
 
+      return {
+        setAddress: (value) => { address = value; },
+        setSquares: (value) => { squares = value; },
+        setType: (value) => { type = value; },
+        getAddress: () => address,
+        getSquares: () => squares,
+        getType: () => type,
+      };
+    };
+
+    const accomodation1: Accommodation = {
+      address: 'Bernužėlių g. 17, Rokelių kaimas, Pasvalio raj.',
+      squares: 224,
+      type: 'House',
+    };
+    console.log('Encapsulating accomodation1:', JSON.stringify(accomodation1, null, 4));
+    const encapsulatedAccomodation1 = encapsulateAccomodation(accomodation1);
+    console.log('Changing properties using setters...');
+    encapsulatedAccomodation1.setAddress('Bernužėlių g. 17, Rokelių kaimas, Biržų raj.');
+    encapsulatedAccomodation1.setSquares(180);
+    console.log('using getters after changes', {
+      'getAddress()': encapsulatedAccomodation1.getAddress(),
+      'getSquares()': encapsulatedAccomodation1.getSquares(),
+      'getType()': encapsulatedAccomodation1.getType(),
+    });
+    console.log('-----');
+
+    const accomodation2: Accommodation = {
+      address: 'Vilniaus g. 26a, Kaunas',
+      squares: 64,
+      type: 'Flat',
+    };
+
+    console.log('Encapsulating accomodation2:', JSON.stringify(accomodation2, null, 4));
+    const encapsulatedAccomodation2 = encapsulateAccomodation(accomodation2);
+    console.log('Changing properties using setters...');
+    encapsulatedAccomodation2.setSquares(110);
+    encapsulatedAccomodation2.setType('House');
+    console.log('using getters after changes', {
+      'getAddress()': encapsulatedAccomodation2.getAddress(),
+      'getSquares()': encapsulatedAccomodation2.getSquares(),
+      'getType()': encapsulatedAccomodation2.getType(),
+    });
+
+    console.log(encapsulatedAccomodation1);
   }
   console.groupEnd();
 }
 console.groupEnd();
-
-// 10:30

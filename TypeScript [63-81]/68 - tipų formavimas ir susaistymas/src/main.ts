@@ -255,6 +255,7 @@ console.group('4. Tipų susaistymas');
   }
 
   type AccommodationSetters = {
+    // eslint-disable-next-line no-unused-vars
     [Key in keyof Accommodation as `set${Capitalize<Key>}`]: (value: Accommodation[Key]) => void
   }
 
@@ -265,7 +266,7 @@ console.group('4. Tipų susaistymas');
   type EncapsulatedAccomodation = AccommodationSetters & AccommodationGetters;
 
   // 50 min
-  console.groupCollapsed('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
+  console.group('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
   /* Hints:
      * TS: mapped types
      * TS: keyof operator
@@ -276,18 +277,18 @@ console.group('4. Tipų susaistymas');
      * OOP: encapsulation
    */
   {
-    const encapsulateAccomodation = ({
-      address,
-      squares,
-      type
-    }: Accommodation): EncapsulatedAccomodation => ({
-      setAddress: (value) => { address = value },
-      setSquares: (value) => { squares = value },
-      setType: (value) => { type = value },
-      getAddress: () => address,
-      getSquares: () => squares,
-      getType: () => type,
-    });
+    const encapsulateAccomodation = (accomodation: Accommodation): EncapsulatedAccomodation => {
+      let { address, squares, type } = accomodation;
+
+      return {
+        setAddress: (value) => { address = value; },
+        setSquares: (value) => { squares = value; },
+        setType: (value) => { type = value; },
+        getAddress: () => address,
+        getSquares: () => squares,
+        getType: () => type,
+      };
+    };
 
     const accomodation1: Accommodation = {
       address: 'Bernužėlių g. 17, Rokelių kaimas, Pasvalio raj.',
@@ -322,6 +323,8 @@ console.group('4. Tipų susaistymas');
       'getSquares()': encapsulatedAccomodation2.getSquares(),
       'getType()': encapsulatedAccomodation2.getType(),
     });
+
+    console.log(encapsulatedAccomodation1);
   }
   console.groupEnd();
 }

@@ -130,16 +130,19 @@ console.group('3. Tipų apjungimas ir “&” sankirtos operatorius');
 console.groupEnd();
 console.group('4. Tipų susaistymas');
 {
-    console.groupCollapsed('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
+    console.group('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
     {
-        const encapsulateAccomodation = ({ address, squares, type }) => ({
-            setAddress: (value) => { address = value; },
-            setSquares: (value) => { squares = value; },
-            setType: (value) => { type = value; },
-            getAddress: () => address,
-            getSquares: () => squares,
-            getType: () => type,
-        });
+        const encapsulateAccomodation = (accomodation) => {
+            let { address, squares, type } = accomodation;
+            return {
+                setAddress: (value) => { address = value; },
+                setSquares: (value) => { squares = value; },
+                setType: (value) => { type = value; },
+                getAddress: () => address,
+                getSquares: () => squares,
+                getType: () => type,
+            };
+        };
         const accomodation1 = {
             address: 'Bernužėlių g. 17, Rokelių kaimas, Pasvalio raj.',
             squares: 224,
@@ -171,6 +174,7 @@ console.group('4. Tipų susaistymas');
             'getSquares()': encapsulatedAccomodation2.getSquares(),
             'getType()': encapsulatedAccomodation2.getType(),
         });
+        console.log(encapsulatedAccomodation1);
     }
     console.groupEnd();
 }
