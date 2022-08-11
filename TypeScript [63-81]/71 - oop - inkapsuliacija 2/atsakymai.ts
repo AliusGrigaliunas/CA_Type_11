@@ -1,409 +1,353 @@
-/* eslint-disable no-console */
-/* eslint-disable no-inner-declarations */
 /* eslint-disable no-lone-blocks */
+enum HeightUnits {
+  CENTIMETRES = 'cm',
+  METRES = 'm',
+  INCHES = 'in',
+}
 
-/*
-  Užduočių atlikimo eiga:
-  * Pirmiausiai perskaitykite visą užduotį:
+enum WeightUnits {
+  KG = 'kg',
+  LBS = 'lbs',
+}
 
-  * Klauskite dėstytojo užduoties paaiškinimo, jeigu užduotis nėra aiški.
+type PersonProps = {
+  name: string,
+  surname: string,
+  age: number,
+  height: number,
+  weight: number,
+  heightUnits?: HeightUnits,
+  weightUnits?: WeightUnits,
+};
 
-  * Galvoje susidarytkite sprendimo planą:
-    * Kaip atliksiu užduotį? Galbūt verta pasibraižyti sprendimo idėją ant lapelio?
-    * Kokių tipų reikės? Parametrų tipai, rezultatų tipai, funkcijų tipai.
-    * Kaip aiškiai ir tvarkingai pateiksiu rezultatus?
+class Person {
+  static heightUnits: HeightUnits = HeightUnits.CENTIMETRES;
 
-  * Bandykite atlikti užduotį:
-    * Pavyko:
-      * Atspausdinkite rezultatus ir/arba veikimo pavyzdžius
-      * Pabandykite patobulinti savo kodą:
-        * pabandykite aiškiau aprašyti kintamųjų/tipų pavadinimus
-        * sužiūrėkite ar tikrai naudojate vieningą sintaksę
-      * Palyginkite savo sprendimą su užuočių atsakymų failu.
-      * Suformuokite klausimus dėstytojui, pagal sprendimų skirtumus
-    * Nepavyko:
-      * pažiūrėkite atsakymų failą ir PO VIENĄ EILUTĘ nusirašykite sprendimą
-      * rašant kiekvieną eilutę smulkmeniškai suformuokite klausimus.
+  static weightUnits: WeightUnits = WeightUnits.KG;
 
-    * Spręskite kitus uždavinius, o kai dėstytojas aiškins užduoties sprendimą, klausykitės
-      * Po dėstytojo sprendimo ir aiškinimo užduokite klausimus, kurių vis dar nesuprantate.
+  private name: string;
 
-  Patarimai:
-    * Paspauskite komandą: ALT + Z - tai padės lengviau skaityti užduočių tekstą
-    * Nežiūrėkite į atsakymų failus anksčiau laiko.
-      jūsų tikslas lavinti inžinerinį mąstymą, o ne atlikti užduotis.
-    * Nesedėkite prie kompiuterio ilgiau nei 1 val iš eilės, darykite pertraukas po 10 min
-    * Klauskite visko ko nesuprantate. Neklausdami eikvojat savo laiką, kurį šie kursai taupo.
-      Gerbiat savo laiką - gerbiat save.
-    * Kodo tvarka ir aiškumas tiek pat svarbūs kiek funkcionalumas. Išmoksite tai dabar,
-      arba kuomet negausite darbo dėl netvarkingo kodo.
-    * Atlikę užduotį, užduokite sau klausimą: "Ar tai geriausia ką galėjau?"
-    * Įsigilinimas jūsų žinias iš supratimo perkelia į suvokimą. Tik suvokiant dalykus, galite
-      žinias pritaikyti kūrybiškai. Iš to seka, kad užduoties atlikimo kokybė >>> užduočių kiekis
-    * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
-*/
+  private surname: string;
 
-// 75min
-console.group('1. Naudojant "getter" ir "setter" NESUTRUMPINTAS funkcijas:');
+  private age?: number;
+
+  private height?: number;
+
+  private weight?: number;
+
+  constructor({
+    name, surname, age, height, heightUnits, weight, weightUnits,
+  }: PersonProps) {
+    this.name = name;
+    this.surname = surname;
+    this.setAge(age);
+    this.setHeight(height, heightUnits);
+    this.setWeight(weight, weightUnits);
+  }
+
+  public setName(name: string): void {
+    this.name = name;
+  }
+
+  public setSurname(surname: string): void {
+    this.surname = surname;
+  }
+
+  public setAge(age: number): void {
+    if (age < 1 || age > 150) {
+      console.error(`age value '${age}' for method Person.setAge in incorrect.\n\t Value must be in range [1; 150].`);
+      return;
+    }
+    if (age % 1 !== 0) {
+      console.error(`age value '${age}' for method Person.setAge in incorrect.\n\t Value must be an integer.`);
+      return;
+    }
+    this.age = age;
+  }
+
+  public setHeight(height: number, units?: HeightUnits): void {
+    switch (units) {
+      case HeightUnits.CENTIMETRES: this.height = height; break;
+      case HeightUnits.METRES: this.height = height * 100; break;
+      case HeightUnits.INCHES: this.height = height * 2.54; break;
+      default: this.height = height;
+    }
+  }
+
+  public setWeight(weight: number, units?: WeightUnits): void {
+    switch (units) {
+      case WeightUnits.KG: this.weight = weight; break;
+      case WeightUnits.LBS: this.weight = weight / 2.20462262; break;
+      default: this.weight = weight;
+    }
+  }
+
+  public getAge(): Person['age'] {
+    return this.age;
+  }
+
+  public getHeight(): number {
+    if (this.height === undefined) return 0;
+
+    let value;
+    switch (Person.heightUnits) {
+      case HeightUnits.CENTIMETRES: value = this.height; break;
+      case HeightUnits.METRES: value = this.height / 100; break;
+      case HeightUnits.INCHES: value = this.height / 2.54; break;
+      default: value = this.height;
+    }
+
+    return Math.round(value * 100) / 100;
+  }
+
+  public getWeight(): number {
+    if (this.weight === undefined) return 0;
+
+    let value;
+    switch (Person.weightUnits) {
+      case WeightUnits.KG: value = this.weight; break;
+      case WeightUnits.LBS: value = this.weight * 2.20462262; break;
+      default: value = this.weight;
+    }
+
+    return Math.round(value * 10) / 10;
+  }
+
+  public getFullname(): string {
+    return `${this.name} ${this.surname}`;
+  }
+
+  public toString(): string {
+    let formattedPerson = `${this.name} ${this.surname}\n`;
+    formattedPerson += `\theight: ${this.getHeight()} ${Person.heightUnits}\n`;
+    formattedPerson += `\tweight: ${this.getWeight()}   ${Person.weightUnits}\n`;
+
+    return formattedPerson;
+  }
+}
+
+console.group('1. Sukurkite Person klasei savybes "name" ir "surname". Kiekvienai iš jų sukurkite setterius, ir bendrą getterį fullname');
 {
-  class Person {
-    private static readonly ONLY_LETTERS_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ ]+$/;
+  const person: Person = new Person({
+    name: 'Serbentautas',
+    surname: 'Bordiūras',
+    age: 20,
+    height: 180,
+    weight: 80,
+  });
+  const newName: string = 'Bolvaris';
+  const newSurname: string = 'Kepurė';
 
-    private name!: string;
-    private surname!: string;
-    private age!: number;
-    private items!: Array<{ title: string; price: number; }>;
+  console.log('Pradinis žmogaus pilnas vardas:\n\t', person.getFullname());
+  console.log('Keičiamas vardas ir pavardė:', { newName, newSurname });
 
-    constructor(
-      name: string,
-      surname: string,
-      age: number,
-      items: Array<{ title: string, price: number }>,
-    ) {
-      this.setName(name);
-      this.setSurname(surname);
-      this.setAge(age);
-      this.setItems(items);
-    }
+  person.setName(newName);
+  person.setSurname(newSurname);
 
-    setName(val: string) {
-      if (val === '') throw new Error('Vardas negali būti tuščias');
-      if (val.length < 2) throw new Error('Vardas negali trumpesnis nei 2 raidės');
-      if (!Person.ONLY_LETTERS_REGEX.test(val)) throw new Error('Vardas turi būti sudarytas iš raidžių ir tarpų');
-
-      this.name = val;
-    }
-
-    setSurname(val: string) {
-      if (val === '') throw new Error('Pavardė negali būti tuščia');
-      if (val.length < 2) throw new Error('Pavardė negali trumpesnė nei 2 raidės');
-      if (!Person.ONLY_LETTERS_REGEX.test(val)) throw new Error('Pavardė turi būti sudaryta iš raidžių ir tarpų');
-
-      this.surname = val;
-    }
-
-    setAge(val: number) {
-      if (val < 0) throw new Error('Amžius negali būti neigiamas');
-      if (Math.round(val) !== val) throw new Error('Amžius turi būti sveikas skaičius');
-
-      this.age = val;
-    }
-
-    setItems(val: Array<{ title: string, price: number }>) {
-      val.forEach(({ title, price }, i) => {
-        if (title === '') throw new Error(`Daiktų masyvo indeksu '${i}' pavadinimas negali būti tuščias`);
-        if (title.length < 2) throw new Error(`Daiktų masyvo indeksu '${i}' pavadinimas negali būt trumpesnis nei 2 simboliai`);
-        if (price < 0) throw new Error(`Daiktų masyvo indeksu '${i}' kaina negali būti neigiama`);
-      });
-
-      this.items = JSON.parse(JSON.stringify(val));
-    }
-
-    getName() {
-      return this.name;
-    }
-
-    getSurname() {
-      return this.surname;
-    }
-
-    getAge() {
-      return this.age;
-    }
-
-    getItems() {
-      return JSON.parse(JSON.stringify(this.items));
-    }
-
-    getFullname() {
-      return this.name + ' ' + this.surname;
-    }
-
-    getTotalItemValue() {
-      return this.items.reduce((sum, item) => sum + item.price, 0);
-    }
-  }
-
-  const person = new Person('Lazdonė', 'Silkienė', 34, [
-    { title: 'rėtis', price: 2.99 },
-    { title: 'taburetė', price: 17.99 },
-    { title: 'Mersas', price: 16000.12 },
-  ]);
-
-  // 15min
-  console.groupCollapsed(`1.1. Sukurkite klasę Person, kuri turėtų privačias savybes:
-      name: string,
-      surname: string,
-      items: Array<{title: string, price: number}>,
-      age: number,
-    Aprašykite konstruktorių kuris priimtų šiom savybėms skirtus parametrus ir nustatytų reikšmes naudojant "setter" funkcijas.
-  `);
-  {
-    console.log(person);
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('1.2. Aprašykite kiekvienai savybei "getter" funkcijas');
-  {
-    console.table({
-      'person.getName()': person.getName(),
-      'person.getSurname()': person.getSurname(),
-      'person.getAge()': person.getAge(),
-      'person.getItems()': person.getItems(),
-    });
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('1.3. Sukurkite papildomą getterį "getFullname", kuris grąžintų pilną žmogaus vardą.');
-  {
-    console.log(person.getFullname());
-  }
-  console.groupEnd();
-
-  // 10min
-  console.groupCollapsed('1.4. Sukurkite papildomą getterį "getTotalItemValue", kuris grąžintų visų asmens daiktų kainų sumą');
-  {
-    console.log(person.getTotalItemValue());
-  }
-  console.groupEnd();
-
-  // 15min
-  console.groupCollapsed('1.5. setName "setter"yje aprašykite 3 savo sugalvotas validacijas');
-  {
-    try { person.setName(''); }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.setName('Š'); }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.setName('Š54641'); }
-    catch (error) { console.error((error as Error).message); }
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('1.6. setSurname "setter"yje aprašykite 3 savo sugalvotas validacijas');
-  {
-    try { person.setSurname(''); }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.setSurname('a'); }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.setSurname('+++++'); }
-    catch (error) { console.error((error as Error).message); }
-  }
-  console.groupEnd();
-
-  // 15min
-  console.groupCollapsed('1.7. setAge "setter"yje aprašykite 2 savo sugalvotas validacijas');
-  {
-    try { person.setAge(17.555); }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.setAge(-19); }
-    catch (error) { console.error((error as Error).message); }
-  }
-  console.groupEnd();
-
-  // 20min
-  console.groupCollapsed('1.8. setItems "setter"yje aprašykite 3 savo sugalvotas validacijas KIEKVIENO priskiriamo masyvo "daiktams"');
-  {
-    try { person.setItems([{ title: '', price: 15 }]); }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.setItems([{ title: 'a', price: 15 }]); }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.setItems([{ title: 'Daiktas', price: -15 }]); }
-    catch (error) { console.error((error as Error).message); }
-  }
-  console.groupEnd();
+  console.log('Pakeistas žmogaus pilnas vardas:\n\t', person.getFullname());
 }
 console.groupEnd();
+console.log('');
 
-// PASIKOPIJUOKITE VISĄ PIRMĄ UŽDUOTĮ IR PAKEISTIKTE KODĄ NAUDOJANT NAUJĄ "get" ir "set" SINTAKSĘ
-// 55min
-console.group('2. Naudojant "get" ir "set" ES6 funkcijas:');
+console.group('2. Sukurkite Person klasei savybę "age". Inkapsuliuokite šią savybę taip, jog reikšmė galėtų būti tik sveiki skaičiai nuo 1 iki 150');
 {
+  const personWrongAge: Person = new Person({
+    name: 'Severija',
+    surname: 'Vampyrė',
+    age: 2000,
+    height: 180,
+    weight: 80,
+  });
+  const person: Person = new Person({
+    name: 'Serbentautas',
+    surname: 'Bordiūras',
+    age: 20,
+    height: 180,
+    weight: 80,
+  });
+  console.log('Person with wrong age param:\n\t', personWrongAge);
+  console.log('Person with correctly set age:\n\t', person);
 
-  class Person {
-    private static readonly ONLY_LETTERS_REGEX = /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ ]+$/;
+  const wrongAge1: number = -17;
+  const wrongAge2: number = 1200;
+  const wrongAge3: number = 15.1;
+  const rightAge: number = 11;
 
-    private _name!: string;
-    private _surname!: string;
-    private _age!: number;
-    private _items!: Array<{ title: string; price: number; }>;
+  console.log('setting age:', wrongAge1);
+  person.setAge(wrongAge1);
+  console.log('person age:', person.getAge());
 
-    constructor(
-      name: string,
-      surname: string,
-      age: number,
-      items: Array<{ title: string, price: number }>,
-    ) {
-      this.name = name;
-      this.surname = surname;
-      this.age = age;
-      this.items = items;
-    }
+  console.log('setting age:', wrongAge2);
+  person.setAge(wrongAge2);
+  console.log('person age:', person.getAge());
 
-    set name(val: string) {
-      if (val === '') throw new Error('Vardas negali būti tuščias');
-      if (val.length < 2) throw new Error('Vardas negali trumpesnis nei 2 raidės');
-      if (!Person.ONLY_LETTERS_REGEX.test(val)) throw new Error('Vardas turi būti sudarytas iš raidžių ir tarpų');
+  console.log('setting age:', wrongAge3);
+  person.setAge(wrongAge3);
+  console.log('person age:', person.getAge());
 
-      this._name = val;
-    }
-
-    set surname(val: string) {
-      if (val === '') throw new Error('Pavardė negali būti tuščia');
-      if (val.length < 2) throw new Error('Pavardė negali trumpesnė nei 2 raidės');
-      if (!Person.ONLY_LETTERS_REGEX.test(val)) throw new Error('Pavardė turi būti sudaryta iš raidžių ir tarpų');
-
-      this._surname = val;
-    }
-
-    set age(val: number) {
-      if (val < 0) throw new Error('Amžius negali būti neigiamas');
-      if (Math.round(val) !== val) throw new Error('Amžius turi būti sveikas skaičius');
-
-      this._age = val;
-    }
-
-    set items(val: Array<{ title: string, price: number }>) {
-      val.forEach(({ title, price }, i) => {
-        if (title === '') throw new Error(`Daiktų masyvo indeksu '${i}' pavadinimas negali būti tuščias`);
-        if (title.length < 2) throw new Error(`Daiktų masyvo indeksu '${i}' pavadinimas negali būt trumpesnis nei 2 simboliai`);
-        if (price < 0) throw new Error(`Daiktų masyvo indeksu '${i}' kaina negali būti neigiama`);
-      });
-
-      this._items = JSON.parse(JSON.stringify(val));
-    }
-
-    get Name() {
-      return this._name;
-    }
-
-    get surname() {
-      return this._surname;
-    }
-
-    get age() {
-      return this._age;
-    }
-
-    get items() {
-      return JSON.parse(JSON.stringify(this._items));
-    }
-
-    get fullname() {
-      return this.name + ' ' + this.surname;
-    }
-
-    get totalItemValue() {
-      return this.items.reduce((sum, item) => sum + item.price, 0);
-    }
-  }
-
-  const person = new Person('Lazdonė', 'Silkienė', 34, [
-    { title: 'rėtis', price: 2.99 },
-    { title: 'taburetė', price: 17.99 },
-    { title: 'Mersas', price: 16000.12 },
-  ]);
-
-
-  // 10min
-  console.groupCollapsed(`2.1. Sukurkite klasę Person, kuri turėtų privačias savybes:
-      name: string,
-      surname: string,
-      items: Array<{title: string, price: number}>,
-      age: number,
-    Aprašykite konstruktorių kuris priimtų šiom savybėms skirtus parametrus ir nustatytų reikšmes naudojant "setter" funkcijas.
-  `);
-  {
-    console.log(person);
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.2. Aprašykite kiekvienai savybei ES6 "get" funkcijas');
-  {
-    console.table({
-      'person.name': person.name,
-      'person.surname': person.surname,
-      'person.age': person.age,
-      'person.items': person.items,
-    });
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.3. Sukurkite papildomą getterį "fullname", kuris grąžintų pilną žmogaus vardą.');
-  {
-    console.log(person.fullname);
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.4. Sukurkite papildomą getterį "totalItemValue", kuris grąžintų visų asmens daiktų kainų sumą');
-  {
-    console.log(person.totalItemValue);
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.5. name "setter"yje aprašykite 3 savo sugalvotas validacijas');
-  {
-    try { person.name = ''; }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.name = 'Š'; }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.name = 'Š54641'; }
-    catch (error) { console.error((error as Error).message); }
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.6. surname "setter"yje aprašykite 3 savo sugalvotas validacijas');
-  {
-    try { person.surname = ''; }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.surname = 'a'; }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.surname = '+++++'; }
-    catch (error) { console.error((error as Error).message); }
-  }
-  console.groupEnd();
-
-  // 10min
-  console.groupCollapsed('2.7. age "setter"yje aprašykite 2 savo sugalvotas validacijas');
-  {
-    try { person.age = 17.555; }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.age = -19; }
-    catch (error) { console.error((error as Error).message); }
-  }
-  console.groupEnd();
-
-  // 10min
-  console.groupCollapsed('2.8. items "setter"yje aprašykite 3 savo sugalvotas validacijas KIEKVIENO priskiriamo masyvo "daiktams"');
-  {
-    try { person.items = [{ title: '', price: 15 }]; }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.items = [{ title: 'a', price: 15 }]; }
-    catch (error) { console.error((error as Error).message); }
-
-    try { person.items = [{ title: 'Daiktas', price: -15 }]; }
-    catch (error) { console.error((error as Error).message); }
-  }
-  console.groupEnd();
+  console.log('setting age:', rightAge);
+  person.setAge(rightAge);
+  console.log('person age:', person.getAge());
 }
 console.groupEnd();
+console.log('');
+
+console.group('3. Sukurkite Person klasei savybę "height" kurios vertė būtų saugoma centimetrais. Sukurkite šiai savybei setterį, kuris pirmu parametru priimtų reikšmę, o antru parametru priimtų matavimo vienetus: "cm" | "m" | "in". Jeigu antras parametras nėra perduotas, numatytas(default) matavimo vienetas turi būti cm. Getteris turi grąžinti reikšmę centimetrais.');
+{
+  const personProps1: PersonProps = {
+    name: 'Serbentautas',
+    surname: 'Bordiūras',
+    age: 20,
+    height: 180,
+    weight: 80,
+  };
+
+  const personProps2: PersonProps = {
+    name: 'Amerikas',
+    surname: 'Magelanas',
+    age: 20,
+    height: 70,
+    weight: 80,
+    heightUnits: HeightUnits.INCHES,
+  };
+
+  const personProps3: PersonProps = {
+    name: 'Amerikas',
+    surname: 'Magelanas',
+    age: 20,
+    height: 1.75,
+    weight: 78,
+    heightUnits: HeightUnits.METRES,
+  };
+  const person1: Person = new Person(personProps1);
+  const person2: Person = new Person(personProps2);
+  const person3: Person = new Person(personProps3);
+
+  console.log('Sukurtas Person objektas be nurodytų matavimo vienetų:', '\n\tprops:', personProps1, '\n\tperson:', person1);
+  console.log('Sukurtas Person su ūgio matavimo vienetais - coliais:', '\n\tprops:', personProps2, '\n\tperson:', person2);
+  console.log('Sukurtas Person su ūgio matavimo vienetais - metrais', '\n\tprops:', personProps3, '\n\tperson:', person3);
+
+  console.log('\n---\n');
+
+  const newHeightProps1: Parameters<Person['setHeight']> = [1.55, HeightUnits.METRES];
+  const newHeightProps2: Parameters<Person['setHeight']> = [65, HeightUnits.INCHES];
+  const newHeightProps3: Parameters<Person['setHeight']> = [165, HeightUnits.CENTIMETRES];
+
+  console.log('Keisime šio žmogaus ūgį:', person1);
+
+  console.log('Nustatomas ūgis:', newHeightProps1);
+  person1.setHeight(...newHeightProps1);
+  console.log('Žmogaus ūgis centimetrais:', person1.getHeight());
+
+  console.log('Nustatomas ūgis:', newHeightProps2);
+  person1.setHeight(...newHeightProps2);
+  console.log('Žmogaus ūgis centimetrais:', person1.getHeight());
+
+  console.log('Nustatomas ūgis:', newHeightProps3);
+  person1.setHeight(...newHeightProps3);
+  console.log('Žmogaus ūgis centimetrais:', person1.getHeight());
+}
+console.groupEnd();
+console.log('');
+
+console.group('4. Sukurkite Person klasei statinę savybę "heightUnits". Jos tipas turi būti išvardinimas(enum), kurio pasirinkimai yra: "CM", "M", "IN". Numatytoji(default) "heightUnits" reikšmė turi būti centimetrai');
+{
+  console.log('Person klasės statinės savybės:');
+  console.dir({ ...Person });
+
+  console.log('Keičiami matavimo vienetai į:', HeightUnits.INCHES);
+  Person.heightUnits = HeightUnits.INCHES;
+  console.log('Person klasės statinės savybės:');
+  console.dir({ ...Person });
+
+  console.log('Keičiami matavimo vienetai į:', HeightUnits.METRES);
+  Person.heightUnits = HeightUnits.METRES;
+  console.log('Person klasės statinės savybės:');
+  console.dir({ ...Person });
+}
+console.groupEnd();
+console.log('');
+
+console.group('5. "height" setterio antram parametrui pakeiskite sąjungos tipą į [4.] užduotyje sukurtą išvardinimą(enum). Priderinkite pavyzdžius ir metodą.');
+
+console.group('6. "height" geteriui sukurkite logiką, jog jis grąžintų matavimo vienetus, pagal statinės savybės "heightUnits" reikšmę.');
+{
+  const person: Person = new Person({
+    name: 'Serbentautas',
+    surname: 'Bordiūras',
+    age: 20,
+    height: 180,
+    weight: 80,
+  });
+
+  console.log('Sukurtas objektas:', person);
+  console.log('\n--\n');
+
+  Person.heightUnits = HeightUnits.CENTIMETRES;
+  console.log('Person klasės ūgio matavimo vienetai:', Person.heightUnits);
+  console.log('žmogaus ūgis', person.getHeight());
+
+  Person.heightUnits = HeightUnits.INCHES;
+  console.log('Person klasės ūgio matavimo vienetai:', Person.heightUnits);
+  console.log('žmogaus ūgis', person.getHeight());
+
+  Person.heightUnits = HeightUnits.METRES;
+  console.log('Person klasės ūgio matavimo vienetai:', Person.heightUnits);
+  console.log('žmogaus ūgis', person.getHeight());
+}
+console.groupEnd();
+console.log('');
+
+console.group('7. Analogiškai pagal [4.]-[6.] punktus sukurkite savybę weight su statiniu išvardinimu "weightUnits", kurio pasirinkimai turi būti: "KG", "LBS"');
+{
+  const person: Person = new Person({
+    name: 'Serbentautas',
+    surname: 'Bordiūras',
+    age: 20,
+    height: 180,
+    weight: 80,
+  });
+
+  console.log('Sukurtas objektas:', person);
+  console.log('\n--\n');
+
+  Person.weightUnits = WeightUnits.KG;
+  console.log('Person klasės svorio matavimo vienetai:', Person.weightUnits);
+  console.log('žmogaus ūgis', person.getWeight());
+
+  Person.weightUnits = WeightUnits.LBS;
+  console.log('Person klasės svorio matavimo vienetai:', Person.weightUnits);
+  console.log('žmogaus ūgis', person.getWeight());
+}
+console.groupEnd();
+console.log('');
+
+console.group('8. Sukurkite klasei Person metodą "toString". Kuris paverstų žmogaus savybes gražiu formatu: vardas ir pavardė pirmoje eilutėje, o "height" ir "weight" savybės atskirose eilutėse, atitrauktos nuo kairio krašto per "tab" simbolį, ir su matavimo vienetais(kurie išsaugoti) statinėse Person klasės savybėse');
+{
+  const person1: Person = new Person({
+    name: 'Severija',
+    surname: 'Vampyrė',
+    age: 80,
+    height: 166,
+    weight: 64,
+  });
+  const person2: Person = new Person({
+    name: 'Serbentautas',
+    surname: 'Bordiūras',
+    age: 20,
+    height: 180,
+    weight: 80,
+  });
+
+  Person.heightUnits = HeightUnits.METRES;
+  Person.weightUnits = WeightUnits.KG;
+  console.log('European Standard');
+  console.log(person1.toString());
+  console.log(person2.toString());
+
+  Person.heightUnits = HeightUnits.INCHES;
+  Person.weightUnits = WeightUnits.LBS;
+  console.log('American Standard');
+  console.log(person1.toString());
+  console.log(person2.toString());
+}

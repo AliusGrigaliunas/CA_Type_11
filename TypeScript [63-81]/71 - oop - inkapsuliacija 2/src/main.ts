@@ -1,223 +1,85 @@
-/* eslint-disable no-console */
-/* eslint-disable no-inner-declarations */
 /* eslint-disable no-lone-blocks */
-/* eslint-disable */
+/* eslint-disable no-empty */
+const capitalize = (word: string): string => {
+  const words = word.trim().split(' ');
+  const capitalizedWords = words.map((w) => w[0].toUpperCase() + w.slice(1));
 
-/*
-  Užduočių atlikimo eiga:
-  * Pirmiausiai perskaitykite visą užduotį:
+  return capitalizedWords.join(' ');
+};
 
-  * Klauskite dėstytojo užduoties paaiškinimo, jeigu užduotis nėra aiški.
+class Person {
+  private name!: string;
 
-  * Galvoje susidarytkite sprendimo planą:
-    * Kaip atliksiu užduotį? Galbūt verta pasibraižyti sprendimo idėją ant lapelio?
-    * Kokių tipų reikės? Parametrų tipai, rezultatų tipai, funkcijų tipai.
-    * Kaip aiškiai ir tvarkingai pateiksiu rezultatus?
+  private surname!: string;
 
-  * Bandykite atlikti užduotį:
-    * Pavyko:
-      * Atspausdinkite rezultatus ir/arba veikimo pavyzdžius
-      * Pabandykite patobulinti savo kodą:
-        * pabandykite aiškiau aprašyti kintamųjų/tipų pavadinimus
-        * sužiūrėkite ar tikrai naudojate vieningą sintaksę
-      * Palyginkite savo sprendimą su užuočių atsakymų failu.
-      * Suformuokite klausimus dėstytojui, pagal sprendimų skirtumus
-    * Nepavyko:
-      * pažiūrėkite atsakymų failą ir PO VIENĄ EILUTĘ nusirašykite sprendimą
-      * rašant kiekvieną eilutę smulkmeniškai suformuokite klausimus.
+  constructor(name: string, surname: string) {
+    this.setName(name);
+    this.setSurname(surname);
+  }
 
-    * Spręskite kitus uždavinius, o kai dėstytojas aiškins užduoties sprendimą, klausykitės
-      * Po dėstytojo sprendimo ir aiškinimo užduokite klausimus, kurių vis dar nesuprantate.
+  public setName(name: string) {
+    if (name === '') throw new Error('Negali būti tuščias');
+    if (name.length < 2) throw new Error('Vardas turi būti bent iš 2 raidžių');
 
-  Patarimai:
-    * Paspauskite komandą: ALT + Z - tai padės lengviau skaityti užduočių tekstą
-    * Nežiūrėkite į atsakymų failus anksčiau laiko.
-      jūsų tikslas lavinti inžinerinį mąstymą, o ne atlikti užduotis.
-    * Nesedėkite prie kompiuterio ilgiau nei 1 val iš eilės, darykite pertraukas po 10 min
-    * Klauskite visko ko nesuprantate. Neklausdami eikvojat savo laiką, kurį šie kursai taupo.
-      Gerbiat savo laiką - gerbiat save.
-    * Kodo tvarka ir aiškumas tiek pat svarbūs kiek funkcionalumas. Išmoksite tai dabar,
-      arba kuomet negausite darbo dėl netvarkingo kodo.
-    * Atlikę užduotį, užduokite sau klausimą: "Ar tai geriausia ką galėjau?"
-    * Įsigilinimas jūsų žinias iš supratimo perkelia į suvokimą. Tik suvokiant dalykus, galite
-      žinias pritaikyti kūrybiškai. Iš to seka, kad užduoties atlikimo kokybė >>> užduočių kiekis
-    * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
-*/
+    this.name = capitalize(name);
+  }
 
-// 75min
-console.group('1. Naudojant "getter" ir "setter" NESUTRUMPINTAS funkcijas:');
+  public setSurname(surname: string) {
+    if (surname === '') throw new Error('Negali būti tuščias');
+    if (surname.length < 2) throw new Error('Pavardė turi būti bent iš 2 raidžių');
+
+    this.surname = capitalize(surname);
+  }
+
+  public getFullname() {
+    return `${this.name} ${this.surname}`;
+  }
+}
+
+console.group('1. Sukurkite Person klasei savybes "name" ir "surname". Kiekvienai iš jų sukurkite setterius, ir bendrą getterį fullname');
 {
-  type Item = { title: string, price: number };
-  class Person {
-    private name!: string;
-    private surname!: string;
-    private items!: Item[];
-    private age!: number;
+  const people: Person[] = [
+    new Person('Liudvikas', 'XVIII'),
+    new Person('varaloja', 'karksė barsė'),
+    new Person('Ana maria', 'Laikauskaitė'),
+  ];
 
-    constructor(
-      name: string,
-      surname: string,
-      items: Item[],
-      age: number,
-    ) {
-      this.setName(name);
-      this.setSurname(surname);
-      this.setItems(items);
-      this.setAge(age);
-    }
+  const fullnames: string[] = people.map((p) => p.getFullname());
 
-    public setName(name: string): void {
-      this.name = name;
-    }
-
-    public getName() {
-      return this.name;
-    }
-
-    public setSurname(surname: string): void {
-      this.surname = surname;
-    }
-
-    public getSurname() {
-      return this.surname;
-    }
-
-    public setItems(items: Item[]): void {
-      this.items = JSON.parse(JSON.stringify(items));
-    }
-
-    public getItems() {
-      return JSON.parse(JSON.stringify(this.items)) as Item[];
-    }
-
-    public setAge(age: number): void {
-      this.age = age;
-    }
-
-    public getAge() {
-      return this.age;
-    }
-  }
-
-  const person = new Person('Veibraidis', 'Klynka', [], 25);
-
-  // 15min
-  console.groupCollapsed(`1.1. Sukurkite klasę Person, kuri turėtų privačias savybes:
-      name: string,
-      surname: string,
-      items: Array<{title: string, price: number}>,
-      age: number,
-    Aprašykite konstruktorių kuris priimtų šiom savybėms skirtus parametrus ir nustatytų reikšmes naudojant "setter" funkcijas.
-  `);
-  {
-    console.log(person);
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('1.2. Aprašykite kiekvienai savybei "getter" funkcijas');
-  {
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('1.3. Sukurkite papildomą getterį "getFullname", kuris grąžintų pilną žmogaus vardą.');
-  {
-  }
-  console.groupEnd();
-
-  // 10min
-  console.groupCollapsed('1.4. Sukurkite papildomą getterį "getTotalItemValue", kuris grąžintų visų asmens daiktų kainų sumą');
-  {
-  }
-  console.groupEnd();
-
-  // 15min
-  console.groupCollapsed('1.5. setName "setter"yje aprašykite 3 savo sugalvotas validacijas');
-  {
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('1.6. setSurname "setter"yje aprašykite 3 savo sugalvotas validacijas');
-  {
-  }
-  console.groupEnd();
-
-  // 15min
-  console.groupCollapsed('1.7. setAge "setter"yje aprašykite 2 savo sugalvotas validacijas');
-  {
-  }
-  console.groupEnd();
-
-  // 20min
-  console.groupCollapsed('1.8. setItems "setter"yje aprašykite 3 savo sugalvotas validacijas KIEKVIENO priskiriamo masyvo "daiktams"');
-  {
-  }
-  console.groupEnd();
+  console.log(fullnames);
 }
 console.groupEnd();
 
-// PASIKOPIJUOKITE VISĄ PIRMĄ UŽDUOTĮ IR PAKEISTIKTE KODĄ NAUDOJANT NAUJĄ "get" ir "set" SINTAKSĘ
-// 55min
-console.group('2. Naudojant "get" ir "set" ES6 funkcijas:');
+console.group('2. Sukurkite Person klasei savybę "age". Inkapsuliuokite šią savybę taip, jog reikšmė galėtų būti tik sveiki skaičiai nuo 1 iki 150');
 {
-  class Person { }
 
-  const person = new Person();
-
-  // 10min
-  console.groupCollapsed(`2.1. Sukurkite klasę Person, kuri turėtų privačias savybes:
-      name: string,
-      surname: string,
-      items: Array<{title: string, price: number}>,
-      age: number,
-    Aprašykite konstruktorių kuris priimtų šiom savybėms skirtus parametrus ir nustatytų reikšmes naudojant "setter" funkcijas.
-  `);
-  {
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.2. Aprašykite kiekvienai savybei ES6 "get" funkcijas');
-  {
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.3. Sukurkite papildomą getterį "fullname", kuris grąžintų pilną žmogaus vardą.');
-  {
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.4. Sukurkite papildomą getterį "totalItemValue", kuris grąžintų visų asmens daiktų kainų sumą');
-  {
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.5. name "setter"yje aprašykite 3 savo sugalvotas validacijas');
-  {
-  }
-  console.groupEnd();
-
-  // 5min
-  console.groupCollapsed('2.6. surname "setter"yje aprašykite 3 savo sugalvotas validacijas');
-  {
-  }
-  console.groupEnd();
-
-  // 10min
-  console.groupCollapsed('2.7. age "setter"yje aprašykite 2 savo sugalvotas validacijas');
-  {
-  }
-  console.groupEnd();
-
-  // 10min
-  console.groupCollapsed('2.8. items "setter"yje aprašykite 3 savo sugalvotas validacijas KIEKVIENO priskiriamo masyvo "daiktams"');
-  {
-  }
-  console.groupEnd();
 }
 console.groupEnd();
+
+console.group('3. Sukurkite Person klasei savybę "height" kurios vertė būtų saugoma centimetrais. Sukurkite šiai savybei setterį, kuris pirmu parametru priimtų reikšmę, o antru parametru priimtų matavimo vienetus: "cm" | "m" | "in". Jeigu antras parametras nėra perduotas, numatytas(default) matavimo vienetas turi būti cm. Getteris turi grąžinti reikšmę centimetrais.');
+{
+
+}
+console.groupEnd();
+
+console.group('4. Sukurkite Person klasei statinę savybę "heightUnits". Jos tipas turi būti išvardinimas(enum), kurio pasirinkimai yra: "CM", "M", "IN". Numatytoji(default) "heightUnits" reikšmė turi būti centimetrai');
+{
+
+}
+console.groupEnd();
+
+console.group('5. "height" setterio antram parametrui pakeiskite sąjungos tipą į [4.] užduotyje sukurtą išvardinimą(enum). Priderinkite pavyzdžius ir metodą.');
+
+console.group('6. "height" geteriui sukurkite logiką, jog jis grąžintų matavimo vienetus, pagal statinės savybės "heightUnits" reikšmę.');
+{
+
+}
+console.groupEnd();
+
+console.group('7. Analogiškai pagal [4.]-[6.] punktus sukurkite savybę weight su statiniu išvardinimu "weightUnits", kurio pasirinkimai turi būti: "KG", "LBS"');
+{
+
+}
+console.groupEnd();
+
+console.group('8. Sukurkite klasei Person metodą "toString". Kuris paverstų žmogaus savybes gražiu formatu: vardas ir pavardė pirmoje eilutėje, o "height" ir "weight" savybės atskirose eilutėse, atitrauktos nuo kairio krašto per "tab" simbolį, ir su matavimo vienetais(kurie išsaugoti) statinėse Person klasės savybėse');
