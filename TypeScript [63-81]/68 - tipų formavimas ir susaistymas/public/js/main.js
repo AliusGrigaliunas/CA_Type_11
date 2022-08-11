@@ -132,6 +132,45 @@ console.group('4. Tipų susaistymas');
 {
     console.groupCollapsed('4.1. Turite tipą Accomodation, jo visos savybės yra pasiekiamos ir keičiamos tiesiogiai. Naudodami saistymo metodologiją sukurkite tipą EncapsulatedAccomodation. Panaudokite kiekvieną Accomodation tipo savybę, kad performuoti ją į setterio ir getterrio funkcijų poras. Sukūrę tipą, aprašykite funkciją "encapsulateAccomodation", kuri priimtų Accomodation tipo parametrą ir grąžintų EncapsulatedAccomodation objektą su veikiančiais setteriais ir getteriais.');
     {
+        const encapsulateAccomodation = ({ address, squares, type }) => ({
+            setAddress: (value) => { address = value; },
+            setSquares: (value) => { squares = value; },
+            setType: (value) => { type = value; },
+            getAddress: () => address,
+            getSquares: () => squares,
+            getType: () => type,
+        });
+        const accomodation1 = {
+            address: 'Bernužėlių g. 17, Rokelių kaimas, Pasvalio raj.',
+            squares: 224,
+            type: 'House',
+        };
+        console.log('Encapsulating accomodation1:', JSON.stringify(accomodation1, null, 4));
+        const encapsulatedAccomodation1 = encapsulateAccomodation(accomodation1);
+        console.log('Changing properties using setters...');
+        encapsulatedAccomodation1.setAddress('Bernužėlių g. 17, Rokelių kaimas, Biržų raj.');
+        encapsulatedAccomodation1.setSquares(180);
+        console.log('using getters after changes', {
+            'getAddress()': encapsulatedAccomodation1.getAddress(),
+            'getSquares()': encapsulatedAccomodation1.getSquares(),
+            'getType()': encapsulatedAccomodation1.getType(),
+        });
+        console.log('-----');
+        const accomodation2 = {
+            address: 'Vilniaus g. 26a, Kaunas',
+            squares: 64,
+            type: 'Flat',
+        };
+        console.log('Encapsulating accomodation2:', JSON.stringify(accomodation2, null, 4));
+        const encapsulatedAccomodation2 = encapsulateAccomodation(accomodation2);
+        console.log('Changing properties using setters...');
+        encapsulatedAccomodation2.setSquares(110);
+        encapsulatedAccomodation2.setType('House');
+        console.log('using getters after changes', {
+            'getAddress()': encapsulatedAccomodation2.getAddress(),
+            'getSquares()': encapsulatedAccomodation2.getSquares(),
+            'getType()': encapsulatedAccomodation2.getType(),
+        });
     }
     console.groupEnd();
 }
