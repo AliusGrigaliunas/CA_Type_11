@@ -43,6 +43,32 @@
 console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsaugokite joje bendrą funkcionalumą.');
 {
   class Person {
+    private static count: number = 0;
+
+    private namePrivate!: string;
+
+    private surnamePrivate!: string;
+
+    public readonly id: string;
+
+    constructor(name: string, surname: string) {
+      Person.count += 1;
+      this.id = `Person_${Person.count}`;
+      this.name = name;
+      this.surname = surname;
+    }
+
+    set name(val: string) {
+      this.namePrivate = val;
+    }
+
+    set surname(val: string) {
+      this.surnamePrivate = val;
+    }
+
+    get fullname(): string {
+      return `${this.namePrivate} ${this.surnamePrivate}`;
+    }
   }
 
   class Student extends Person {
@@ -60,9 +86,16 @@ console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsau
     private static VSD_PERC = 0.1252;
   }
 
+  const people: Person[] = [
+    new Person('Marikzas', 'Bauda'),
+    new Person('Staska', 'Virėjas'),
+  ];
+
   // 20min
-  console.group('1.1. Sukurkite klasę Person, kurios objektams būtų galima priskirti vardą ir pavardę. Šios klasės objektams turi susigeneruoti id - unikalus raktas. Taip pat sukurkite get"erį fullname, kuris grąžina vardą ir pavardę atskirtus tarpu. Atspausdinkite kelis šios klasės objektus, ir pademonstruokite get"erio veikimą.');
+  console.group('1.1. Sukurkite klasę Person, kurios objektams būtų galima priskirti vardą ir pavardę. Šios klasės objektams susigeneruoti id - unikalus raktas. Taip pat sukurkite get"erį fullname, kuris grąžina vardą ir pavardę atskirtus tarpu. Atspausdinkite kelis šios klasės objektus, ir pademonstruokite get"erio veikimą.');
   {
+    console.log(people);
+    people.forEach((p) => console.log(p.fullname));
   }
   console.groupEnd();
 
