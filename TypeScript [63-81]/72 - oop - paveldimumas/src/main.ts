@@ -1,158 +1,86 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable max-classes-per-file */
+/* eslint-disable no-console */
+/* eslint-disable no-inner-declarations */
 /* eslint-disable no-lone-blocks */
-/* eslint-disable no-empty */
 
-// eslint-disable-next-line no-shadow, no-unused-vars
-enum HeightUnits {
-  // eslint-disable-next-line
-  CENTIMETERS = 'cm',
-  // eslint-disable-next-line
-  METERS = 'm',
-  // eslint-disable-next-line
-  INCHES = 'in'
-}
+/*
+  Užduočių atlikimo eiga:
+  * Pirmiausiai perskaitykite visą užduotį:
+  * Klauskite dėstytojo užduoties paaiškinimo, jeigu užduotis nėra aiški.
+  * Galvoje susidarytkite sprendimo planą:
+    * Kaip atliksiu užduotį? Galbūt verta pasibraižyti sprendimo idėją ant lapelio?
+    * Kokių tipų reikės? Parametrų tipai, rezultatų tipai, funkcijų tipai.
+    * Kaip aiškiai ir tvarkingai pateiksiu rezultatus?
+  * Bandykite atlikti užduotį:
+    * Pavyko:
+      * Atspausdinkite rezultatus ir/arba veikimo pavyzdžius
+      * Pabandykite patobulinti savo kodą:
+        * pabandykite aiškiau aprašyti kintamųjų/tipų pavadinimus
+        * sužiūrėkite ar tikrai naudojate vieningą sintaksę
+      * Palyginkite savo sprendimą su užuočių atsakymų failu.
+      * Suformuokite klausimus dėstytojui, pagal sprendimų skirtumus
+    * Nepavyko:
+      * pažiūrėkite atsakymų failą ir PO VIENĄ EILUTĘ nusirašykite sprendimą
+      * rašant kiekvieną eilutę smulkmeniškai suformuokite klausimus.
+    * Spręskite kitus uždavinius, o kai dėstytojas aiškins užduoties sprendimą, klausykitės
+      * Po dėstytojo sprendimo ir aiškinimo užduokite klausimus, kurių vis dar nesuprantate.
+  Patarimai:
+    * Paspauskite komandą: ALT + Z - tai padės lengviau skaityti užduočių tekstą
+    * Nežiūrėkite į atsakymų failus anksčiau laiko.
+      jūsų tikslas lavinti inžinerinį mąstymą, o ne atlikti užduotis.
+    * Nesedėkite prie kompiuterio ilgiau nei 1 val iš eilės, darykite pertraukas po 10 min
+    * Klauskite visko ko nesuprantate. Neklausdami eikvojat savo laiką, kurį šie kursai taupo.
+      Gerbiat savo laiką - gerbiat save.
+    * Kodo tvarka ir aiškumas tiek pat svarbūs kiek funkcionalumas. Išmoksite tai dabar,
+      arba kuomet negausite darbo dėl netvarkingo kodo.
+    * Atlikę užduotį, užduokite sau klausimą: "Ar tai geriausia ką galėjau?"
+    * Įsigilinimas jūsų žinias iš supratimo perkelia į suvokimą. Tik suvokiant dalykus, galite
+      žinias pritaikyti kūrybiškai. Iš to seka, kad užduoties atlikimo kokybė >>> užduočių kiekis
+    * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
+*/
 
-const capitalize = (word: string): string => {
-  const words = word.trim().split(' ');
-  const capitalizedWords = words.map((w) => w[0].toUpperCase() + w.slice(1));
-
-  return capitalizedWords.join(' ');
-};
-
-class Person {
-  public static heightUnits: HeightUnits = HeightUnits.CENTIMETERS;
-
-  private privateName!: string;
-
-  private surname!: string;
-
-  private age!: number;
-
-  private height!: number;
-
-  public constructor(
-    name: string,
-    surname: string,
-    age: number,
-    height: number,
-    heightUnits?: HeightUnits,
-  ) {
-    this.setName(name);
-    this.setSurname(surname);
-    this.setAge(age);
-    this.setHeight(height, heightUnits);
-  }
-
-  public setName(name: string) {
-    if (name === '') throw new Error('Negali būti tuščias');
-    if (name.length < 2) throw new Error('Vardas turi būti bent iš 2 raidžių');
-
-    this.privateName = capitalize(name);
-  }
-
-  public setSurname(surname: string) {
-    if (surname === '') throw new Error('Negali būti tuščias');
-    if (surname.length < 2) throw new Error('Pavardė turi būti bent iš 2 raidžių');
-
-    this.surname = capitalize(surname);
-  }
-
-  public setAge(age: number) {
-    if (age % 1 !== 0) throw new Error('Amžius turi būti sveikas skaičius');
-    if (age < 1) throw new Error('Amžius negali būti mažesnis nei 1');
-    if (age > 150) throw new Error('Amžius negali būti didesnis už 150');
-
-    this.age = age;
-  }
-
-  public setHeight(height: number, units: HeightUnits = HeightUnits.CENTIMETERS) {
-    switch (units) {
-      case HeightUnits.CENTIMETERS: this.height = height; break;
-      case HeightUnits.METERS: this.height = height * 100; break;
-      case HeightUnits.INCHES: this.height = height * 2.54; break;
-      default: break;
-    }
-  }
-
-  public getFullname() {
-    return `${this.privateName} ${this.surname}`;
-  }
-
-  public getAge() {
-    return this.age;
-  }
-
-  public getHeight() {
-    switch (Person.heightUnits) {
-      case HeightUnits.CENTIMETERS: return this.height;
-      case HeightUnits.METERS: return this.height / 100;
-      case HeightUnits.INCHES: return this.height / 2.54;
-      default: return this.height;
-    }
-  }
-}
-
-const people: Person[] = [
-  new Person('Liudvikas', 'XVIII', 31, 190),
-  new Person('varaloja', 'karksė barsė', 35, 1.7, HeightUnits.METERS),
-  new Person('Ana maria', 'Laikauskaitė', 39, 70, HeightUnits.INCHES),
-];
-
-console.groupCollapsed('1. Sukurkite Person klasei savybes "name" ir "surname". Kiekvienai iš jų sukurkite setterius, ir bendrą getterį fullname');
+console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsaugokite joje bendrą funkcionalumą.');
 {
-  const fullnames: string[] = people.map((p) => p.getFullname());
+  class Person {
+  }
 
-  console.log(fullnames);
+  class Student extends Person {
+  }
+
+  class Lecturer extends Person {
+    private static MIN_SALARY = 1800;
+
+    private static MAX_SALARY = 4400;
+
+    private static GPM_PERC = 0.20;
+
+    private static PSD_PERC = 0.0698;
+
+    private static VSD_PERC = 0.1252;
+  }
+
+  // 20min
+  console.group('1.1. Sukurkite klasę Person, kurios objektams būtų galima priskirti vardą ir pavardę. Šios klasės objektams turi susigeneruoti id - unikalus raktas. Taip pat sukurkite get"erį fullname, kuris grąžina vardą ir pavardę atskirtus tarpu. Atspausdinkite kelis šios klasės objektus, ir pademonstruokite get"erio veikimą.');
+  {
+  }
+  console.groupEnd();
+
+  // 40min
+  console.group('1.2. Sukurkite klasę Student, kuri paveldėtų klasę Person. Be Person klasės paveldimų savybių, klasę Student turi turėti savybę "marks", kurioje bus saugomi studento pažymiai. Konstruktoriaus vykdymo metu, "marks" reikšmei turi būti sukuriamas tuščias masyvas. Student klasėje sukurkite metodą "addMark" kuris leistų įdėti naują pažymį - sveiką skaičių nuo 1 iki 10. Taip pat sukurkite get"erį "avg", kuris skaičiuotų studento vidurkį pagal esamus pažymius. Sukurkite bent 2 Student klasės objektus ir atspausdinkite visus get"erius ir pavaizduokite metodų funkcionalumą konsolėje.');
+  {
+  }
+  console.groupEnd();
+
+  // 50min
+  console.group('1.3. Sukurkite klasę Lecturer, kuri paveldėtų klasę Person. Papildomai klasei Lecturer sukurkite savybę "salary", kuri privalo būti priskirta objekto sukūrimo metu. Inkapsuliuokite savybę "salary" taip, kad ji galėtų būti skaičius nuo 1800 iki 4400 su ne daugiau nei 2 skaičiais po kablelio. Taip pat sukurkite get"erį "salaryNeto", kuris atspausdintų suapvalintą atlyginimą iki sveikų skaičių atskaičiavus mokesčius: GPM 20%, PSD 6.98%, VSD 12.52%. Sukurkite bent 2 Lecturer klasės objektus ir atspausdinkite visus get"erius konsolėje.');
+  {
+  }
+  console.groupEnd();
+
+  // 10min
+  console.group('1.4. Sukurkite viešai [1.] užduočiai pasiekiamą masyvą "allPeople". [1.1], [1.2] ir [1.3] užduotyse sukurtus objektus įdėkite į šį masyvą. Atspausdinkite visų žmonių elementų "fullname"');
+  {
+  }
 }
 console.groupEnd();
-
-console.groupCollapsed('2. Sukurkite Person klasei savybę "age". Inkapsuliuokite šią savybę taip, jog reikšmė galėtų būti tik sveiki skaičiai nuo 1 iki 150');
-{
-  const ages = people.map((p) => p.getAge());
-  console.log(ages);
-}
-console.groupEnd();
-
-console.group('3. Sukurkite Person klasei savybę "height" kurios vertė būtų saugoma centimetrais. Sukurkite šiai savybei setterį, kuris pirmu parametru priimtų reikšmę, o antru parametru priimtų matavimo vienetus: "cm" | "m" | "in". Jeigu antras parametras nėra perduotas, numatytas(default) matavimo vienetas turi būti cm. Getteris turi grąžinti reikšmę centimetrais.');
-{
-  const heights = people.map((p) => p.getHeight());
-  console.log(heights);
-}
-console.groupEnd();
-
-console.group('4. Sukurkite Person klasei statinę savybę "heightUnits". Jos tipas turi būti išvardinimas(enum), kurio pasirinkimai yra: "cm", "m", "in". Numatytoji(default) "heightUnits" reikšmė turi būti centimetrai');
-{
-  Person.heightUnits = HeightUnits.METERS;
-  console.log('Matavimo vienetai pakeisti į:', HeightUnits.METERS);
-  console.log({ 'Person.heightUnits': Person.heightUnits });
-  Person.heightUnits = HeightUnits.INCHES;
-  console.log('Matavimo vienetai pakeisti į:', HeightUnits.INCHES);
-  console.log({ 'Person.heightUnits': Person.heightUnits });
-  Person.heightUnits = HeightUnits.CENTIMETERS;
-  console.log('Matavimo vienetai pakeisti į:', HeightUnits.CENTIMETERS);
-  console.log({ 'Person.heightUnits': Person.heightUnits });
-}
-console.groupEnd();
-
-console.group('5. "height" setterio antram parametrui pakeiskite sąjungos tipą į [4.] užduotyje sukurtą išvardinimą(enum). Priderinkite pavyzdžius ir metodą.');
-
-console.group('6. "height" geteriui sukurkite logiką, jog jis grąžintų matavimo vienetus, pagal statinės savybės "heightUnits" reikšmę.');
-{
-  Person.heightUnits = HeightUnits.METERS;
-  console.log('Matavimo vienetai pakeisti į:', HeightUnits.METERS);
-  console.log(people.map((p) => p.getHeight()));
-  Person.heightUnits = HeightUnits.INCHES;
-  console.log('Matavimo vienetai pakeisti į:', HeightUnits.INCHES);
-  console.log(people.map((p) => p.getHeight()));
-  Person.heightUnits = HeightUnits.CENTIMETERS;
-  console.log('Matavimo vienetai pakeisti į:', HeightUnits.CENTIMETERS);
-  console.log(people.map((p) => p.getHeight()));
-}
-console.groupEnd();
-
-console.group('7. Analogiškai pagal [4.]-[6.] punktus sukurkite savybę weight su statiniu išvardinimu "weightUnits", kurio pasirinkimai turi būti: "KG", "LBS"');
-{
-
-}
-console.groupEnd();
-
-console.group('8. Sukurkite klasei Person metodą "toString". Kuris paverstų žmogaus savybes gražiu formatu: vardas ir pavardė pirmoje eilutėje, o "height" ir "weight" savybės atskirose eilutėse, atitrauktos nuo kairio krašto per "tab" simbolį, ir su matavimo vienetais(kurie išsaugoti) statinėse Person klasės savybėse');
