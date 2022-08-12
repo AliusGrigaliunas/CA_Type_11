@@ -128,7 +128,7 @@ console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsau
     }
   }
 
-  const allPeople = [];
+  const allPeople: Person[] = [];
 
   // 20min
   console.group('1.1. Sukurkite klasę Person, kurios objektams būtų galima priskirti vardą ir pavardę. Šios klasės objektams turi susigeneruoti id - unikalus raktas. Taip pat sukurkite get"erį fullname, kuris grąžina vardą ir pavardę atskirtus tarpu. Atspausdinkite kelis šios klasės objektus, ir pademonstruokite get"erio veikimą.');
