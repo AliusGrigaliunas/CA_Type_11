@@ -39,7 +39,7 @@
     * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
 */
 
-// 80min
+// 60min
 console.group('1. Implementuokite figūrų abstrakciją ir polimorfizmą naudojant abstrakčią klasę');
 {
   // ↓↓↓↓ Klasės ↓↓↓↓
@@ -49,15 +49,16 @@ console.group('1. Implementuokite figūrų abstrakciją ir polimorfizmą naudoja
   // 10min
   console.log('1.1. Sukurkite abstrakčią klasę Shape2D, kuri turėtų 2 abstrakčius metodus. Abu šie metodai neturi parametrų ir grąžina skaičių: "getPerimeter" ir "getArea"');
 
-  // 30min
+  // 20min
   console.log('1.2. Sukurkite Rectangle klasę kuri paveldi Shape2D klasę ir implementuokite metodus. Konstruktoriaus ir savybes pasirinkite taip, kad galėtumėte implementuoti abstrakčių metodų logiką.');
 
-  // 30min
+  // 20min
   console.log('1.3. Sukurkite Circle klasę kuri paveldi Shape2D klasę ir implementuokite metodus. Konstruktoriaus ir savybes pasirinkite taip, kad galėtumėte implementuoti abstrakčių metodų logiką.');
 
   // 10min
   console.groupCollapsed('1.4. Sukurkite "Shape2D" tipo masyvą, kuriame būtų 2 apskritimai ir 2 keturkampiai. Atspausdinkite visų figūrų plotus ir perimetrus naudodami "Shape2D" klasės abstrakčius metodus');
   {
+
   }
   console.groupEnd();
 }
