@@ -7,11 +7,14 @@
 /*
   Užduočių atlikimo eiga:
   * Pirmiausiai perskaitykite visą užduotį:
+
   * Klauskite dėstytojo užduoties paaiškinimo, jeigu užduotis nėra aiški.
+
   * Galvoje susidarytkite sprendimo planą:
     * Kaip atliksiu užduotį? Galbūt verta pasibraižyti sprendimo idėją ant lapelio?
     * Kokių tipų reikės? Parametrų tipai, rezultatų tipai, funkcijų tipai.
     * Kaip aiškiai ir tvarkingai pateiksiu rezultatus?
+
   * Bandykite atlikti užduotį:
     * Pavyko:
       * Atspausdinkite rezultatus ir/arba veikimo pavyzdžius
@@ -23,8 +26,10 @@
     * Nepavyko:
       * pažiūrėkite atsakymų failą ir PO VIENĄ EILUTĘ nusirašykite sprendimą
       * rašant kiekvieną eilutę smulkmeniškai suformuokite klausimus.
+
     * Spręskite kitus uždavinius, o kai dėstytojas aiškins užduoties sprendimą, klausykitės
       * Po dėstytojo sprendimo ir aiškinimo užduokite klausimus, kurių vis dar nesuprantate.
+
   Patarimai:
     * Paspauskite komandą: ALT + Z - tai padės lengviau skaityti užduočių tekstą
     * Nežiūrėkite į atsakymų failus anksčiau laiko.
@@ -42,54 +47,41 @@
 
 console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsaugokite joje bendrą funkcionalumą.');
 {
+  interface PersonProps {
+    name: string;
+    surname: string;
+  }
+
   class Person {
-    private static count: number = 0;
+    protected name: string;
 
-    private namePrivate!: string;
+    protected surname: string;
 
-    private surnamePrivate!: string;
-
-    public readonly id: string;
-
-    public constructor(name: string, surname: string) {
-      Person.count += 1;
-      this.id = `Person_${Person.count}`;
+    constructor({ name, surname }: PersonProps) {
       this.name = name;
       this.surname = surname;
     }
 
-    public set name(val: string) {
-      this.namePrivate = val;
-    }
-
-    public set surname(val: string) {
-      this.surnamePrivate = val;
-    }
-
-    public get fullname(): string {
-      return `${this.namePrivate} ${this.surnamePrivate}`;
+    get fullname() {
+      return `${this.name} ${this.surname}`;
     }
   }
 
   class Student extends Person {
     private marks: number[];
 
-    public constructor(name: string, surname: string) {
-      super(name, surname);
+    constructor(personProps: PersonProps) {
+      super(personProps);
       this.marks = [];
     }
 
-    public get avg() {
+    get avg() {
       return this.marks.length > 0
-        ? this.marks.reduce((sum, mark) => sum + mark) / this.marks.length
+        ? this.marks.reduce((s, x) => s + x) / this.marks.length
         : 0;
     }
 
-    public addMark(mark: number): void {
-      if (mark < 1) throw new Error('Pažymys negali būti mažesnis už 1');
-      if (mark > 10) throw new Error('Pažymys negali būti didesnis už 10');
-      if (mark % 1 !== 0) throw new Error('Pažymys turi būti sveikas skaičius');
-
+    addMark(mark: number) {
       this.marks.push(mark);
     }
   }
@@ -105,47 +97,49 @@ console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsau
 
     private static VSD_PERC = 0.1252;
 
-    private salaryPrivate!: number;
+    private _salary!: number;
 
-    constructor(salary: number, name: string, surname: string) {
-      super(name, surname);
+    constructor(salary: number, personProps: PersonProps) {
+      super(personProps);
       this.salary = salary;
     }
 
-    set salary(value) {
-      if (value < Lecturer.MIN_SALARY || value > Lecturer.MAX_SALARY) {
+    set salary(val) {
+      if (val < Lecturer.MIN_SALARY || val > Lecturer.MAX_SALARY) {
         throw new Error(`Lecturer salary must be in range ${Lecturer.MIN_SALARY}-${Lecturer.MAX_SALARY}`);
       }
-      const valStr = String(value);
+      const valStr = String(val);
       const numbersAfterFor = valStr.split('.')[1];
       if (numbersAfterFor !== undefined && numbersAfterFor.length > 2) {
         throw new Error('Lecturer salary precision must be no more than 2 points');
       }
-      this.salaryPrivate = value;
+      this._salary = val;
     }
 
     get salary() {
-      return this.salaryPrivate;
+      return this._salary;
     }
 
     get salaryNeto() {
-      const gmpTax = this.salaryPrivate * Lecturer.GPM_PERC;
-      const psdTax = this.salaryPrivate * Lecturer.PSD_PERC;
-      const vsdTax = this.salaryPrivate * Lecturer.VSD_PERC;
-
-      return Math.round(this.salaryPrivate - gmpTax - psdTax - vsdTax);
+      const gmpTax = this._salary * Lecturer.GPM_PERC;
+      const psdTax = this._salary * Lecturer.PSD_PERC;
+      const vsdTax = this._salary * Lecturer.VSD_PERC;
+      return Math.round(this._salary - gmpTax - psdTax - vsdTax);
     }
   }
 
-  const people: Person[] = [
-    new Person('Marikzas', 'Bauda'),
-    new Person('Staska', 'Virėjas'),
-  ];
+  const allPeople: Person[] = [];
 
   // 20min
-  console.group('1.1. Sukurkite klasę Person, kurios objektams būtų galima priskirti vardą ir pavardę. Šios klasės objektams susigeneruoti id - unikalus raktas. Taip pat sukurkite get"erį fullname, kuris grąžina vardą ir pavardę atskirtus tarpu. Atspausdinkite kelis šios klasės objektus, ir pademonstruokite get"erio veikimą.');
+  console.group('1.1. Sukurkite klasę Person, kurios objektams būtų galima priskirti vardą ir pavardę. Šios klasės objektams turi susigeneruoti id - unikalus raktas. Taip pat sukurkite get"erį fullname, kuris grąžina vardą ir pavardę atskirtus tarpu. Atspausdinkite kelis šios klasės objektus, ir pademonstruokite get"erio veikimą.');
   {
-    console.log(people);
+    const person1 = new Person({ name: 'Varguna', surname: 'Špagelytė' });
+    const person2 = new Person({ name: 'Rainis', surname: 'Parkūras' });
+    const people = [person1, person2];
+    // 1.4
+    allPeople.push(...people);
+
+    people.forEach((p) => console.log(p));
     people.forEach((p) => console.log(p.fullname));
   }
   console.groupEnd();
@@ -153,9 +147,11 @@ console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsau
   // 40min
   console.group('1.2. Sukurkite klasę Student, kuri paveldėtų klasę Person. Be Person klasės paveldimų savybių, klasę Student turi turėti savybę "marks", kurioje bus saugomi studento pažymiai. Konstruktoriaus vykdymo metu, "marks" reikšmei turi būti sukuriamas tuščias masyvas. Student klasėje sukurkite metodą "addMark" kuris leistų įdėti naują pažymį - sveiką skaičių nuo 1 iki 10. Taip pat sukurkite get"erį "avg", kuris skaičiuotų studento vidurkį pagal esamus pažymius. Sukurkite bent 2 Student klasės objektus ir atspausdinkite visus get"erius ir pavaizduokite metodų funkcionalumą konsolėje.');
   {
-    const stud1 = new Student('Kiauraklis', 'Balkonėjus');
-    const stud2 = new Student('Sulinda', 'Gylaitaitė');
+    const stud1 = new Student({ name: 'Kiauraklis', surname: 'Balkonėjus' });
+    const stud2 = new Student({ name: 'Sulinda', surname: 'Gylaitaitė' });
     const students = [stud1, stud2];
+    // 1.4
+    allPeople.push(...students);
 
     console.group('Studenčiokai');
     students.forEach((s) => console.log(s));
@@ -184,9 +180,11 @@ console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsau
   // 50min
   console.group('1.3. Sukurkite klasę Lecturer, kuri paveldėtų klasę Person. Papildomai klasei Lecturer sukurkite savybę "salary", kuri privalo būti priskirta objekto sukūrimo metu. Inkapsuliuokite savybę "salary" taip, kad ji galėtų būti skaičius nuo 1800 iki 4400 su ne daugiau nei 2 skaičiais po kablelio. Taip pat sukurkite get"erį "salaryNeto", kuris atspausdintų suapvalintą atlyginimą iki sveikų skaičių atskaičiavus mokesčius: GPM 20%, PSD 6.98%, VSD 12.52%. Sukurkite bent 2 Lecturer klasės objektus ir atspausdinkite visus get"erius konsolėje.');
   {
-    const lecturer1 = new Lecturer(3000, 'Servacijus', 'Tritonas');
-    const lecturer2 = new Lecturer(3200, 'Vorė', 'Tinklaitienė');
+    const lecturer1 = new Lecturer(3000, { name: 'Servacijus', surname: 'Tritonas' });
+    const lecturer2 = new Lecturer(3200, { name: 'Vorė', surname: 'Tinklaitienė' });
     const lecturers = [lecturer1, lecturer2];
+    // 1.4
+    allPeople.push(...lecturers);
 
     console.group('Dėstytuvai:');
     lecturers.forEach((l) => console.log(l));
@@ -205,7 +203,7 @@ console.group('1. Sukurkite klasę tėvinę Person vaikinėms klasėms ir išsau
   // 10min
   console.group('1.4. Sukurkite viešai [1.] užduočiai pasiekiamą masyvą "allPeople". [1.1], [1.2] ir [1.3] užduotyse sukurtus objektus įdėkite į šį masyvą. Atspausdinkite visų žmonių elementų "fullname"');
   {
-
+    allPeople.forEach(({ fullname }) => console.log(fullname));
   }
 }
 console.groupEnd();
