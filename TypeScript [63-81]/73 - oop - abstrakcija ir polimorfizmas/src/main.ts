@@ -43,10 +43,15 @@
 console.group('1. Implementuokite figūrų abstrakciją ir polimorfizmą naudojant abstrakčią klasę');
 {
   // ↓↓↓↓ Klasės ↓↓↓↓
+  abstract class Shape2D {
+    public abstract getPerimeter(): number;
+
+    public abstract getArea(): number;
+  }
 
   // ↑↑↑↑ Klasės ↑↑↑↑
 
-  // 10min
+  // 5min
   console.log('1.1. Sukurkite abstrakčią klasę Shape2D, kuri turėtų 2 abstrakčius metodus. Abu šie metodai neturi parametrų ir grąžina skaičių: "getPerimeter" ir "getArea"');
 
   // 20min
