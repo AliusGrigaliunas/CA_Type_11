@@ -260,5 +260,58 @@ console.group('5. Sukurkite funkciją "groupBy", kuri priima masyvą objektų, i
     * JS: Array.prototype.reduce
 */
 {
+  type GroupObject<
+    ObjectType extends { [key: string]: any },
+    Key extends keyof ObjectType
+    > = {
+      [PropName in ObjectType[Key]]?: ObjectType[]
+    }
+
+  interface Person {
+    surname: string;
+    age: number;
+    city: string;
+  }
+
+  const groupBy = <
+    ObjectType extends { [key: string]: any },
+    Key extends keyof ObjectType,
+    >(arr: ObjectType[], key: Key) => arr.reduce<GroupObject<ObjectType, Key>>(
+      (prevGroupedObject, element) => {
+        const groupedObject = { ...prevGroupedObject };
+        const groupKey = element[key];
+
+        if (groupKey in groupedObject) {
+          groupedObject[groupKey]?.push(element);
+        } else {
+          groupedObject[groupKey] = [element];
+        }
+
+        return groupedObject;
+      },
+      {},
+    );
+
+  const people: Person[] = [
+    { city: 'Vilnius', surname: 'Bandziūga', age: 17 },
+    { city: 'Kaunas', surname: 'Britkus', age: 28 },
+    { city: 'Kaunas', surname: 'Žinlinskas', age: 16 },
+    { city: 'Rietavas', surname: 'Varkienė', age: 63 },
+    { city: 'Vilnius', surname: 'Hienytė', age: 22 },
+    { city: 'Kaunas', surname: 'Malūnas', age: 32 },
+    { city: 'Kaunas', surname: 'Žiobaras', age: 32 },
+    { city: 'Vilnius', surname: 'Fosforas', age: 22 },
+    { city: 'Kaunas', surname: 'Mažuronis', age: 19 },
+    { city: 'Kaunas', surname: 'Princas', age: 32 },
+    { city: 'Vilnius', surname: 'Klinkaitė', age: 32 },
+    { city: 'Kaunas', surname: 'Griovys', age: 47 },
+    { city: 'Rietavas', surname: 'Žinduolis', age: 29 },
+    { city: 'Vilnius', surname: 'Amadėjus', age: 23 },
+  ];
+
+  const groupedPeopleByAge = groupBy(people, 'age');
+  const groupedPeopleByCity = groupBy(people, 'city');
+  console.log(groupedPeopleByAge);
+  console.log(groupedPeopleByCity);
 }
 console.groupEnd();
