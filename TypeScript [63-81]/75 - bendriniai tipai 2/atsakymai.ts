@@ -63,9 +63,9 @@ console.group('2. Sukurkite funkciją "joinObjects", kuri apjungia 2 objektus. A
     * JS: spread operator
 */
 {
-  type CommonProperties<T extends Object, K extends Object> = keyof (T | K);
+  type CommonProperties<T extends object, K extends Object> = keyof (T | K);
 
-  type Merge<T extends Object, K extends Object> = Omit<T, CommonProperties<T, K>> & K;
+  type Merge<T extends object, K extends Object> = Omit<T, CommonProperties<T, K>> & K;
 
   const joinObjects = <T extends object, K extends object>(obj1: T, obj2: K)
     : Merge<T, K> => ({
@@ -101,7 +101,7 @@ console.group('2. Sukurkite funkciją "joinObjects", kuri apjungia 2 objektus. A
     legs: 8,
   };
 
-  const spiderPig = joinObjects(pig, spider);
+  const spiderPig = joinObjects(spider, pig);
 
   // Patikrinama, ar teisingai išsisaugojo tipas po apjungimo
   console.table({
@@ -123,6 +123,27 @@ console.group('3. Sukurkite funkciją "applyFilters", kuri priima masyvą elemen
     * JS: Array.prototype.reduce
 */
 {
+  type FilterFunctionType<T> = (el: T) => boolean;
+
+  const applyFilters = <T>(
+    arr: T[],
+    filterFunctions: FilterFunctionType<T>[]): T[] => filterFunctions
+      .reduce(
+        (prevArr, filterFunction) => prevArr.filter(filterFunction),
+        [...arr],
+      );
+
+  const isPositive = (a: number) => a > 0;
+  const isEqual = (a: number) => a % 2 === 0;
+  const isInteger = (a: number) => Math.round(a) === a;
+
+  const numbers = [1, 2, 3, 4, 5, 1.11, 1.22, 1.17, -5, -7, -4, 0, -6, -1];
+  const filteredNumbers = applyFilters(numbers, [isPositive, isEqual, isInteger]);
+
+  console.table({
+    numbers: JSON.stringify(numbers),
+    filteredNumbers: JSON.stringify(filteredNumbers),
+  });
 }
 console.groupEnd();
 
@@ -171,6 +192,49 @@ console.group('4. Sukurkite funkciją "applySortings", kuri priima masyvą eleme
     * Programming: Return Early Pattern
 */
 {
+  interface Person {
+    surname: string;
+    age: number;
+    city: string;
+  }
+
+  type SortingFunctionType<T> = (a: T, b: T) => number;
+
+  const applySortings = <T>(arr: T[], sortingFunction: SortingFunctionType<T>[]): T[] => {
+    const sortedArr = [...arr].sort((a, b) => {
+      for (let i = 0; i < sortingFunction.length; i += 1) {
+        const sortingFunctionResult = sortingFunction[i](a, b);
+        if (sortingFunctionResult !== 0) return sortingFunctionResult;
+      }
+      return 0;
+    });
+
+    return sortedArr;
+  };
+
+  const byCity = (a: Person, b: Person) => a.city.localeCompare(b.city);
+  const byAge = (a: Person, b: Person) => a.age - b.age;
+  const bySurname = (a: Person, b: Person) => a.surname.localeCompare(b.surname);
+
+  const people: Person[] = [
+    { city: 'Vilnius', surname: 'Bandziūga', age: 17 },
+    { city: 'Kaunas', surname: 'Britkus', age: 28 },
+    { city: 'Kaunas', surname: 'Žinlinskas', age: 16 },
+    { city: 'Rietavas', surname: 'Varkienė', age: 63 },
+    { city: 'Vilnius', surname: 'Hienytė', age: 22 },
+    { city: 'Kaunas', surname: 'Malūnas', age: 32 },
+    { city: 'Kaunas', surname: 'Žiobaras', age: 32 },
+    { city: 'Vilnius', surname: 'Fosforas', age: 22 },
+    { city: 'Kaunas', surname: 'Mažuronis', age: 19 },
+    { city: 'Kaunas', surname: 'Princas', age: 32 },
+    { city: 'Vilnius', surname: 'Klinkaitė', age: 32 },
+    { city: 'Kaunas', surname: 'Griovys', age: 47 },
+    { city: 'Rietavas', surname: 'Žinduolis', age: 29 },
+    { city: 'Vilnius', surname: 'Amadėjus', age: 23 },
+  ];
+
+  const sortedPeople = applySortings(people, [byCity, byAge, bySurname]);
+  console.table(sortedPeople);
 }
 console.groupEnd();
 
@@ -181,5 +245,61 @@ console.group('5. Sukurkite funkciją "groupBy", kuri priima masyvą objektų, i
     * JS: Array.prototype.reduce
 */
 {
+  interface Person {
+    surname: string;
+    age: number;
+    city: string;
+  }
+
+  type GroupedByKey<Type, Key extends keyof Type> = {
+    [key in Key]?: Type[]
+  };
+
+  const groupBy = <
+    Type,
+    Key extends keyof Type,
+    Result extends GroupedByKey<Type, Key> = GroupedByKey<Type, Key>,
+    >(arr: Type[], key: Key): Result => {
+    const groupedByKey = arr.reduce<Result>((res, el) => {
+      const resKey = el[key] as unknown as keyof Result;
+
+      if (res[resKey] !== undefined) {
+        res[resKey]?.push(el);
+        return res;
+      }
+
+      return {
+        ...res,
+        [resKey]: [el],
+      };
+    }, {} as Result);
+
+    return groupedByKey;
+  };
+
+  const people: Person[] = [
+    { city: 'Vilnius', surname: 'Bandziūga', age: 17 },
+    { city: 'Kaunas', surname: 'Britkus', age: 28 },
+    { city: 'Kaunas', surname: 'Žinlinskas', age: 16 },
+    { city: 'Rietavas', surname: 'Varkienė', age: 63 },
+    { city: 'Vilnius', surname: 'Hienytė', age: 22 },
+    { city: 'Kaunas', surname: 'Malūnas', age: 32 },
+    { city: 'Kaunas', surname: 'Žiobaras', age: 32 },
+    { city: 'Vilnius', surname: 'Fosforas', age: 22 },
+    { city: 'Kaunas', surname: 'Mažuronis', age: 19 },
+    { city: 'Kaunas', surname: 'Princas', age: 32 },
+    { city: 'Vilnius', surname: 'Klinkaitė', age: 32 },
+    { city: 'Kaunas', surname: 'Griovys', age: 47 },
+    { city: 'Rietavas', surname: 'Žinduolis', age: 29 },
+    { city: 'Vilnius', surname: 'Amadėjus', age: 23 },
+  ];
+
+  const groupedByCity = groupBy(people, 'city');
+  const groupedByAge = groupBy(people, 'age');
+
+  console.log({
+    groupedByCity,
+    groupedByAge,
+  });
 }
 console.groupEnd();
