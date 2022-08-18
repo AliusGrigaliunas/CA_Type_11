@@ -130,7 +130,7 @@ console.group('3. Sukurkite funkciją "applyFilters", kuri priima masyvą elemen
     filterFunctions: FilterFunctionType<T>[]): T[] => filterFunctions
       .reduce(
         (prevArr, filterFunction) => prevArr.filter(filterFunction),
-        [...arr],
+        arr,
       );
 
   const isPositive = (a: number) => a > 0;
