@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 /* eslint-disable no-console */
 /* eslint-disable no-inner-declarations */
 /* eslint-disable no-lone-blocks */
@@ -43,263 +44,204 @@
     * Užduočių rezultatų pateikimas tike pat svarbus, kiek sprendimas.
 */
 
-// 10 min
-console.group('1. Sukurkite funkciją "joinArrays", kuri apjungia 2 masyvus. Grąžinamo masyvo tipas turi būti lygus parametrais perduotų masyvų tipų sajungai');
+// 55 min
+console.group('1. Dėklo (Stack) duomenų struktūros kūrimas');
 {
-  const joinArrays = <T, K>(arr1: T[], arr2: K[]): (T | K)[] => [...arr1, ...arr2];
+  /*
+    Perskaitykite: https://runestone.academy/ns/books/published/pythonds/BasicDS/WhatisaStack.html
+  */
 
-  console.table({
-    'joinArrays([1, 2, 3], [4, 5, 6]': joinArrays([1, 2, 3], [4, 5, 6]),
-    'joinArrays([1, 2, 3], ["a", "b"]': joinArrays([1, 2, 3], ['a', 'b']),
-  });
-}
-console.groupEnd();
+  // ↓↓↓ klasė ↓↓↓
+  class Stack<T> {
+    private index: number;
 
-// 25 min
-console.group('2. Sukurkite funkciją "joinObjects", kuri apjungia 2 objektus. Apjungtam objekto tipe, turi būti visos savybės kurios buvo objekte pirmu parametru, ir objekte antru parametru.');
-/*
-  hints:
-    * TS: generic constraints
-    * JS: spread operator
-*/
-{
-  type CommonProperties<T extends object, K extends Object> = keyof (T | K);
+    [i: number]: T | undefined;
 
-  type Merge<T extends object, K extends Object> = Omit<T, CommonProperties<T, K>> & K;
+    // 1.
+    constructor() { this.index = -1; }
 
-  const joinObjects = <T extends object, K extends object>(obj1: T, obj2: K)
-    : Merge<T, K> => ({
-      ...obj1,
-      ...obj2,
-    });
+    // 4.
+    get length() {
+      return this.index + 1;
+    }
 
-  type Pig = {
-    sayOinkOink(): void,
-    weight: number,
-    legs: 4
-  };
+    // 2.
+    push(data: T) {
+      this.index += 1;
+      this[this.index] = data;
+    }
 
-  type Spider = {
-    sprayWeb(): void,
-    weight: number,
-    legs: 8
-  };
-
-  const pig: Pig = {
-    sayOinkOink() {
-      console.log('Oink Oink');
-    },
-    weight: 80,
-    legs: 4,
-  };
-
-  const spider: Spider = {
-    sprayWeb() {
-      console.log('https://bwscience.com/wp-content/uploads/2016/10/spider-web.jpg');
-    },
-    weight: 80,
-    legs: 8,
-  };
-
-  const spiderPig = joinObjects(spider, pig);
-
-  // Patikrinama, ar teisingai išsisaugojo tipas po apjungimo
-  console.table({
-    'spiderPig.legs': spiderPig.legs,
-    'spiderPig.weight': spiderPig.weight,
-  });
-  console.log('spiderPig.sayOinkOink()');
-  spiderPig.sayOinkOink();
-  console.log('spiderPig.sprayWeb()');
-  spiderPig.sprayWeb();
-}
-console.groupEnd();
-
-// 30 min
-console.group('3. Sukurkite funkciją "applyFilters", kuri priima masyvą elementų, ir masyvą filtravimo funkcijų. Panaudokite visas filtravimo funkcijas masyvo elementams filtruoti.');
-/*
-  hints:
-    * JS: Array.prototype.filter
-    * JS: Array.prototype.reduce
-*/
-{
-  type FilterFunctionType<T> = (el: T) => boolean;
-
-  const applyFilters = <T>(
-    arr: T[],
-    filterFunctions: FilterFunctionType<T>[]): T[] => filterFunctions
-      .reduce(
-        (prevArr, filterFunction) => prevArr.filter(filterFunction),
-        arr,
-      );
-
-  const isPositive = (a: number) => a > 0;
-  const isEqual = (a: number) => a % 2 === 0;
-  const isInteger = (a: number) => Math.round(a) === a;
-
-  const numbers = [1, 2, 3, 4, 5, 1.11, 1.22, 1.17, -5, -7, -4, 0, -6, -1];
-  const filteredNumbers = applyFilters(numbers, [isPositive, isEqual, isInteger]);
-
-  console.table({
-    numbers: JSON.stringify(numbers),
-    filteredNumbers: JSON.stringify(filteredNumbers),
-  });
-}
-console.groupEnd();
-
-// 40 min
-console.group('4. Sukurkite funkciją "applySortings", kuri priima masyvą elementų, ir masyvą rikiavimo funkcijų. Panaudokite visas rikiavimo funkcijas masyvo elementams rikiuoti.');
-/*
-  Kartais norime išrikiuoti masyvą pagal kelis kriterijus:
-    Rikiuojame žmones pagal miestus,
-    o pagal miestus išrikiuotus žmones išrikiuojame pagal amžių, nekeičiant rikiavimo pagal miestus,
-    o tuomet pagal pavardę, nekeičiant prieš tai buvusių rikiavimų
-
-    Kitaip tariant rikiuojame:
-      1. Pagal Miestą, o iš to paties miesto rikiuojame:
-        2. Pagal amžių, o iš to paties miesto ir to paties amžiaus rikiuojame:
-          3. Pagal pavardę
-
-  Pavyzdžiui:
-
-  Miestas 1↑ | Pavardė 3↑ | Amžius 2↑
-  ------------------------------------
-  Kaunas     | Žinlinskas | 16
-  Kaunas     | Mažuronis  | 19
-  Kaunas     | Britkus    | 28
-  Kaunas     | Malūnas    | 32
-  Kaunas     | Princas    | 32
-  Kaunas     | Žiobaras   | 32
-  Kaunas     | Griovys    | 47
-  Rietavas   | Žinduolis  | 29
-  Rietavas   | Varkienė   | 63
-  Vilnius    | Bandziūga  | 17
-  Vilnius    | Fosforas   | 22
-  Vilnius    | Hienytė    | 22
-  Vilnius    | Amadėjus   | 23
-  Vilnius    | Klinkaitė  | 32
-
-  Parašykite tokį BENDRINĮ algoritmą, kuris priimtų parametrus
-    * duomenų masyvą
-    * rikiavimo funkcijų masyvą
-  Ir išrikiuotų masyvą pritaikant visų rikiavimo funkcijų kriterijus,
-    pagal funkcijų masyve esančių rikiavimo funkcijų eiliškumą
-
-  hints:
-    * JS: Array.prototype.sort
-    * JS: spread operator
-    * Programming: Sorting function | Sorting function return type
-    * Programming: Return Early Pattern
-*/
-{
-  interface Person {
-    surname: string;
-    age: number;
-    city: string;
-  }
-
-  type SortingFunctionType<T> = (a: T, b: T) => number;
-
-  const applySortings = <T>(arr: T[], sortingFunction: SortingFunctionType<T>[]): T[] => {
-    const sortedArr = [...arr].sort((a, b) => {
-      for (let i = 0; i < sortingFunction.length; i += 1) {
-        const sortingFunctionResult = sortingFunction[i](a, b);
-        if (sortingFunctionResult !== 0) return sortingFunctionResult;
-      }
-      return 0;
-    });
-
-    return sortedArr;
-  };
-
-  const byCity = (a: Person, b: Person) => a.city.localeCompare(b.city);
-  const byAge = (a: Person, b: Person) => a.age - b.age;
-  const bySurname = (a: Person, b: Person) => a.surname.localeCompare(b.surname);
-
-  const people: Person[] = [
-    { city: 'Vilnius', surname: 'Bandziūga', age: 17 },
-    { city: 'Kaunas', surname: 'Britkus', age: 28 },
-    { city: 'Kaunas', surname: 'Žinlinskas', age: 16 },
-    { city: 'Rietavas', surname: 'Varkienė', age: 63 },
-    { city: 'Vilnius', surname: 'Hienytė', age: 22 },
-    { city: 'Kaunas', surname: 'Malūnas', age: 32 },
-    { city: 'Kaunas', surname: 'Žiobaras', age: 32 },
-    { city: 'Vilnius', surname: 'Fosforas', age: 22 },
-    { city: 'Kaunas', surname: 'Mažuronis', age: 19 },
-    { city: 'Kaunas', surname: 'Princas', age: 32 },
-    { city: 'Vilnius', surname: 'Klinkaitė', age: 32 },
-    { city: 'Kaunas', surname: 'Griovys', age: 47 },
-    { city: 'Rietavas', surname: 'Žinduolis', age: 29 },
-    { city: 'Vilnius', surname: 'Amadėjus', age: 23 },
-  ];
-
-  const sortedPeople = applySortings(people, [byCity, byAge, bySurname]);
-  console.table(sortedPeople);
-}
-console.groupEnd();
-
-// 50 min
-console.group('5. Sukurkite funkciją "groupBy", kuri priima masyvą objektų, ir obejkto savybės pavadinimą. Funkcija turi sugrupuoti masyvo elementus, pagal savybės pavadinimo reikšmes');
-/*
-  hints:
-    * JS: Array.prototype.reduce
-*/
-{
-  interface Person {
-    surname: string;
-    age: number;
-    city: string;
-  }
-
-  type GroupedByKey<Type, Key extends keyof Type> = {
-    [key in Key]?: Type[]
-  };
-
-  const groupBy = <
-    Type,
-    Key extends keyof Type,
-    Result extends GroupedByKey<Type, Key> = GroupedByKey<Type, Key>,
-    >(arr: Type[], key: Key): Result => {
-    const groupedByKey = arr.reduce<Result>((res, el) => {
-      const resKey = el[key] as unknown as keyof Result;
-
-      if (res[resKey] !== undefined) {
-        res[resKey]?.push(el);
-        return res;
+    // 3.
+    pop(): T | undefined {
+      const returnVal = this[this.index];
+      if (returnVal !== undefined) {
+        delete this[this.index];
+        this.index -= 1;
       }
 
-      return {
-        ...res,
-        [resKey]: [el],
-      };
-    }, {} as Result);
+      return returnVal;
+    }
+  }
+  // ↑↑↑ klasė ↑↑↑
 
-    return groupedByKey;
-  };
+  // ↓↓↓ bendri kintamieji ↓↓↓
+  const numberStack = new Stack();
+  const stringStack = new Stack();
+  // ↑↑↑ bendri kintamieji ↑↑↑
 
-  const people: Person[] = [
-    { city: 'Vilnius', surname: 'Bandziūga', age: 17 },
-    { city: 'Kaunas', surname: 'Britkus', age: 28 },
-    { city: 'Kaunas', surname: 'Žinlinskas', age: 16 },
-    { city: 'Rietavas', surname: 'Varkienė', age: 63 },
-    { city: 'Vilnius', surname: 'Hienytė', age: 22 },
-    { city: 'Kaunas', surname: 'Malūnas', age: 32 },
-    { city: 'Kaunas', surname: 'Žiobaras', age: 32 },
-    { city: 'Vilnius', surname: 'Fosforas', age: 22 },
-    { city: 'Kaunas', surname: 'Mažuronis', age: 19 },
-    { city: 'Kaunas', surname: 'Princas', age: 32 },
-    { city: 'Vilnius', surname: 'Klinkaitė', age: 32 },
-    { city: 'Kaunas', surname: 'Griovys', age: 47 },
-    { city: 'Rietavas', surname: 'Žinduolis', age: 29 },
-    { city: 'Vilnius', surname: 'Amadėjus', age: 23 },
-  ];
+  // 5 min.
+  console.groupCollapsed('1.1. sukurkite konstruktorių, kuris nustatytų privačią savybę "index" į -1');
+  {
+    console.log({
+      numberStack,
+      stringStack,
+    });
+  }
+  console.groupEnd();
 
-  const groupedByCity = groupBy(people, 'city');
-  const groupedByAge = groupBy(people, 'age');
+  // 20 min
+  console.groupCollapsed('1.2. Sukurkite metodą "push", kuris pridėtų elementą į struktūros galą, t.y.: vienetu didesniu indeksu nei dabartinis index. Po pridėjimo index savybę padidinkite vienetu');
+  {
+    numberStack.push(7);
+    numberStack.push(8);
+    numberStack.push(9);
 
-  console.log({
-    groupedByCity,
-    groupedByAge,
-  });
+    stringStack.push('Viens');
+    stringStack.push('Du');
+    stringStack.push('Trys');
+
+    console.log({
+      numberStack,
+      stringStack,
+    });
+  }
+  console.groupEnd();
+
+  // 20 min
+  console.groupCollapsed('1.3. Sukurkite metodą "pop", kuris išimtų elementą iš struktūros galo. Po išėmimo index savybę sumažinkite vienetu');
+  {
+    const lastNumber = numberStack.pop();
+    const lastString = stringStack.pop();
+
+    console.log({
+      lastNumber,
+      lastString,
+    });
+  }
+  console.groupEnd();
+
+  // 10 min
+  console.groupCollapsed('1.4. Sukurkite get\'erį "length", kuris grąžintų elementų kiekį struktūroje');
+  {
+    console.log({
+      'numberStack.length': numberStack.length,
+      'stringStack.length': stringStack.length,
+    });
+  }
+  console.groupEnd();
+}
+console.groupEnd();
+
+// 70 min
+console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
+{
+  /*
+    Perskaitykite: https://www.tutorialspoint.com/data_structures_algorithms/dsa_queue.htm
+  */
+
+  // ↓↓↓ klasė ↓↓↓
+  class Queue<T> {
+    private index: number;
+
+    [i: number]: T | undefined;
+
+    // 1.
+    constructor() { this.index = -1; }
+
+    // 4.
+    get length() {
+      return this.index + 1;
+    }
+
+    // 2.
+    enqueue(data: T) {
+      for (let i = this.index; i >= 0; i -= 1) {
+        this[i + 1] = this[i];
+      }
+
+      this[0] = data;
+      this.index += 1;
+    }
+
+    // 3.
+    dequeue(): T | undefined {
+      const returnVal = this[0];
+      for (let i = 1; i <= this.index; i += 1) {
+        this[i - 1] = this[i];
+      }
+
+      delete this[this.index];
+      this.index -= 1;
+
+      return returnVal;
+    }
+  }
+  // ↑↑↑ klasė ↑↑↑
+
+  // ↓↓↓ bendri kintamieji ↓↓↓
+  const numberQueue = new Queue();
+  const stringQueue = new Queue();
+  // ↑↑↑ bendri kintamieji ↑↑↑
+
+  // 5 min.
+  console.groupCollapsed('1.1. sukurkite konstruktorių, kuris nustatytų privačią savybę "index" į -1');
+  {
+    console.log({
+      numberStack: numberQueue,
+      stringStack: stringQueue,
+    });
+  }
+  console.groupEnd();
+
+  // 30 min
+  console.groupCollapsed('1.2. Sukurkite metodą "enqueue", kuris pridėtų elementą į struktūros priekį. Užtikrinkite kad kiti duomenys tavrkingai persislinktų ir indeksuotūsi');
+  {
+    numberQueue.enqueue(7);
+    numberQueue.enqueue(8);
+    numberQueue.enqueue(9);
+
+    stringQueue.enqueue('Viens');
+    stringQueue.enqueue('Du');
+    stringQueue.enqueue('Trys');
+
+    console.log({
+      numberStack: numberQueue,
+      stringStack: stringQueue,
+    });
+  }
+  console.groupEnd();
+
+  // 30 min
+  console.groupCollapsed('1.3. Sukurkite metodą "pop", kuris išimtų elementą iš struktūros priekio. Užtikrinkite kad kiti duomenys tavrkingai persislinktų ir indeksuotūsi');
+  {
+    const lastNumber = numberQueue.dequeue();
+    const lastString = stringQueue.dequeue();
+
+    console.log({
+      lastNumber,
+      lastString,
+    });
+  }
+  console.groupEnd();
+
+  // 5 min
+  console.groupCollapsed('1.4. Sukurkite get\'erį "length", kuris grąžintų elementų kiekį struktūroje');
+  {
+    console.log({
+      'numberQueue.length': numberQueue.length,
+      'stringQueue.length': stringQueue.length,
+    });
+  }
+  console.groupEnd();
 }
 console.groupEnd();
