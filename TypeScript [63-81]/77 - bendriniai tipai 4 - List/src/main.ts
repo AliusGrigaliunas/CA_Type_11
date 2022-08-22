@@ -49,7 +49,7 @@ class List<Type> {
     const newNode = new ListNode(data);
     if (this.tail === null) {
       this.head = newNode;
-      this.tail = newNode;
+      this.tail = this.head;
     } else {
       this.tail.next = newNode;
       this.tail = newNode;
@@ -121,19 +121,19 @@ console.groupEnd();
 console.group('4. Sukurkite metodą pridėti elementui į sąrašo galą.');
 {
   console.log('String sąrašas');
-  console.log(numberList);
+  console.log(JSON.parse(JSON.stringify(numberList)));
 
   console.log('Pridedamas Mazgas 1', 1);
   numberList.push(1);
-  console.log('Sąrašas po pridėjimo', { ...numberList });
+  console.log('Sąrašas po pridėjimo', JSON.parse(JSON.stringify(numberList)));
 
   console.log('Pridedamas Mazgas 2', 2);
   numberList.push(2);
-  console.log('Sąrašas po pridėjimo', { ...numberList });
+  console.log('Sąrašas po pridėjimo', JSON.parse(JSON.stringify(numberList)));
 
   console.log('Pridedamas Mazgas 3', 3);
   numberList.push(3);
-  console.log('Sąrašas po pridėjimo', { ...numberList });
+  console.log('Sąrašas po pridėjimo', JSON.parse(JSON.stringify(numberList)));
 }
 console.groupEnd();
 
