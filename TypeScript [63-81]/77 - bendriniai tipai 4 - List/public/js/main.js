@@ -44,20 +44,16 @@ class List {
         }
     };
     forEach = (callback) => {
-        if (this.head === null)
-            return;
-        let currentNode = this.head;
-        while (true) {
-            if (currentNode.next === null)
-                break;
-            callback(currentNode.data);
-            currentNode = currentNode.next;
+        let currNode = this.head;
+        while (currNode !== null) {
+            callback(currNode.data);
+            currNode = currNode.next;
         }
     };
 }
 const stringList = new List();
 const numberList = new List(5);
-console.group('1. Sukurkitę sąrašo mazgo struktūrą ListNode, bet kokiam duomenų tipui');
+console.groupCollapsed('1. Sukurkitę sąrašo mazgo struktūrą ListNode, bet kokiam duomenų tipui');
 {
     const stringNode1 = { data: 'labas', next: null };
     const stringNode2 = { data: 'vakaras', next: stringNode1 };
@@ -67,7 +63,7 @@ console.group('1. Sukurkitę sąrašo mazgo struktūrą ListNode, bet kokiam duo
     });
 }
 console.groupEnd();
-console.group('2. Sukurkite sąrašo klasę List');
+console.groupCollapsed('2. Sukurkite sąrašo klasę List');
 {
     console.log('Tučias string sąrašas');
     console.log(stringList);
@@ -75,24 +71,24 @@ console.group('2. Sukurkite sąrašo klasę List');
     console.log(numberList);
 }
 console.groupEnd();
-console.group('3. Sukurkite metodą pridėti elementui į sąrašo priekį.');
+console.groupCollapsed('3. Sukurkite metodą pridėti elementui į sąrašo priekį.');
 {
     console.log('String sąrašas');
-    console.log(stringList);
+    console.log(JSON.parse(JSON.stringify(stringList)));
     console.log('Pridedamas 1', 'pirmas');
     stringList.unshift('pirmas');
-    console.log('Sąrašas po pridėjimo', { ...stringList });
+    console.log('Sąrašas po pridėjimo', JSON.parse(JSON.stringify(stringList)));
     console.log('Pridedamas 2', 'antras');
     stringList.unshift('antras');
-    console.log('Sąrašas po pridėjimo', { ...stringList });
+    console.log('Sąrašas po pridėjimo', JSON.parse(JSON.stringify(stringList)));
     console.log('Pridedamas Mazgas 3', 'trečias');
     stringList.unshift('trečias');
-    console.log('Sąrašas po pridėjimo', { ...stringList });
+    console.log('Sąrašas po pridėjimo', JSON.parse(JSON.stringify(stringList)));
 }
 console.groupEnd();
-console.group('4. Sukurkite metodą pridėti elementui į sąrašo galą.');
+console.groupCollapsed('4. Sukurkite metodą pridėti elementui į sąrašo galą.');
 {
-    console.log('String sąrašas');
+    console.log('Number sąrašas');
     console.log(JSON.parse(JSON.stringify(numberList)));
     console.log('Pridedamas Mazgas 1', 1);
     numberList.push(1);
@@ -105,7 +101,7 @@ console.group('4. Sukurkite metodą pridėti elementui į sąrašo galą.');
     console.log('Sąrašas po pridėjimo', JSON.parse(JSON.stringify(numberList)));
 }
 console.groupEnd();
-console.group('5. Sukurkite metodą List.forEach klasėje List, kuris vykdytų parametru perduotą funkciją');
+console.groupCollapsed('5. Sukurkite metodą List.forEach klasėje List, kuris vykdytų parametru perduotą funkciją');
 {
     console.log('string sąrašo spausdinimas');
     stringList.forEach((str) => console.log(str));
@@ -119,4 +115,19 @@ console.group('5. Sukurkite metodą List.forEach klasėje List, kuris vykdytų p
     console.log(numberListStringRepresentation);
 }
 console.groupEnd();
+const list = new List();
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(4);
+list.push(5);
+list.push(6);
+list.push(7);
+list.push(8);
+list.push(9);
+list.push(10);
+list.push(11);
+const arr = [];
+list.forEach((x) => arr.push(x * 2));
+console.log(arr);
 //# sourceMappingURL=main.js.map
