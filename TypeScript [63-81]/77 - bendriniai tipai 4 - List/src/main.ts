@@ -66,6 +66,7 @@ class List<Type> {
     // let currNode = this.head;
 
     // while (currNode !== null) {
+    // callback(currNode.data);
     //   currNode = currNode.next;
     // }
   };
