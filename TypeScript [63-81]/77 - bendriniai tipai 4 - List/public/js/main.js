@@ -44,10 +44,8 @@ class List {
         }
     };
     forEach = (callback) => {
-        let currNode = this.head;
-        while (currNode !== null) {
+        for (let currNode = this.head; currNode !== null; currNode = currNode.next) {
             callback(currNode.data);
-            currNode = currNode.next;
         }
     };
 }

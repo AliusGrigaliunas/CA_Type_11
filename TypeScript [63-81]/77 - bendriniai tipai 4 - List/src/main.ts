@@ -59,12 +59,15 @@ class List<Type> {
 
   // 5.
   public forEach = (callback: ForEachCallback<Type>): void => {
-    let currNode = this.head;
-
-    while (currNode !== null) {
+    for (let currNode = this.head; currNode !== null; currNode = currNode.next) {
       callback(currNode.data);
-      currNode = currNode.next;
     }
+
+    // let currNode = this.head;
+
+    // while (currNode !== null) {
+    //   currNode = currNode.next;
+    // }
   };
 }
 // ↑↑↑ Klasės ↑↑↑
