@@ -165,12 +165,8 @@ console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
 
     // 2.
     enqueue(data: T) {
-      for (let i = this.index; i >= 0; i -= 1) {
-        this[i + 1] = this[i];
-      }
-
-      this[0] = data;
       this.index += 1;
+      this[this.index] = data;
     }
 
     // 3.
@@ -204,7 +200,7 @@ console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
   console.groupEnd();
 
   // 30 min
-  console.groupCollapsed('1.2. Sukurkite metodą "enqueue", kuris pridėtų elementą į struktūros priekį. Užtikrinkite kad kiti duomenys tavrkingai persislinktų ir indeksuotūsi');
+  console.groupCollapsed('1.2. Sukurkite metodą "enqueue", kuris pridėtų elementą į struktūros galą.');
   {
     numberQueue.enqueue(7);
     numberQueue.enqueue(8);
@@ -222,7 +218,7 @@ console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
   console.groupEnd();
 
   // 30 min
-  console.groupCollapsed('1.3. Sukurkite metodą "pop", kuris išimtų elementą iš struktūros priekio. Užtikrinkite kad kiti duomenys tavrkingai persislinktų ir indeksuotūsi');
+  console.groupCollapsed('1.3. Sukurkite metodą "dequeue", kuris išimtų elementą iš struktūros priekio. Užtikrinkite kad kiti duomenys tvarkingai persislinktų ir indeksuotūsi');
   {
     const lastNumber = numberQueue.dequeue();
     const lastString = stringQueue.dequeue();

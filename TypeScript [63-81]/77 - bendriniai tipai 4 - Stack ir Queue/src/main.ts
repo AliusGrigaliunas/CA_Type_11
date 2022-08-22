@@ -174,7 +174,6 @@ console.group('1. Dėklo (Stack) duomenų struktūros kūrimas');
 }
 console.groupEnd();
 
-// 70 min
 console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
 {
   /*
@@ -183,34 +182,105 @@ console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
 
   // ↓↓↓ klasė ↓↓↓
   class Queue<T> {
+    private lastElIndex: number;
+
+    [i: number]: T | undefined;
+
+    // 1.
+    constructor() { this.lastElIndex = -1; }
+
+    // 4.
+    get length() {
+      return this.lastElIndex + 1;
+    }
+
+    // 2.
+    enqueue(data: T) {
+      this.lastElIndex += 1;
+      this[this.lastElIndex] = data;
+    }
+
+    // 3.
+    dequeue(): T | null {
+      const returnVal = this[0];
+      for (let i = 1; i <= this.lastElIndex; i += 1) {
+        this[i - 1] = this[i];
+      }
+
+      if (returnVal !== undefined) {
+        delete this[this.lastElIndex];
+        this.lastElIndex -= 1;
+
+        return returnVal;
+      }
+
+      return null;
+    }
   }
   // ↑↑↑ klasė ↑↑↑
 
   // ↓↓↓ bendri kintamieji ↓↓↓
-
+  const numberQueue = new Queue<number>();
+  const stringQueue = new Queue<string>();
   // ↑↑↑ bendri kintamieji ↑↑↑
 
   // 5 min.
   console.groupCollapsed('1.1. sukurkite konstruktorių, kuris nustatytų privačią savybę "index" į -1');
   {
+    console.log({
+      numberStack: numberQueue,
+      stringStack: stringQueue,
+    });
   }
   console.groupEnd();
 
   // 30 min
-  console.groupCollapsed('1.2. Sukurkite metodą "enqueue", kuris pridėtų elementą į struktūros priekį. Užtikrinkite kad kiti duomenys tavrkingai persislinktų ir indeksuotūsi');
+  console.groupCollapsed('1.2. Sukurkite metodą "enqueue", kuris pridėtų elementą į struktūros galą.');
   {
+    numberQueue.enqueue(7);
+    numberQueue.enqueue(8);
+    numberQueue.enqueue(9);
+
+    stringQueue.enqueue('Viens');
+    stringQueue.enqueue('Du');
+    stringQueue.enqueue('Trys');
+
+    console.log({
+      numberStack: numberQueue,
+      stringStack: stringQueue,
+    });
   }
   console.groupEnd();
 
   // 30 min
-  console.groupCollapsed('1.3. Sukurkite metodą "pop", kuris išimtų elementą iš struktūros priekio. Užtikrinkite kad kiti duomenys tavrkingai persislinktų ir indeksuotūsi');
+  console.groupCollapsed('1.3. Sukurkite metodą "dequeue", kuris išimtų elementą iš struktūros priekio. Užtikrinkite kad kiti duomenys tavrkingai persislinktų ir indeksuotūsi');
   {
+    const lastNumber = numberQueue.dequeue();
+    const lastString = stringQueue.dequeue();
+
+    stringQueue.dequeue();
+    stringQueue.dequeue();
+    stringQueue.dequeue();
+    stringQueue.dequeue();
+    stringQueue.dequeue();
+    stringQueue.dequeue();
+
+    console.log({
+      lastNumber,
+      lastString,
+    });
+
+    console.log(stringQueue);
   }
   console.groupEnd();
 
   // 5 min
   console.groupCollapsed('1.4. Sukurkite get\'erį "length", kuris grąžintų elementų kiekį struktūroje');
   {
+    console.log({
+      'numberQueue.length': numberQueue.length,
+      'stringQueue.length': stringQueue.length,
+    });
   }
   console.groupEnd();
 }
