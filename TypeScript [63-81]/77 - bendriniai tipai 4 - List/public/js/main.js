@@ -16,15 +16,16 @@ class List {
             this.tail = null;
         }
         else {
-            this.head = new ListNode(data);
-            this.tail = this.head;
+            const newNode = new ListNode(data);
+            this.head = newNode;
+            this.tail = newNode;
         }
     }
     unshift = (data) => {
         const newNode = new ListNode(data);
         if (this.head === null) {
             this.head = newNode;
-            this.tail = this.head;
+            this.tail = newNode;
         }
         else {
             newNode.next = this.head;
@@ -35,7 +36,7 @@ class List {
         const newNode = new ListNode(data);
         if (this.tail === null) {
             this.head = newNode;
-            this.tail = this.head;
+            this.tail = newNode;
         }
         else {
             this.tail.next = newNode;
