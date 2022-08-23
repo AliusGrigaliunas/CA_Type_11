@@ -26,6 +26,6 @@ module.exports = {
       templateParameters: {
         title: 'TS webpack template',
       },
-    })
+    }),
   ],
 };

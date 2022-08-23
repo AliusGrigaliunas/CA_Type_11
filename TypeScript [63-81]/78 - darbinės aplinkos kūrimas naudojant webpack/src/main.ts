@@ -1,4 +1,4 @@
-import people from "./people";
+import people from './people';
 
 console.log(people);
 console.log('labas');
