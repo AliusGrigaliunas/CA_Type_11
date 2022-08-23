@@ -4,9 +4,8 @@
   "description": "basic typescript project for web development",
   "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve",
-    "build": "webpack"
+    "start": "webpack serve --config webpack.config.development.js",
+    "build": "webpack --config webpack.config.production.js"
   },
   "author": "Žilvinas Vidmantas",
   "license": "ISC",
@@ -16,6 +15,7 @@
     "typescript": "^4.7.4",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.10.0"
+    "webpack-dev-server": "^4.10.0",
+    "webpack-merge": "^5.8.0"
   }
 }
