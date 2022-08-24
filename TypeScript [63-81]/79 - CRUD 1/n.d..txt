@@ -1,0 +1,8 @@
+1. https://www.youtube.com/watch?v=C3icLzBtg8I&ab_channel=ChristopherKalodikis
+
+2. Įsigilinti į pamokos darbą
+
+3. Atlikti 1, 2 užduotis:
+  https://github.com/CodeAcademy-Online/TypeScript/tree/lesson-12
+
+4. src/index.html Sukurkite lentelės atvaizdavimą su į'hard-code'intais duomenimis
