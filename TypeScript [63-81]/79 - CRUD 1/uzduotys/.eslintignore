@@ -1,4 +1,5 @@
-  .eslintrc.js
-  public
-  webpack.config*
+.eslintrc.js
+public
+webpack.config*
+
   
