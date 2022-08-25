@@ -3,9 +3,28 @@ import products from '../data/products';
 import initCategories from '../data/categories';
 import productsCategories from '../data/products-categories';
 import Table from './table';
-import stringifyProps from '../helpers/stringify-props';
+import stringifyPropValues from '../helpers/stringify-prop-values';
+import ProductJoined from '../types/product-joined';
 
 type ProductTableRow = [string, string, string, string, string];
+
+const formatProductTableRow = (product: ProductJoined): ProductTableRow => {
+  const {
+    id,
+    title,
+    price,
+    description,
+    categories,
+  } = stringifyPropValues(product);
+
+  return [
+    id,
+    title,
+    price,
+    description ?? '',
+    categories,
+  ];
+};
 
 class App {
   private htmlElement: HTMLElement;
@@ -23,25 +42,10 @@ class App {
     this.htmlElement = foundHtmlElement;
     this.productsCollection = new ProductsCollection(products, initCategories, productsCategories);
 
-    const stringifiedProducts = this.productsCollection.all.map(stringifyProps);
-    const rowsData = stringifiedProducts.map<ProductTableRow>(({
-      id,
-      title,
-      price,
-      description,
-      categories,
-    }) => [
-        id,
-        title,
-        price,
-        description ?? '',
-        categories,
-      ]);
-
     this.productsTable = new Table({
       title: 'Visi produktai',
       columns: ['Id', 'Pavadinimas', 'Kaina', 'Aprašymas', 'Kategorijos'],
-      rowsData,
+      rowsData: this.productsCollection.all.map(formatProductTableRow),
     });
   }
 
