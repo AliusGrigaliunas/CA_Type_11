@@ -16,8 +16,7 @@ class Table<T extends string[]> {
 
   private props: TableProps<T>;
 
-  // TODO: padaryti private
-  public thead: HTMLTableSectionElement;
+  private thead: HTMLTableSectionElement;
 
   private tbody: HTMLTableSectionElement;
 
@@ -36,14 +35,30 @@ class Table<T extends string[]> {
   }
 
   private initializeHead() {
-    const headerHTMLString = this.props.columns
+    const columnsHTMLString = this.props.columns
       .map((column) => `<th>${column}</th>`)
       .join('');
-    this.thead.innerHTML = `<tr>${headerHTMLString}</tr>`;
+
+    this.thead.innerHTML = `<tr>${columnsHTMLString}</tr>`;
+  }
+
+  private initializeBody() {
+    const rowsDataHTMLString = this.props.rowsData
+      .map((rowData) => {
+        const rowHTMLString = rowData
+          .map((data) => `<td>${data}</td>`)
+          .join('');
+
+        return `<tr>${rowHTMLString}</tr>`;
+      })
+      .join('');
+
+    this.tbody.innerHTML = rowsDataHTMLString;
   }
 
   private initialize() {
     this.initializeHead();
+    this.initializeBody();
   }
 }
 
