@@ -9,28 +9,41 @@ class Table<T extends string[]> {
     columns: Type,
     rowsData: Type[],
   ): boolean {
-    // Todo: Patikrinti ar stulpelių skaičius yra lygus kiekvienos eilutės stulpelių skaičiui
-    console.log(columns, rowsData);
-    console.log(('-').repeat(64));
-    console.log('Sprendimas ir spausdinimai rašomi čia');
-
-    return true;
+    return rowsData.every((rowData) => rowData.length === columns.length);
   }
 
   public htmlElement!: HTMLTableElement;
 
-  private props!: TableProps<T>;
+  private props: TableProps<T>;
 
-  private thead!: HTMLTableSectionElement;
+  // TODO: padaryti private
+  public thead: HTMLTableSectionElement;
 
-  private tbody!: HTMLTableSectionElement;
+  private tbody: HTMLTableSectionElement;
 
   constructor(props: TableProps<T>) {
-    console.log(this.props, this.thead, this.tbody);
     const columnsIsCompatable = Table.checkColumnsCompatability(props.columns, props.rowsData);
     if (!columnsIsCompatable) {
       throw new Error('Lentelės stulpeliai nesuderinti su lentelės duomenimis');
     }
+
+    this.props = props;
+    this.htmlElement = document.createElement('table');
+    this.thead = document.createElement('thead');
+    this.tbody = document.createElement('tbody');
+
+    this.initialize();
+  }
+
+  private initializeHead() {
+    const headerHTMLString = this.props.columns
+      .map((column) => `<th>${column}</th>`)
+      .join('');
+    this.thead.innerHTML = `<tr>${headerHTMLString}</tr>`;
+  }
+
+  private initialize() {
+    this.initializeHead();
   }
 }
 
