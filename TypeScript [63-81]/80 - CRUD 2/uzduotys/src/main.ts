@@ -16,4 +16,4 @@ const table = new Table({
   ],
 });
 
-console.log(table);
+console.dir(table.htmlElement);

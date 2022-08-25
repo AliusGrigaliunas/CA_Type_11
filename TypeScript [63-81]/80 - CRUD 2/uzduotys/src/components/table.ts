@@ -12,7 +12,7 @@ class Table<T extends string[]> {
     return rowsData.every((rowData) => rowData.length === columns.length);
   }
 
-  public htmlElement!: HTMLTableElement;
+  public htmlElement: HTMLTableElement;
 
   private props: TableProps<T>;
 
@@ -35,6 +35,8 @@ class Table<T extends string[]> {
   }
 
   private initializeHead() {
+    this.thead.className = 'table-dark';
+
     const columnsHTMLString = this.props.columns
       .map((column) => `<th>${column}</th>`)
       .join('');
@@ -57,8 +59,15 @@ class Table<T extends string[]> {
   }
 
   private initialize() {
+    this.htmlElement.className = 'table table-striped';
+
     this.initializeHead();
     this.initializeBody();
+
+    this.htmlElement.append(
+      this.thead,
+      this.tbody,
+    );
   }
 }
 
