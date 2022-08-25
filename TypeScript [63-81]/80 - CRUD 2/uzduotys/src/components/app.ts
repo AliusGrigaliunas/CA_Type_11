@@ -1,6 +1,6 @@
 import ProductsCollection from '../helpers/products-collection';
 import products from '../data/products';
-import initCategories from '../data/categories';
+import categories from '../data/categories';
 import productsCategories from '../data/products-categories';
 import Table from './table';
 import stringifyPropValues from '../helpers/stringify-prop-values';
@@ -14,7 +14,7 @@ const formatProductTableRow = (product: ProductJoined): ProductTableRow => {
     title,
     price,
     description,
-    categories,
+    categories: categoriesString,
   } = stringifyPropValues(product);
 
   return [
@@ -22,7 +22,7 @@ const formatProductTableRow = (product: ProductJoined): ProductTableRow => {
     title,
     price,
     description ?? '',
-    categories,
+    categoriesString,
   ];
 };
 
@@ -40,7 +40,7 @@ class App {
     }
 
     this.htmlElement = foundHtmlElement;
-    this.productsCollection = new ProductsCollection(products, initCategories, productsCategories);
+    this.productsCollection = new ProductsCollection({ products, categories, productsCategories });
 
     this.productsTable = new Table({
       title: 'Visi produktai',
