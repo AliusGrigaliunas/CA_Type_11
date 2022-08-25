@@ -14,7 +14,7 @@ const formatProductTableRow = (product: ProductJoined): ProductTableRow => {
     title,
     price,
     description,
-    categories: categoriesString,
+    categories: categoryString,
   } = stringifyPropValues(product);
 
   return [
@@ -22,7 +22,7 @@ const formatProductTableRow = (product: ProductJoined): ProductTableRow => {
     title,
     price,
     description ?? '',
-    categoriesString,
+    categoryString,
   ];
 };
 
