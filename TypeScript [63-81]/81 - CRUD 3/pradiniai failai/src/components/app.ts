@@ -25,6 +25,9 @@ class App {
 
     this.productsCollection = new ProductsCollection({ products, categories, productsCategories });
     this.htmlElement = foundElement;
+
+    // TODO: ištrinti
+    this.productsCollection.getByCategoryId('5');
   }
 
   initialize = (): void => {

@@ -38,10 +38,15 @@ class ProductsCollection {
   }
 
   public getByCategoryId = (categoryId: string): ProductJoined[] => {
-    /*
-     TODO: peržiūrėkite schemą 'product-category-entity-relation.png' ir naudojant
-     TODO: 'categoryId' grąžinkite tik atitinkamos kategorijos APJUNGTUS produktus
-     */
+    const productsIds = this.props.productsCategories
+      .filter((productCategory) => productCategory.categoryId === categoryId)
+      .map((productCategory) => productCategory.productId);
+
+    const joinedProducts = this.props.products
+      .filter((product) => productsIds.includes(product.id))
+      .map(this.joinProduct);
+
+    return joinedProducts;
   };
 }
 
