@@ -12,15 +12,10 @@ export type TableProps<Type extends RowData> = {
 };
 
 class Table<Type extends RowData> {
-  public htmlElement: HTMLTableElement;
-
-  private props: TableProps<Type>;
-
-  private tbody: HTMLTableSectionElement;
-
-  private thead: HTMLTableSectionElement;
-
-  private static checkColumnsCompatability = <T extends RowData>({ rowsData, columns }: TableProps<T>): void => {
+  private static checkColumnsCompatability = <T extends RowData>({
+    rowsData,
+    columns,
+  }: TableProps<T>): void => {
     if (rowsData.length === 0) return;
     const columnCount = getPropCount(columns);
 
@@ -32,6 +27,14 @@ class Table<Type extends RowData> {
       throw new Error('Nesutampa lentelės stulpelių skaičius su eilučių stulpelių skaičiumi');
     }
   };
+
+  public htmlElement: HTMLTableElement;
+
+  private props: TableProps<Type>;
+
+  private tbody: HTMLTableSectionElement;
+
+  private thead: HTMLTableSectionElement;
 
   public constructor(props: TableProps<Type>) {
     Table.checkColumnsCompatability(props);

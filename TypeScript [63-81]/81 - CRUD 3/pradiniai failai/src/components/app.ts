@@ -3,7 +3,15 @@ import Table from './table';
 import products from '../data/products';
 import categories from '../data/categories';
 import productsCategories from '../data/products-categories';
-import stringifyProps from '../helpers/stringify-props';
+import stringifyProps, { StringifiedObject } from '../helpers/stringify-props';
+import ProductJoined from '../types/product-joined';
+
+type ProductTableRow = Required<StringifiedObject<ProductJoined>>;
+
+const formatProductTableRow = (product: ProductJoined): ProductTableRow => ({
+  ...stringifyProps(product),
+  description: product.description ?? '',
+});
 
 class App {
   private htmlElement: HTMLElement;
@@ -26,12 +34,11 @@ class App {
         title: 'Pavadinimas',
         price: 'Kaina',
         description: 'Aprašymas',
-        categories: 'Kategorijos'
+        categories: 'Kategorijos',
       },
-      rowsData: this.productsCollection.all
-        .map(x => ({ ...x, description: x.description ?? '' }))
-        .map(stringifyProps),
-    });;
+      rowsData: this.productsCollection.all.map(formatProductTableRow),
+
+    });
 
     const container = document.createElement('div');
     container.className = 'container my-5';
