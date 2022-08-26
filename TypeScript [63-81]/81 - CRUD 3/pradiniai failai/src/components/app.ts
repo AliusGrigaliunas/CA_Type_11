@@ -41,13 +41,15 @@ class App {
     });
 
     const categorySelect = new SelectField({
-      label: 'Miestas',
+      label: 'Kategorijos',
       options: [
-        { label: 'Vilnius', value: 'vln' },
-        { label: 'Kaunas', value: 'kns' },
-        { label: 'Klaipėda', value: 'klp' },
-        { label: 'Šiauliai', value: 'sia' },
+        { label: 'Visi produktai', value: '-1' },
+        ...categories.map((category) => ({
+          label: category.title,
+          value: category.id,
+        })),
       ],
+      onChange: (categoryId) => console.log('logika kuri filtruos duomenis pagal kategorijos id:', categoryId),
     });
 
     const container = document.createElement('div');

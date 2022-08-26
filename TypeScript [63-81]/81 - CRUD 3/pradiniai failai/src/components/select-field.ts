@@ -5,7 +5,8 @@ type SelectOption = {
 
 type SelectFieldProps = {
   label: string,
-  options: SelectOption[]
+  options: SelectOption[],
+  onChange: (value: string) => void,
 };
 
 class SelectField {
@@ -27,24 +28,27 @@ class SelectField {
   }
 
   private initialize = (): void => {
-    const label = document.createElement('label');
-    label.innerHTML = `${this.props.label}:`;
-    label.className = 'mb-1';
-    label.setAttribute('for', this.id);
+    const { label, options, onChange } = this.props;
 
-    const optionsHtmlString = this.props.options
+    const labelHtmlElement = document.createElement('label');
+    labelHtmlElement.innerHTML = `${label}:`;
+    labelHtmlElement.className = 'mb-1';
+    labelHtmlElement.setAttribute('for', this.id);
+
+    const optionsHtmlString = options
       .map((option) => `<option value="${option.value}">${option.label}</option>`)
       .join('');
 
-    const select = document.createElement('select');
-    select.className = 'form-select';
-    select.id = this.id;
-    select.innerHTML = optionsHtmlString;
+    const selectHtmlElement = document.createElement('select');
+    selectHtmlElement.className = 'form-select';
+    selectHtmlElement.id = this.id;
+    selectHtmlElement.innerHTML = optionsHtmlString;
+    selectHtmlElement.addEventListener('change', () => onChange(selectHtmlElement.value));
 
     this.htmlElement.className = 'mb-3';
     this.htmlElement.append(
-      label,
-      select,
+      labelHtmlElement,
+      selectHtmlElement,
     );
   };
 }
