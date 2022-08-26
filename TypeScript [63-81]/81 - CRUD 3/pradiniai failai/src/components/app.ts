@@ -14,10 +14,17 @@ const formatProductTableRow = (product: ProductJoined): ProductTableRow => ({
   description: product.description ?? '',
 });
 
+const ALL_CATEGORIES_ID = '-1';
+const ALL_CATEGORIES_TITLE = 'Visi produktai';
+
 class App {
   private htmlElement: HTMLElement;
 
   private productsCollection: ProductsCollection;
+
+  private productsTable: Table<ProductTableRow>;
+
+  private selectedCategoryId: string;
 
   constructor(selector: string) {
     const foundElement = document.querySelector<HTMLElement>(selector);
@@ -25,11 +32,8 @@ class App {
 
     this.productsCollection = new ProductsCollection({ products, categories, productsCategories });
     this.htmlElement = foundElement;
-  }
-
-  initialize = (): void => {
-    const productsTable = new Table({
-      title: 'Visi produktai',
+    this.productsTable = new Table({
+      title: ALL_CATEGORIES_TITLE,
       columns: {
         id: 'Id',
         title: 'Pavadinimas',
@@ -39,29 +43,51 @@ class App {
       },
       rowsData: this.productsCollection.all.map(formatProductTableRow),
     });
+    this.selectedCategoryId = ALL_CATEGORIES_ID;
+  }
 
+  private handleCategoryChange = (categoryId: string) => {
+    this.selectedCategoryId = categoryId;
+
+    this.update();
+  };
+
+  private update = (): void => {
+    if (this.selectedCategoryId === ALL_CATEGORIES_ID) {
+      this.productsTable.updateProps({
+        title: ALL_CATEGORIES_TITLE,
+        rowsData: this.productsCollection.all.map(formatProductTableRow),
+      });
+    } else {
+      const categoryTitle = categories
+        .find((category) => category.id === this.selectedCategoryId)?.title ?? 'Nėra pavadinimo';
+
+      this.productsTable.updateProps({
+        title: categoryTitle,
+        rowsData: this.productsCollection.getByCategoryId(this.selectedCategoryId)
+          .map(formatProductTableRow),
+      });
+    }
+  };
+
+  public initialize = (): void => {
     const categorySelect = new SelectField({
       label: 'Kategorijos',
       options: [
-        { label: 'Visi produktai', value: '-1' },
+        { label: ALL_CATEGORIES_TITLE, value: ALL_CATEGORIES_ID },
         ...categories.map((category) => ({
           label: category.title,
           value: category.id,
         })),
       ],
-      onChange: (categoryId) => {
-        console.log('logika kuri filtruos duomenis pagal kategorijos id:', categoryId);
-        productsTable.updateProps({
-          title: categoryId,
-        });
-      },
+      onChange: this.handleCategoryChange,
     });
 
     const container = document.createElement('div');
     container.className = 'container my-5';
     container.append(
       categorySelect.htmlElement,
-      productsTable.htmlElement,
+      this.productsTable.htmlElement,
     );
 
     this.htmlElement.append(container);
