@@ -5,6 +5,7 @@ import categories from '../data/categories';
 import productsCategories from '../data/products-categories';
 import stringifyProps, { StringifiedObject } from '../helpers/stringify-props';
 import ProductJoined from '../types/product-joined';
+import SelectField from './select-field';
 
 type ProductTableRow = Required<StringifiedObject<ProductJoined>>;
 
@@ -27,7 +28,7 @@ class App {
   }
 
   initialize = (): void => {
-    const productTable = new Table({
+    const productsTable = new Table({
       title: 'Visi produktai',
       columns: {
         id: 'Id',
@@ -37,12 +38,24 @@ class App {
         categories: 'Kategorijos',
       },
       rowsData: this.productsCollection.all.map(formatProductTableRow),
+    });
 
+    const categorySelect = new SelectField({
+      label: 'Miestas',
+      options: [
+        { label: 'Vilnius', value: 'vln' },
+        { label: 'Kaunas', value: 'kns' },
+        { label: 'Klaipėda', value: 'klp' },
+        { label: 'Šiauliai', value: 'sia' },
+      ],
     });
 
     const container = document.createElement('div');
     container.className = 'container my-5';
-    container.appendChild(productTable.htmlElement);
+    container.append(
+      categorySelect.htmlElement,
+      productsTable.htmlElement,
+    );
 
     this.htmlElement.append(container);
   };
