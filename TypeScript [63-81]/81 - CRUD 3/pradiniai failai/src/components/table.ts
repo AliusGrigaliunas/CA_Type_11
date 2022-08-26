@@ -45,9 +45,18 @@ class Table<Type extends RowData> {
     this.tbody = document.createElement('tbody');
 
     this.initialize();
+    this.renderView();
   }
 
-  private initializeHead = (): void => {
+  private initialize = (): void => {
+    this.htmlElement.className = 'table table-striped order border p-3';
+    this.htmlElement.append(
+      this.thead,
+      this.tbody,
+    );
+  };
+
+  private renderHeadView = (): void => {
     const { title, columns } = this.props;
 
     const headersArray = Object.values(columns);
@@ -61,7 +70,7 @@ class Table<Type extends RowData> {
     `;
   };
 
-  private initializeBody = (): void => {
+  private renderBodyView = (): void => {
     const { rowsData, columns } = this.props;
 
     this.tbody.innerHTML = '';
@@ -81,15 +90,18 @@ class Table<Type extends RowData> {
     this.tbody.append(...rowsHtmlElements);
   };
 
-  private initialize = (): void => {
-    this.initializeHead();
-    this.initializeBody();
+  private renderView = (): void => {
+    this.renderHeadView();
+    this.renderBodyView();
+  };
 
-    this.htmlElement.className = 'table table-striped order border p-3';
-    this.htmlElement.append(
-      this.thead,
-      this.tbody,
-    );
+  public updateProps = (newProps: Partial<TableProps<Type>>): void => {
+    this.props = {
+      ...this.props,
+      ...newProps,
+    };
+
+    this.renderView();
   };
 }
 

@@ -25,9 +25,6 @@ class App {
 
     this.productsCollection = new ProductsCollection({ products, categories, productsCategories });
     this.htmlElement = foundElement;
-
-    // TODO: ištrinti
-    this.productsCollection.getByCategoryId('5');
   }
 
   initialize = (): void => {
@@ -52,7 +49,12 @@ class App {
           value: category.id,
         })),
       ],
-      onChange: (categoryId) => console.log('logika kuri filtruos duomenis pagal kategorijos id:', categoryId),
+      onChange: (categoryId) => {
+        console.log('logika kuri filtruos duomenis pagal kategorijos id:', categoryId);
+        productsTable.updateProps({
+          title: categoryId,
+        });
+      },
     });
 
     const container = document.createElement('div');
