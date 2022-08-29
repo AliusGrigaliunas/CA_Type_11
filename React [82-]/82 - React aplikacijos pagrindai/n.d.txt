@@ -6,6 +6,7 @@ Perskaityti:
 
 Peržiūrėti:
   * 0:00:00 - 0:36:00
+    * https://www.youtube.com/watch?v=Ke90Tje7VS0&t=2143s&ab_channel=ProgrammingwithMosh 
   
 NAUDOJANT PAMOKOS PROJEKTĄ IR TYPESCRIPT:
   Pasidaryti žiūrint:
