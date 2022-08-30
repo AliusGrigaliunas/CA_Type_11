@@ -1,36 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ManoParagrafas from './mano-paragrafas';
+import * as React from 'react';
+import Button from './components/button';
 
-// <ManoParagrafas content="Pirmas paragrafas" author="Jalamonis Kirpaila" />
-// ManoParagrafas({
-//   content: "Pirmas paragrafas",
-//   author: "Jalamonis Kirpaila"
-// })
-
-function App() {
-  const title = 'Mano pirma aplikacija'
-  const linkText = 'Išmok React!';
+const App: React.FC = () => {
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{title}</p>
-        <ManoParagrafas content="Pirmas paragrafas" author="Jalamonis Kirpaila" />
-        <ManoParagrafas content="Antras paragrafas" />
-        <ManoParagrafas content="Trečias paragrafas" />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {linkText} aaaa
-        </a>
-      </header>
-    </div>
+    <main>
+      <h1>Mano pirmoji aplikacija</h1>
+      <Button>Pirmas mygtukas</Button>
+      <Button>Antras mygtukas</Button>
+      <Button>Trečias mygtukas</Button>
+    </main>
   );
 }
 
