@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from './components/button';
+import TextField from './components/text-field';
 
 const App: React.FC = () => {
 
@@ -9,6 +10,7 @@ const App: React.FC = () => {
       <Button>Pirmas mygtukas</Button>
       <Button>Antras mygtukas</Button>
       <Button>Trečias mygtukas</Button>
+      <TextField />
     </main>
   );
 }
