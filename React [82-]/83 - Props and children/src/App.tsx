@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Button from './components/button';
-import TextField from './components/text-field';
 
 const App: React.FC = () => {
 
@@ -12,7 +11,6 @@ const App: React.FC = () => {
       <Button color="secondary">secondary mygtukas</Button>
       <Button color="error">error mygtukas</Button>
       <Button color="warning">warning mygtukas</Button>
-      <TextField />
     </main>
   );
 }
