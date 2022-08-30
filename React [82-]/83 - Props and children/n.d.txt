@@ -15,4 +15,9 @@
       * https://www.youtube.com/watch?v=0sSYmRImgRY&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=5&ab_channel=TheNetNinja
 
 8-31:
+  Peržiūrėti:
+    * https://www.youtube.com/watch?v=Zz6eOVaaelI&ab_channel=DevEd
   
+  Skurkite naują React-TS projektą ir perdarykite šį puslapį naudojant stiliaus modulio failus:
+    * https://www.youtube.com/watch?v=fs923Mu5EXY&ab_channel=WEBCIFAR
+    * https://codepen.io/Web_Cifar/pen/oNzPXRY

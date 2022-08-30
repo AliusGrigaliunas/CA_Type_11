@@ -6,7 +6,6 @@
   .#{$color-name} {
     // @include text-contrast($color-value);
     color: set-text-color($color-value);
-
     background-color: $color-value;
     padding: 0.6em 1em;
     border: 2px solid darken($color-value, 15);
