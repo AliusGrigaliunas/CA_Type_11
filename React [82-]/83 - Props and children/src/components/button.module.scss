@@ -1,12 +1,20 @@
 @import "variables";
+// @import "mixins";
+@import "functions";
 
 @each $color-name, $color-value in $colors-map {
   .#{$color-name} {
+    // @include text-contrast($color-value);
+    color: set-text-color($color-value);
+
     background-color: $color-value;
+    padding: 0.6em 1em;
+    border: 2px solid darken($color-value, 15);
+    border-radius: 4px;
 
     &:hover {
       cursor: pointer;
-      background-color: darken($color-value, 10);
+      background-color: darken($color-value, 8);
     }
   }
 }
