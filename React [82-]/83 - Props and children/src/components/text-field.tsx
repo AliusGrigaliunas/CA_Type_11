@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classes from './text-field.module.css';
+import classes from './text-field.module.scss';
 
 const TextField: React.FC = () => {
 
