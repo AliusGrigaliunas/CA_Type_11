@@ -1,12 +1,17 @@
 import * as React from 'react';
+import Hero from './components/hero';
+import SideBox from './components/side-box';
 
 const App: React.FC = () => {
 
   return (
     <main>
-      <h1>Mano pirmoji aplikacija</h1>
+      <Hero />
+      <SideBox />
     </main>
   );
 }
 
 export default App;
+
+
