@@ -1,7 +1,0 @@
-@mixin text-contrast($color) {
-  @if lightness($color) < 50 {
-    color: white;
-  } @else {
-    color: black;
-  }
-}
