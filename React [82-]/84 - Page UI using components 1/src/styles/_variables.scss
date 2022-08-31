@@ -1,0 +1,11 @@
+$color-primary: #e1fff9;
+$color-secondary: #e9cfcf;
+$color-error: #4b0000;
+$color-warning: #444400;
+
+$colors-map: (
+  "primary": $color-primary,
+  "secondary": $color-secondary,
+  "error": $color-error,
+  "warning": $color-warning,
+);
