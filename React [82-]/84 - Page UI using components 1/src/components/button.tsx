@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from './button.module.scss';
+import Link from './link';
 
 type ButtonProps = {
   children: React.ReactNode,
@@ -8,7 +9,7 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = ({ href, children }) => {
   if (href) {
-    return <a href={href} className={classes.button}>{children}</a>
+    return <Link href={href} className={classes.button}>{children}</Link>
   }
 
   return (

@@ -2,6 +2,7 @@
 * {
   padding: 0;
   margin: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 body {
@@ -20,19 +21,7 @@ body {
 /* ********************** */
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
-* {
-  padding: 0;
-  margin: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
-a {
-  padding: 0;
-  margin: 0;
-  color: var(--color-4);
-  text-decoration: none;
-}
 #webCifar-sidebox {
   position: fixed;
   right: 0px;

@@ -1,14 +1,28 @@
 import React from 'react'
+import classes from './link.module.scss'
+
 
 type LinkProps = {
-  children: React.ReactNode,
   href: string,
+  children: React.ReactNode,
+  target?: string,
+  className?: string
 }
 
-const Link: React.FC<LinkProps> = ({ href, children }) => (
-  <a href={href} target="blank" className="item">
+const Link: React.FC<LinkProps> = ({
+  href,
+  children,
+  target,
+  className
+}) => (
+  <a
+    href={href}
+    className={className ? [classes.link, className].join(' ') : classes.link}
+    target={target}
+  >
     {children}
   </a>
 )
+
 
 export default Link
