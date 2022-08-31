@@ -2,21 +2,22 @@ import React from 'react'
 import CloseIcon from './icons/close-icon';
 import EyeIcon from './icons/eye-icon';
 import InfoIcon from './icons/info-icon';
+import Link from './link';
 
 const SideBox = () => {
   return (
     <div id="webCifar-sidebox">
-      <div id="webCifar">
+      <div id="webCifar" >
         <h2 className="logo">Web Cifar</h2>
         <p className="author">Coded By <span>Shaif Arfan</span></p>
         <div className="items">
-          <a href="https://www.youtube.com/channel/UCdxaLo9ALJgXgOUDURRPGiQ" target="blank" className="item youtubeLink">
+          <Link href="https://www.youtube.com/channel/UCdxaLo9ALJgXgOUDURRPGiQ">
             <EyeIcon />
             <p>Watch how we made this.</p>
-          </a>
-          <a href="https://webcifar.com" target="blank" className="item">
+          </Link>
+          <Link href="https://webcifar.com">
             <p>https://webcifar.com</p>
-          </a>
+          </Link>
         </div>
         <div className="close">
           <CloseIcon />
