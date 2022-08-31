@@ -1,4 +1,4 @@
-8-29:
+8-30:
   Perskaityti:
     * https://reactjs.org/docs/hello-world.html
     * https://reactjs.org/docs/introducing-jsx.html
@@ -14,7 +14,7 @@
       * https://www.youtube.com/watch?v=pnhO8UaCgxg&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=4&ab_channel=TheNetNinja
       * https://www.youtube.com/watch?v=0sSYmRImgRY&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=5&ab_channel=TheNetNinja
 
-8-30:
+8-31:
   Peržiūrėti:
     * https://www.youtube.com/watch?v=Zz6eOVaaelI&ab_channel=DevEd
   
