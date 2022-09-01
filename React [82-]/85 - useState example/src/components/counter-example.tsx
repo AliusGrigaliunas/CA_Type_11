@@ -45,7 +45,6 @@ const CounterExample = () => {
         >
           Didinti
         </button>
-
       </div>
     </div>
   );

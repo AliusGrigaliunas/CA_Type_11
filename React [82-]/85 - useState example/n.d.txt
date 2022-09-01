@@ -33,4 +33,23 @@
   Skurkite naują React-TS projektą ir perdarykite šį puslapį naudojant stiliaus modulio failus:
     https://www.youtube.com/watch?v=hVdTQWASliE&ab_channel=TraversyMedia
     https://codepen.io/bradtraversy/pen/XerXYV
+
+9-02:
+  Perskaityti:
+    https://reactjs.org/docs/handling-events.html
+    https://reactjs.org/docs/forms.html
+    https://reactjs.org/docs/conditional-rendering.html
+
+  Peržiūrėti:
+    https://www.youtube.com/watch?v=IkMND33x0qQ&ab_channel=TheNetNinja
+    https://www.youtube.com/watch?v=4oCVDkb_EIs&ab_channel=WebDevSurvivalGuide
+
+
+  Išskaidykite pamokos '85 - useState example': <CounterExample> komponentą smulkesniais 
+  komponentais ir pritaikykite stilius naudojas ***.module.scss failus:
+    * <Input ... />
+    * <Button ... />
+    
+
+
   
