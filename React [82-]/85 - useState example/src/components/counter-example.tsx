@@ -6,9 +6,6 @@ const buttonStyle = {
   cursor: 'pointer',
 };
 
-// TODO: Sukurti įvesties lauką, kuriame bus įvedamas skaičius. Tuomet tas skaičius bus naudojamas
-// TODO: padidinti arba sumažinti 'count' reikšmę.
-
 const CounterExample = () => {
   //       ↙ - kitamasis naudojimui: atvaizdavimui, arba perdavimui į kitus komponenetus
   const [count, setCount] = React.useState(0);
@@ -17,10 +14,17 @@ const CounterExample = () => {
   //                     ↖               ↖  išlaikyti reikšmei tarp komponento persikrovimų.
   //                       ↖
   //                         ↖ - funkcija, skirta keisti reikšmei ir perkrauti komponentui.
+  const [step, setStep] = React.useState(3);
 
   return (
     <div style={{ fontSize: 50, textAlign: 'center', marginTop: '2rem' }}>
       <div>{`Count: ${count}`}</div>
+      <input
+        type="number"
+        style={{ fontSize: 40, width: 140, textAlign: 'center' }}
+        value={step}
+        onChange={(e) => setStep(e.target.valueAsNumber)}
+      />
       <div style={{
         display: 'flex', justifyContent: 'center', gap: 20, marginTop: '1rem',
       }}
@@ -29,18 +33,19 @@ const CounterExample = () => {
           type="button"
           style={buttonStyle}
           //                ↙ - kviečiama state keitimo funkcija, perduodant naują reikšmę
-          onClick={() => setCount(count + 1)}
+          onClick={() => setCount(count - step)}
         >
-          Didinti
+          Mazinti
         </button>
         <button
           type="button"
           style={buttonStyle}
           //                ↙ - kviečiama state keitimo funkcija, perduodant naują reikšmę
-          onClick={() => setCount(count - 1)}
+          onClick={() => setCount(count + step)}
         >
-          Mazinti
+          Didinti
         </button>
+
       </div>
     </div>
   );
