@@ -12,8 +12,11 @@ const buttonStyle = {
 const CounterExample = () => {
   //       ↙ - kitamasis naudojimui: atvaizdavimui, arba perdavimui į kitus komponenetus
   const [count, setCount] = React.useState(0);
-  //                 ↖                      ↖ pradinė reikšmė, sukuriama komponento kūrimo metu
-  //                   ↖ - funkcija, skirta keisti reikšmei ir perkrauti komponentui.
+  //                 ↖               ↖      ↖  - pradinė reikšmė, sukuriama komponento kūrimo metu
+  //                   ↖               ↖  - speciali funkcija, naudojama funkciniuose komponentuose,
+  //                     ↖               ↖  išlaikyti reikšmei tarp komponento persikrovimų.
+  //                       ↖
+  //                         ↖ - funkcija, skirta keisti reikšmei ir perkrauti komponentui.
 
   return (
     <div style={{ fontSize: 50, textAlign: 'center', marginTop: '2rem' }}>
