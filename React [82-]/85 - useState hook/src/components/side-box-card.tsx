@@ -4,8 +4,13 @@ import EyeIcon from './icons/eye-icon';
 import LinkItem from './link-item';
 import classes from './side-box-card.module.scss';
 
-const SideBoxCard: React.FC = () => (
-  <div className={classes.sideBoxCard}>
+type SideBoxCardProps = {
+  show: boolean,
+  onClose: VoidFunction,
+}
+
+const SideBoxCard: React.FC<SideBoxCardProps> = ({ show, onClose }) => (
+  <div className={classes.sideBoxCard + (show ? ' ' + classes.active : '')}>
     <h2 className={classes.logo}>Web Cifar</h2>
     <p className={classes.author}>Coded By <span>Shaif Arfan</span></p>
     <div className={classes.linkItemsContainer}>
@@ -17,7 +22,7 @@ const SideBoxCard: React.FC = () => (
         <p>https://webcifar.com</p>
       </LinkItem>
     </div>
-    <div className={classes.close}>
+    <div className={classes.close} onClick={onClose}>
       <CloseIcon />
     </div>
   </div>

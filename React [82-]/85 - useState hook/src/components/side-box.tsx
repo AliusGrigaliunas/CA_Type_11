@@ -4,14 +4,17 @@ import SideBoxInfo from './side-box-info';
 import classes from './side-box.module.scss';
 
 const SideBox: React.FC = () => {
-  console.log('Sukurtas SideBox komponentas');
+  const [cardVisibility, setCardVisibility] = React.useState(false);
+  const hideCardVisibility = () => setCardVisibility(false);
+  const showCardVisibility = () => setCardVisibility(!cardVisibility);
 
   return (
     <div className={classes.sideBox}>
-      <SideBoxCard />
-      <SideBoxInfo />
+      <SideBoxCard show={cardVisibility} onClose={hideCardVisibility} />
+      <SideBoxInfo onClick={showCardVisibility} />
     </div>
   )
 }
 
-export default SideBox
+export default SideBox;
+

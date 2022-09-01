@@ -1,6 +1,0 @@
-funkcinis komponenetas - tai yra funkcija, kuri grąžina JSX. Funkcinis komponentas turi grąžinti VIENĄ tėvinį JSX elementą. Jeigu norite grąžinti daugiau nei vieną, turi apgaubti grąžinamus JSX elementus naudojant React.Fragment. Sutrumpinta React.Fragment sintaksė - <></>
-
-props - tai komponentui perduodama informacija. Komponento naudojimo metu, props'ai perduodami lyg HTML elemento atributai. Šie atributai perduodami į Funkcinio komponento pirmajį parametrą objekto pavidalu.
-Kiekvienas atributas (komponento panaudojime) įdedamas į pirmąjį parametrą - objektu (komponento aprašyme). Naudojant TypeScript privamola aprašyti props'ų tipus. Dažniausiai tai daroma naudojant React.FC<JūsųKomponentoPropsTipas>.
-
-children - tai komponento panaudojime esanti turinys tarp komponento atidarymo ir uždarymo. Šis turinys yra perduodamas kaip prop'sas. Kuriant savo prop'sus STIPRIAI NEPATARTINA naudoti prop'so pavadinimo children, nes kiti programuotojai jį gali suprasti kaip turinį esantį tarp atidarymo ir uždarymo.
