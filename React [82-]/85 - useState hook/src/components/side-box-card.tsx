@@ -5,7 +5,7 @@ import LinkItem from './link-item';
 import classes from './side-box-card.module.scss';
 
 const SideBoxCard: React.FC = () => (
-  <div className={classes.sideBoxCard + ' ' + classes.active}>
+  <div className={classes.sideBoxCard}>
     <h2 className={classes.logo}>Web Cifar</h2>
     <p className={classes.author}>Coded By <span>Shaif Arfan</span></p>
     <div className={classes.linkItemsContainer}>

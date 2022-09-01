@@ -1,7 +1,6 @@
 import React from 'react'
 import classes from './link.module.scss'
 
-
 type LinkProps = {
   href: string,
   children: React.ReactNode,
