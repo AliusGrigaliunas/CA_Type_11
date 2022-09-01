@@ -1,9 +1,11 @@
 import * as React from 'react';
+import Container from './components/container';
+import CounterExample from './components/counter-example';
 
 const App: React.FC = () => (
-  <main>
-    <h1>Mano aplikacija</h1>
-  </main>
+  <Container>
+    <CounterExample />
+  </Container>
 );
 
 export default App;

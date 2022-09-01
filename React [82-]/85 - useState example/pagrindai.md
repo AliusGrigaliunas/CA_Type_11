@@ -5,6 +5,10 @@ Kiekvienas atributas (komponento panaudojime) įdedamas į pirmąjį parametrą 
 
 __children__ - tai komponento panaudojime esanti turinys tarp komponento atidarymo ir uždarymo. Šis turinys yra perduodamas kaip prop'sas. Kuriant savo prop'sus STIPRIAI NEPATARTINA naudoti prop'so pavadinimo children, nes kiti programuotojai jį gali suprasti kaip turinį esantį tarp atidarymo ir uždarymo.
 
+
+__Turinio atsinaujimo taisyklė__ - Jeigu norite pakeiti atvaizdavimą, turite perkrauti komponentą, pakeitus jo __state__ arba perduodant jam naujus __props__'us.
+
+## Kabliukai - Hooks
 __React.useState__ - tai funkcija, kuri grąžina masyvą iš dviejų elementų:
   1. reikšmė skirta naudojimui (bet ne keitimui)
   2. funkcija skirta tai reikšmei keisti (kuri išprovokuoja komponento persikrovimą)
@@ -12,5 +16,5 @@ Praktikoje beveik visada šios, 2 elementų dydžio masyvo, reikšmės yra pasie
 ```tsx
   const [reikšmė, funkcijaReikšmeiNustatyti] = React.useState(pradinėReikšmė);
 ```
-React.useState kabliukas (hook) naudojamas išsaugoti/kaupti/perpanaudoti reikšmę persikraunant komponentui. 
+__React.useState__ kabliukas (hook) naudojamas išsaugoti/kaupti/perpanaudoti reikšmę persikraunant komponentui. 
 Jeigu bandote nustatyti naują reikšmę, naudojant __funkcijaReikšmeiNustatyti__, kuri sutampa (tenkina operatorių ===), komponentas nebus perkraunamas.
