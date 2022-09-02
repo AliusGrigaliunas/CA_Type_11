@@ -49,6 +49,18 @@
   komponentais ir pritaikykite stilius naudojas ***.module.scss failus:
     * <Input ... />
     * <Button ... />
+
+9-05:
+  Perskaityti:
+    https://reactjs.org/docs/lifting-state-up.html
+    https://reactjs.org/docs/composition-vs-inheritance.html
+    https://reactjs.org/docs/thinking-in-react.html
+
+  Peržiūrėti:
+    https://www.youtube.com/watch?v=w7ejDZ8SWv8&t=5885s&ab_channel=TraversyMedia
+
+  Kas planuoja įsidarbinti per pusę metų:
+    Pabandyti padaryti naudojant TypeScript
     
 
 

@@ -24,8 +24,8 @@ const CounterExample = () => {
         display: 'flex', justifyContent: 'center', gap: 20, marginTop: '1rem',
       }}
       >
-        <Button onClick={() => setCount(count - step)}>Mazinti</Button>
-        <Button onClick={() => setCount(count + step)}>Didinti</Button>
+        <Button onClick={() => setCount(count - step)}>{`- ${step}`}</Button>
+        <Button onClick={() => setCount(count + step)}>{`+ ${step}`}</Button>
       </div>
     </div>
   );
