@@ -1,4 +1,5 @@
 import React from 'react';
+import Input from './input';
 
 const buttonStyle = {
   fontSize: 40,
@@ -8,20 +9,20 @@ const buttonStyle = {
 
 const CounterExample = () => {
   //       ↙ - kitamasis naudojimui: atvaizdavimui, arba perdavimui į kitus komponenetus
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState<number>(0);
   //                 ↖               ↖      ↖  - pradinė reikšmė, sukuriama komponento kūrimo metu
   //                   ↖               ↖  - speciali funkcija, naudojama funkciniuose komponentuose,
   //                     ↖               ↖  išlaikyti reikšmei tarp komponento persikrovimų.
   //                       ↖
   //                         ↖ - funkcija, skirta keisti reikšmei ir perkrauti komponentui.
-  const [step, setStep] = React.useState(3);
+  const [step, setStep] = React.useState<number>(3);
 
+  // TODO: BUTTON + children
   return (
     <div style={{ fontSize: 50, textAlign: 'center', marginTop: '2rem' }}>
       <div>{`Count: ${count}`}</div>
-      <input
+      <Input
         type="number"
-        style={{ fontSize: 40, width: 140, textAlign: 'center' }}
         value={step}
         onChange={(e) => setStep(e.target.valueAsNumber)}
       />
