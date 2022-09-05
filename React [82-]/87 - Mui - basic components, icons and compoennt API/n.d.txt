@@ -1,3 +1,4 @@
+---------------------------------------- React - Pirma Savaitė ------------------------------------
 8-30:
   Perskaityti:
     * https://reactjs.org/docs/hello-world.html
@@ -61,7 +62,9 @@
 
   Kas planuoja įsidarbinti per pusę metų:
     Pabandyti padaryti naudojant TypeScript
-    
+
+---------------------------------------- React - Antra Savaitė ------------------------------------
+  
 
 
   
