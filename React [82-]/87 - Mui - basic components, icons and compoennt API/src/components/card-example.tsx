@@ -1,8 +1,11 @@
+/* eslint-disable max-len */
 import * as React from 'react';
-import { Box } from '@mui/material';
+import {
+  Box,
+} from '@mui/material';
 
 const CardExample: React.FC = () => (
-  <Box sx={{ bgcolor: 'primary.main', flexGrow: 1 }}>Kai užaugsiu, būsi Koretelė</Box>
+  <Box />
 );
 
 export default CardExample;
