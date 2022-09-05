@@ -1,0 +1,67 @@
+8-30:
+  Perskaityti:
+    * https://reactjs.org/docs/hello-world.html
+    * https://reactjs.org/docs/introducing-jsx.html
+    * https://reactjs.org/docs/rendering-elements.html
+    * https://reactjs.org/docs/components-and-props.html
+
+  Peržiūrėti:
+    * 0:00:00 - 0:36:00
+      * https://www.youtube.com/watch?v=Ke90Tje7VS0&t=2143s&ab_channel=ProgrammingwithMosh 
+    
+  NAUDOJANT PAMOKOS PROJEKTĄ IR TYPESCRIPT:
+    Pasidaryti žiūrint:
+      * https://www.youtube.com/watch?v=pnhO8UaCgxg&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=4&ab_channel=TheNetNinja
+      * https://www.youtube.com/watch?v=0sSYmRImgRY&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=5&ab_channel=TheNetNinja
+
+8-31:
+  Peržiūrėti:
+    * https://www.youtube.com/watch?v=Zz6eOVaaelI&ab_channel=DevEd
+  
+  Skurkite naują React-TS projektą ir perdarykite šį puslapį naudojant stiliaus modulio failus:
+    * https://www.youtube.com/watch?v=fs923Mu5EXY&ab_channel=WEBCIFAR
+    * https://codepen.io/Web_Cifar/pen/oNzPXRY
+
+9-01: 
+  Perskaityti:
+    https://reactjs.org/docs/state-and-lifecycle.html
+
+  Peržiūrėti:
+    https://www.youtube.com/watch?v=O6P86uwfdR0&ab_channel=WebDevSimplified
+
+  
+  Skurkite naują React-TS projektą ir perdarykite šį puslapį naudojant stiliaus modulio failus:
+    https://www.youtube.com/watch?v=hVdTQWASliE&ab_channel=TraversyMedia
+    https://codepen.io/bradtraversy/pen/XerXYV
+
+9-02:
+  Perskaityti:
+    https://reactjs.org/docs/handling-events.html
+    https://reactjs.org/docs/forms.html
+    https://reactjs.org/docs/conditional-rendering.html
+
+  Peržiūrėti:
+    https://www.youtube.com/watch?v=IkMND33x0qQ&ab_channel=TheNetNinja
+    https://www.youtube.com/watch?v=4oCVDkb_EIs&ab_channel=WebDevSurvivalGuide
+
+
+  Išskaidykite pamokos '85 - useState example': <CounterExample> komponentą smulkesniais 
+  komponentais ir pritaikykite stilius naudojas ***.module.scss failus:
+    * <Input ... />
+    * <Button ... />
+
+9-05:
+  Perskaityti:
+    https://reactjs.org/docs/lifting-state-up.html
+    https://reactjs.org/docs/composition-vs-inheritance.html
+    https://reactjs.org/docs/thinking-in-react.html
+
+  Peržiūrėti:
+    https://www.youtube.com/watch?v=w7ejDZ8SWv8&t=5885s&ab_channel=TraversyMedia
+
+  Kas planuoja įsidarbinti per pusę metų:
+    Pabandyti padaryti naudojant TypeScript
+    
+
+
+  
