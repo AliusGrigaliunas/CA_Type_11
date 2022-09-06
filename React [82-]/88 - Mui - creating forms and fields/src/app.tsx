@@ -1,8 +1,8 @@
 import * as React from 'react';
-import LoginForm from './components/login-form';
+import RegisterPage from './components/register-page';
 
 const App: React.FC = () => (
-  <LoginForm />
+  <RegisterPage />
 );
 
 export default App;

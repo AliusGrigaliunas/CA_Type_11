@@ -5,15 +5,34 @@ import {
   Typography,
   TextField,
   Button,
-  FormControlLabel,
+  Autocomplete,
 } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
-import CustomSizeCheckbox from './custom-size-checkbox';
 
-const LoginForm: React.FC = () => {
+type Topic = {
+  id: string,
+  title: string,
+};
+
+const topics: Topic[] = [
+  { id: '1', title: 'HTML' },
+  { id: '2', title: 'CSS' },
+  { id: '3', title: 'JavaScript' },
+  { id: '4', title: 'DOM' },
+  { id: '5', title: 'TypeScript' },
+  { id: '6', title: 'Webpack' },
+  { id: '7', title: 'GIT' },
+  { id: '8', title: 'React' },
+  { id: '9', title: 'Node' },
+  { id: '10', title: 'Express' },
+  { id: '11', title: 'SQL' },
+  { id: '12', title: 'MongoDB' },
+];
+
+const RegisterPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [remember, setRemember] = React.useState(true);
+  const [selectedTopics, setSelectedTopics] = React.useState<Topic[]>([]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +41,6 @@ const LoginForm: React.FC = () => {
     console.log({
       email,
       password,
-      remember,
     });
   };
 
@@ -48,7 +66,7 @@ const LoginForm: React.FC = () => {
         onSubmit={handleSubmit}
       >
         <SecurityIcon sx={{ fontSize: 50, alignSelf: 'center' }} color="primary" />
-        <Typography component="h1" variant="h4" align="center">Prisijungimas</Typography>
+        <Typography component="h1" variant="h4" align="center">Registracija</Typography>
         <TextField
           variant="filled"
           label="El. paštas"
@@ -63,14 +81,19 @@ const LoginForm: React.FC = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <FormControlLabel
-          control={(
-            <CustomSizeCheckbox
-              checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
+        <Autocomplete
+          options={topics}
+          multiple
+          getOptionLabel={({ title }) => title}
+          value={selectedTopics}
+          onChange={(_, newSelectedTopics) => setSelectedTopics(newSelectedTopics)}
+          renderInput={(inputProps) => (
+            <TextField
+              label="Dominančios temos"
+              variant="filled"
+              {...inputProps}
             />
           )}
-          label="Įsiminti prisijungimo duomenis"
         />
         <Button
           type="submit"
@@ -78,11 +101,11 @@ const LoginForm: React.FC = () => {
           sx={{ height: 60 }}
           size="large"
         >
-          Prisijungti
+          Registruotis
         </Button>
       </Paper>
     </Box>
   );
 };
 
-export default LoginForm;
+export default RegisterPage;
