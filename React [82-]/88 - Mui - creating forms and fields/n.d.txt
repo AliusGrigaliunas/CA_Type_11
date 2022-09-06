@@ -69,5 +69,11 @@
   Peržiūrėti ir pasidaryti naujam projekte:
     https://www.youtube.com/watch?v=fzxEECHnsvU&ab_channel=LamaDev
 
+09-07:
+  Persižiūrėti ir pasitestuoti savame projekte arba naudojant https://stackblitz.com/run?file=demo.tsx: 
+    https://www.youtube.com/watch?v=r42jcDXSFM0&list=PLC3y8-rFHvwh-K9mDlrrcDywl7CeVL2rO&index=3&ab_channel=Codevolution
+      privaloma: 3-10
+      rekomenduojama: 3-13
+  
   
   

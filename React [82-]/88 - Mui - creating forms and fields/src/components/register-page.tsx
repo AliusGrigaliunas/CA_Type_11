@@ -36,6 +36,7 @@ const RegisterPage: React.FC = () => {
     console.log({
       email,
       password,
+      selectedTopics,
     });
   };
 
