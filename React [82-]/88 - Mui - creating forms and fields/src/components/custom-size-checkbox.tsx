@@ -8,7 +8,7 @@ import {
 
 const CustomSizeCheckbox = styled(Checkbox, {
   shouldForwardProp: (propName) => propName !== 'size',
-})(({ size = 35 }) => ({
+})(({ size = 30 }) => ({
   svg: {
     height: size,
     width: size,
