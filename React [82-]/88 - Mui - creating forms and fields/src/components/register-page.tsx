@@ -9,11 +9,6 @@ import {
 } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
 
-type Topic = {
-  id: string,
-  title: string,
-};
-
 const topics: Topic[] = [
   { id: '1', title: 'HTML' },
   { id: '2', title: 'CSS' },
