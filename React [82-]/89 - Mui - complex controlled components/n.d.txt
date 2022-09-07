@@ -74,6 +74,13 @@
     https://www.youtube.com/watch?v=r42jcDXSFM0&list=PLC3y8-rFHvwh-K9mDlrrcDywl7CeVL2rO&index=3&ab_channel=Codevolution
       privaloma: 3-10
       rekomenduojama: 3-13
-  
+
+09-08:
+  privaloma:
+    Persižiūrėti ir pasitestuoti savame projekte arba naudojant https://stackblitz.com/run?file=demo.tsx: 
+    https://www.youtube.com/watch?v=r42jcDXSFM0&list=PLC3y8-rFHvwh-K9mDlrrcDywl7CeVL2rO&index=3&ab_channel=Codevolution
+      10-20
+      
+  rekomenduojama: Peržiūrėti paskaitos įrašą.
   
   
