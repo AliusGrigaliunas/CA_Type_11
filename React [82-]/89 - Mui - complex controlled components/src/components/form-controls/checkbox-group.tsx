@@ -20,7 +20,7 @@ type CheckboxGroupProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: CheckboxOption[]) => void,
 };
 
-type MutateOptions = (currentValue: CheckboxOption[], checkboxValue: string) => CheckboxOption[];
+type MutateOptions = (value: CheckboxOption[], option: CheckboxOption) => CheckboxOption[];
 
 const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   label,
@@ -31,32 +31,22 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 }) => {
   const selectedValues = value && value.map((x) => x.value);
 
-  const createAppendedValue: MutateOptions = (currentValue, checkboxValue) => {
-    const copy = [...currentValue];
-    const newOption = options.find((x) => x.value === checkboxValue);
-    if (newOption === undefined) {
-      throw new Error('selected checkbox is not found in options');
-    } else {
-      copy.push(newOption);
-    }
+  const createAppendedValue: MutateOptions = (currentValue, option) => [...currentValue, option];
 
-    return copy;
-  };
+  const createReducedValue: MutateOptions = (currentValue, option) => currentValue
+    .filter((x) => x.value !== option.value);
 
-  const createReducedValue: MutateOptions = (currentValue, checkboxValue) => currentValue
-    .filter((x) => x.value !== checkboxValue);
-
-  const handleRadioChange = (
+  const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean,
-    checkboxValue: string,
+    option: CheckboxOption,
   ) => {
     const componentIsControlled = value && onChange;
 
     if (componentIsControlled) {
       const newValue: CheckboxOption[] = checked
-        ? createAppendedValue(value, checkboxValue)
-        : createReducedValue(value, checkboxValue);
+        ? createAppendedValue(value, option)
+        : createReducedValue(value, option);
 
       onChange(event, newValue);
     } else {
@@ -76,7 +66,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
               <Checkbox
                 value={option.value}
                 name={name}
-                onChange={(e, newChecked) => handleRadioChange(e, newChecked, option.value)}
+                onChange={(e, newChecked) => handleCheckboxChange(e, newChecked, option)}
                 checked={selectedValues?.includes(option.value)}
               />
             )}
