@@ -7,12 +7,12 @@ import {
   FormGroup,
 } from '@mui/material';
 
-type CheckboxOption = {
+export type CheckboxOption = {
   value: string,
   label: string,
 };
 
-type CheckboxGroupProps = {
+export type CheckboxGroupProps = {
   label: string,
   name: string,
   options: CheckboxOption[],
@@ -20,7 +20,7 @@ type CheckboxGroupProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: CheckboxOption[]) => void,
 };
 
-type MutateOptions = (value: CheckboxOption[], option: CheckboxOption) => CheckboxOption[];
+export type MutateOptions = (value: CheckboxOption[], option: CheckboxOption) => CheckboxOption[];
 
 const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   label,

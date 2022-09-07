@@ -8,7 +8,17 @@ import {
   Autocomplete,
 } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
-import CheckboxGroup from './form-controls/checkbox-group';
+import CheckboxGroup, { CheckboxOption } from './form-controls/checkbox-group';
+
+const contentType2CheckboxOption = ({ id, title }: ContentType): CheckboxOption => ({
+  value: id,
+  label: title,
+});
+
+const checkboxOptionToContentType = ({ value, label }: CheckboxOption): ContentType => ({
+  id: value,
+  title: label,
+});
 
 const topics: Topic[] = [
   { id: '1', title: 'HTML' },
@@ -25,10 +35,20 @@ const topics: Topic[] = [
   { id: '12', title: 'MongoDB' },
 ];
 
+const contentTypes: ContentType[] = [
+  { id: '1', title: 'Straipsniai' },
+  { id: '2', title: 'Vaizdo įrašai' },
+  { id: '3', title: 'Klausimai' },
+  { id: '4', title: 'Užduotys' },
+];
+
+const contentTypeOptions = contentTypes.map(contentType2CheckboxOption);
+
 const RegisterPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [selectedTopics, setSelectedTopics] = React.useState<Topic[]>([]);
+  const [selectedContentTypes, setSelectedContentTypes] = React.useState<CheckboxOption[]>([]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,6 +58,7 @@ const RegisterPage: React.FC = () => {
       email,
       password,
       selectedTopics,
+      selectedContentTypes: selectedContentTypes.map(checkboxOptionToContentType),
     });
   };
 
@@ -95,19 +116,9 @@ const RegisterPage: React.FC = () => {
         <CheckboxGroup
           label="Dominantys informacijos tipai"
           name="instrests-types"
-          options={[
-            { value: '1', label: 'Straipsniai' },
-            { value: '2', label: 'Vaizdo įrašai' },
-            { value: '3', label: 'Klausimai' },
-            { value: '4', label: 'Užduotys' },
-          ]}
-          value={[
-            { value: '2', label: 'Vaizdo įrašai' },
-            { value: '4', label: 'Užduotys' },
-          ]}
-          onChange={(event, selectedOptions) => console.log({
-            selectedOptions,
-          })}
+          options={contentTypeOptions}
+          value={selectedContentTypes}
+          onChange={(_, newContentTypes) => setSelectedContentTypes(newContentTypes)}
         />
         <Button
           type="submit"
