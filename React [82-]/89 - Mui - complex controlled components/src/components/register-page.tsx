@@ -8,6 +8,7 @@ import {
   Autocomplete,
 } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
+import CheckboxGroup from './form-controls/checkbox-group';
 
 const topics: Topic[] = [
   { id: '1', title: 'HTML' },
@@ -90,6 +91,16 @@ const RegisterPage: React.FC = () => {
               {...inputProps}
             />
           )}
+        />
+        <CheckboxGroup
+          label="Dominantys informacijos tipai"
+          name="instrests-types"
+          options={[
+            { value: '1', label: 'Straipsniai' },
+            { value: '2', label: 'Vaizdo įrašai' },
+            { value: '3', label: 'Klausimai' },
+            { value: '4', label: 'Užduotys' },
+          ]}
         />
         <Button
           type="submit"
