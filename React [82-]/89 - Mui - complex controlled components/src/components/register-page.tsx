@@ -101,6 +101,13 @@ const RegisterPage: React.FC = () => {
             { value: '3', label: 'Klausimai' },
             { value: '4', label: 'Užduotys' },
           ]}
+          value={[
+            { value: '2', label: 'Vaizdo įrašai' },
+            { value: '4', label: 'Užduotys' },
+          ]}
+          onChange={(event, selectedOptions) => console.log({
+            selectedOptions,
+          })}
         />
         <Button
           type="submit"
