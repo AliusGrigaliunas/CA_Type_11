@@ -29,6 +29,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   value,
   onChange,
 }) => {
+  const checkboxGroupRef = React.useRef<null | HTMLDivElement>(null);
   const selectedValues = value && value.map((x) => x.value);
 
   const createAppendedValue: MutateOptions = (currentValue, option) => [...currentValue, option];
@@ -36,29 +37,46 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   const createReducedValue: MutateOptions = (currentValue, option) => currentValue
     .filter((x) => x.value !== option.value);
 
+  const createControlledValue = (
+    currentValue: CheckboxOption[],
+    checked: boolean,
+    newOption: CheckboxOption,
+  ): CheckboxOption[] => (checked
+    ? createAppendedValue(currentValue, newOption)
+    : createReducedValue(currentValue, newOption)
+  );
+
+  const createUncontrolledValue = (): CheckboxOption[] => {
+    const optionContainer = checkboxGroupRef.current as HTMLDivElement;
+    const checkboxes = Array.from(
+      optionContainer.querySelectorAll<HTMLInputElement>('input[type=checkbox]'),
+    );
+    return checkboxes
+      .filter((checkbox) => checkbox.checked)
+      .map(
+        (checkbox) => options.find((option) => option.value === checkbox.value),
+      ) as CheckboxOption[];
+  };
+
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean,
-    option: CheckboxOption,
-  ) => {
-    const componentIsControlled = value && onChange;
-
-    if (componentIsControlled) {
-      const newValue: CheckboxOption[] = checked
-        ? createAppendedValue(value, option)
-        : createReducedValue(value, option);
+    newOption: CheckboxOption,
+  ): void => {
+    if (onChange) {
+      const componentIsControlled = value !== undefined;
+      const newValue: CheckboxOption[] = componentIsControlled
+        ? createControlledValue(value, checked, newOption)
+        : createUncontrolledValue();
 
       onChange(event, newValue);
-    } else {
-      // Komponentas nekontroliuojamas
-
     }
   };
 
   return (
     <Box>
       <FormLabel sx={{ letterSpacing: '0.04em', mb: 1 }}>{label}</FormLabel>
-      <FormGroup sx={{ display: 'flex', flexDirection: 'column', px: 2 }}>
+      <FormGroup sx={{ display: 'flex', flexDirection: 'column', px: 2 }} ref={checkboxGroupRef}>
         {options.map((option) => (
           <FormControlLabel
             key={option.value}
