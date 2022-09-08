@@ -8,7 +8,7 @@ import {
   Autocomplete,
 } from '@mui/material';
 import SecurityIcon from '@mui/icons-material/Security';
-import CheckboxGroup, { CheckboxOption } from './form-controls/checkbox-group';
+import CheckboxGroup, { CheckboxOption } from '../components/form-controls/checkbox-group';
 
 const contentType2CheckboxOption = ({ id, title }: ContentType): CheckboxOption => ({
   value: id,
