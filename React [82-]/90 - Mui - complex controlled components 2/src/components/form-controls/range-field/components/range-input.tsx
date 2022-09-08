@@ -5,9 +5,9 @@ import {
   FilledInputProps,
 } from '@mui/material';
 
-type InputProps = Omit<FilledInputProps, 'size'>;
+type RangeInputProps = Omit<FilledInputProps, 'size'>;
 
-const Input: React.FC<InputProps> = ({ sx = [], ...props }) => (
+const RangeInput: React.FC<RangeInputProps> = ({ sx = [], ...props }) => (
   <FilledInput
     size="small"
     sx={[
@@ -21,4 +21,4 @@ const Input: React.FC<InputProps> = ({ sx = [], ...props }) => (
   />
 );
 
-export default Input;
+export default RangeInput;

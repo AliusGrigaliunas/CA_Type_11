@@ -4,14 +4,14 @@ import {
   Typography,
   Slider,
 } from '@mui/material';
-import { Input, InputContainer } from './components';
+import { RangeInput, InputContainer } from './components';
 
 const RangeField: React.FC = () => (
   <Box sx={{ width: 300 }}>
     <InputContainer>
-      <Input />
+      <RangeInput />
       <Typography>iki</Typography>
-      <Input />
+      <RangeInput />
     </InputContainer>
     <Box sx={{ mx: 2 }}>
       <Slider value={[75, 120]} min={15} max={150} />
