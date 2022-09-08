@@ -83,4 +83,8 @@
       
   rekomenduojama: Peržiūrėti paskaitos įrašą.
   
-  
+09-09:
+  Kiek įmanoma labiau atakrtoti RangeInput įvesties laukų elgseną pagal:
+    https://www.1a.lt/c/buitine-technika/namams-smulki-buitine-technika/puku-surinkejai/2z5?plb=29
+
+  rekomenduojama: Peržiūrėti paskaitos įrašą.
