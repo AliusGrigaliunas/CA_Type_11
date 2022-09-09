@@ -88,3 +88,15 @@
     https://www.1a.lt/c/buitine-technika/namams-smulki-buitine-technika/puku-surinkejai/2z5?plb=29
 
   rekomenduojama: Peržiūrėti paskaitos įrašą.
+
+09-12:
+  Peržiūrėti: kad suprasti principą:
+    https://www.youtube.com/watch?v=7FQS6_fOgR8&ab_channel=JonBellah
+    https://www.youtube.com/watch?v=yqgX-c4zPFU&ab_channel=Weibenfalk
+    https://www.youtube.com/watch?v=IsnOTmB88tE&ab_channel=TravelsCode
+    88-91 paskaitų įrašai
+
+  Atlikti:
+    Surasti internete jus dominantį kompleksinį įvesties lauką ir įgalinti jo funcionalumą.
+
+---------------------------------------- React - Trečia Savaitė ------------------------------------
