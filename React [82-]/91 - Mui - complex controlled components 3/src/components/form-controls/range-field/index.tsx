@@ -11,7 +11,7 @@ type RangeFieldProps = {
   max?: number
 };
 
-type RangeInputChangeHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+type RangeInputChangeHandler = React.ChangeEventHandler<HTMLInputElement>;
 
 const RangeField: React.FC<RangeFieldProps> = ({
   min = 0,
@@ -21,6 +21,7 @@ const RangeField: React.FC<RangeFieldProps> = ({
   const [privateMinValue, privateMaxValue] = privateValue;
 
   const handleMinValueChange: RangeInputChangeHandler = (e) => {
+    console.log('handleMinValueChange');
     // TODO: nustatyti reikšmę tik tuomet, jeigu ji nėra mažesnė už props'ą - min
     setPrivateValue([
       Number(e.target.value),
