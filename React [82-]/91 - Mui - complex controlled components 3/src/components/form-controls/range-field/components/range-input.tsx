@@ -5,18 +5,29 @@ import {
   FilledInputProps,
 } from '@mui/material';
 
-type RangeInputProps = Omit<FilledInputProps, 'size' | 'type' | 'multiline' | 'onChange' | 'value'> & {
+export type RangeInputProps = Omit<FilledInputProps, 'size' | 'type' | 'multiline' | 'onChange' | 'value'> & {
   value: number,
   onChange: (e: React.FocusEvent<HTMLInputElement>, val: number) => void,
+  newValueIsValid: (val: number) => boolean
 };
 
 const RangeInput: React.FC<RangeInputProps> = ({
   value,
   onChange,
+  newValueIsValid,
   sx = [],
   ...props
 }) => {
   const [privateValue, setPrivateValue] = React.useState(value);
+
+  const handleBlur: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
+    const newValue = Number(e.target.value);
+    if (newValueIsValid(newValue)) {
+      onChange(e as React.FocusEvent<HTMLInputElement>, Number(e.target.value));
+    } else {
+      setPrivateValue(value);
+    }
+  };
 
   React.useEffect(() => setPrivateValue(value), [value]);
 
@@ -37,7 +48,7 @@ const RangeInput: React.FC<RangeInputProps> = ({
       ]}
       value={privateValue}
       onChange={(e) => setPrivateValue(Number(e.target.value))}
-      onBlur={(e) => onChange(e as React.FocusEvent<HTMLInputElement>, Number(e.target.value))}
+      onBlur={handleBlur}
       {...props}
     />
   );
