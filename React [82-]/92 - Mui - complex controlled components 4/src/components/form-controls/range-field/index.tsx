@@ -23,12 +23,13 @@ const DEFAULT_RANGE: Range = [DEFAULT_MIN, DEFAULT_MAX];
 const RangeField: React.FC<RangeFieldProps> = ({
   min,
   max,
-  value,
+  value = DEFAULT_RANGE,
 }) => {
-  const [rangeBounds, setRangeBounds] = React.useState<Range>(DEFAULT_RANGE);
+  const [bounds, setBounds] = React.useState<Range>(DEFAULT_RANGE);
   const [privateValue, setPrivateValue] = React.useState<Range>(DEFAULT_RANGE);
+
   const [privateMin, privateMax] = privateValue;
-  const [lowerBound, higherBound] = rangeBounds;
+  const [lowerBound, higherBound] = bounds;
 
   const valueInRange = (newValue: number) => newValue <= higherBound && newValue >= lowerBound;
 
@@ -40,37 +41,27 @@ const RangeField: React.FC<RangeFieldProps> = ({
     setPrivateValue(orderRangeASC([privateMin, newMax]));
   };
 
-  // ComponentDidMount alternatyva
+  const calcInitBounds = (): Range => {
+    const [minVal, maxVal] = orderRangeASC(value);
+
+    const initMinBound = min || minVal;
+    const initMaxBound = max || maxVal;
+
+    return [initMinBound, initMaxBound];
+  };
+
+  const calcInitPrivateValue = (initBounds: Range): Range => {
+    const [minVal, maxVal] = orderRangeASC(value);
+
+    return value ? [minVal, maxVal] : initBounds;
+  };
+
   React.useEffect(() => {
-    const [minVal, maxVal] = (value && orderRangeASC(value)) ?? DEFAULT_RANGE;
-    let finalValue: Range = DEFAULT_RANGE;
-    let finalBounds: Range = DEFAULT_RANGE;
+    const initBounds = calcInitBounds();
+    const initPrivateValue = calcInitPrivateValue(initBounds);
 
-    if (min && max && value) {
-      finalBounds = [min, max];
-      finalValue = value;
-    } else if (min && max && !value) {
-      finalBounds = [min, max];
-      finalValue = [min, max];
-    } else if (min && !max && value) {
-      finalBounds = [min, maxVal];
-      finalValue = [minVal, maxVal];
-    } else if (min && !max && !value) {
-      finalBounds = [min, DEFAULT_MAX];
-      finalValue = [min, DEFAULT_MAX];
-    } else if (!min && max && value) {
-      finalBounds = [minVal, max];
-      finalValue = [minVal, maxVal];
-    } else if (!min && max && !value) {
-      finalBounds = [DEFAULT_MIN, max];
-      finalValue = [DEFAULT_MIN, max];
-    } else if (!min && !max && value) {
-      finalBounds = value;
-      finalValue = value;
-    }
-
-    setPrivateValue(finalValue);
-    setRangeBounds(finalBounds);
+    setBounds(initBounds);
+    setPrivateValue(initPrivateValue);
   }, []);
 
   return (
