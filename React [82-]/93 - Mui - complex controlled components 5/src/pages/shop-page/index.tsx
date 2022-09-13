@@ -10,10 +10,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Drawer as MuiDrawer,
   styled,
-  Theme,
-  CSSObject,
 } from '@mui/material';
 
 import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -21,29 +18,9 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ApplicationBar from './components/application-bar';
+import SideBar from './components/side-bar';
 
 const drawerWidth = 240;
-
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: 'hidden',
-});
-
-const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -53,25 +30,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    ...(open
-      ? ({
-        ...openedMixin(theme),
-        '& .MuiDrawer-paper': openedMixin(theme),
-      })
-      : ({
-        ...closedMixin(theme),
-        '& .MuiDrawer-paper': closedMixin(theme),
-      })),
-
-  }),
-);
 
 const ShopPage = () => {
   const [open, setOpen] = React.useState(false);
@@ -100,7 +58,7 @@ const ShopPage = () => {
           </Typography>
         </Toolbar>
       </ApplicationBar>
-      <Drawer variant="permanent" open={open}>
+      <SideBar variant="permanent" open={open} drawerWidth={drawerWidth}>
         <DrawerHeader>
           <IconButton onClick={closeDrawer}>
             <ChevronLeftIcon />
@@ -156,7 +114,7 @@ const ShopPage = () => {
             </ListItem>
           ))}
         </List>
-      </Drawer>
+      </SideBar>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Typography paragraph>
