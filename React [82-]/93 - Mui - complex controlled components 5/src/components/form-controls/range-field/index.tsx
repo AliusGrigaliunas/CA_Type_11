@@ -6,27 +6,27 @@ import {
 } from '@mui/material';
 import { RangeInput, InputContainer, RangeInputProps } from './components';
 
-type Range = [number, number];
-
 type RangeFieldProps = {
   min?: number,
   max?: number,
-  value?: Range
+  value?: NumberRange,
+  onChange?: (event: React.SyntheticEvent | Event, value: NumberRange) => void;
 };
 
-const orderRangeASC = (range: Range) => range.sort((x, y) => x - y) as Range;
+const orderRangeASC = (range: NumberRange) => range.sort((x, y) => x - y) as NumberRange;
 
 const DEFAULT_MIN = 0;
 const DEFAULT_MAX = 100;
-const DEFAULT_RANGE: Range = [DEFAULT_MIN, DEFAULT_MAX];
+const DEFAULT_RANGE: NumberRange = [DEFAULT_MIN, DEFAULT_MAX];
 
 const RangeField: React.FC<RangeFieldProps> = ({
   min,
   max,
   value = DEFAULT_RANGE,
+  onChange,
 }) => {
-  const [bounds, setBounds] = React.useState<Range>(DEFAULT_RANGE);
-  const [privateValue, setPrivateValue] = React.useState<Range>(DEFAULT_RANGE);
+  const [bounds, setBounds] = React.useState<NumberRange>(DEFAULT_RANGE);
+  const [privateValue, setPrivateValue] = React.useState<NumberRange>(DEFAULT_RANGE);
 
   const [privateMin, privateMax] = privateValue;
   const [lowerBound, higherBound] = bounds;
@@ -41,7 +41,7 @@ const RangeField: React.FC<RangeFieldProps> = ({
     setPrivateValue(orderRangeASC([privateMin, newMax]));
   };
 
-  const calcInitBounds = (): Range => {
+  const calcInitBounds = (): NumberRange => {
     const [minVal, maxVal] = orderRangeASC(value);
 
     const initMinBound = min || minVal;
@@ -50,7 +50,7 @@ const RangeField: React.FC<RangeFieldProps> = ({
     return [initMinBound, initMaxBound];
   };
 
-  const calcInitPrivateValue = (initBounds: Range): Range => {
+  const calcInitPrivateValue = (initBounds: NumberRange): NumberRange => {
     const [minVal, maxVal] = orderRangeASC(value);
 
     return value ? [minVal, maxVal] : initBounds;
@@ -63,6 +63,10 @@ const RangeField: React.FC<RangeFieldProps> = ({
     setBounds(initBounds);
     setPrivateValue(initPrivateValue);
   }, []);
+
+  React.useEffect(() => {
+    setPrivateValue(value);
+  }, [value]);
 
   return (
     <Box sx={{ width: 300 }}>
@@ -84,8 +88,8 @@ const RangeField: React.FC<RangeFieldProps> = ({
           value={privateValue}
           min={lowerBound}
           max={higherBound}
-          onChange={(_, newValue) => setPrivateValue(newValue as Range)}
-          onChangeCommitted={(_, newValue) => { console.log('onChangeCommitted', { newValue }); }}
+          onChange={(_, newValue) => setPrivateValue(newValue as NumberRange)}
+          onChangeCommitted={onChange && ((e, val) => onChange(e, val as NumberRange))}
         />
       </Box>
     </Box>
