@@ -27,14 +27,14 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-type SideBarProps = DrawerProps & {
+export type SideBarContainerProps = DrawerProps & {
   drawerWidth: number,
 };
 
 const propsForStyling = ['drawerWidth'];
 const shouldForwardProp = (propName: string) => !propsForStyling.includes(propName);
 
-const SideBar = styled(Drawer, { shouldForwardProp })<SideBarProps>(
+const SideBarContainer = styled(Drawer, { shouldForwardProp })<SideBarContainerProps>(
   ({ theme, open, drawerWidth }) => ({
     width: drawerWidth,
     flexShrink: 0,
@@ -52,4 +52,4 @@ const SideBar = styled(Drawer, { shouldForwardProp })<SideBarProps>(
   }),
 );
 
-export default SideBar;
+export default SideBarContainer;
