@@ -109,3 +109,14 @@
 
   Papildomai:
     Pasiruošti pristatyti savo kompleksinį komponentą, kurį darėt savaitgalį. [+0.25] 
+
+09-14:
+  Privaloma:
+    0. https://www.youtube.com/watch?v=GIU8ekYndKw&ab_channel=Academind
+    1. Peržiūrėti paskaitos įrašą (1.5x)
+    2. Iš MUI puslapio pakopijuoti "drawer layout": https://mui.com/material-ui/react-drawer/#mini-variant-drawer
+    3. Išskaidyti komponentais nežiūrint į pamokos darbą (Žiūrėti tik tuomet, jeigu esat aklavietei)
+      * https://mui.com/system/styled/
+
+  Papildoma:
+    https://www.youtube.com/watch?v=CTDZ-5MnETA&ab_channel=TheCleverDev
