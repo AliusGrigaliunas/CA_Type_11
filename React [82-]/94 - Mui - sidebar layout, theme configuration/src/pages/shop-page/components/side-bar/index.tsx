@@ -47,13 +47,13 @@ const SideBar: React.FC<SideBarProps> = ({
     <Divider />
     <List>
       {userMenuItemsData.map((menuItemData) => (
-        <SideBarItem {...menuItemData} open={open} />
+        <SideBarItem key={menuItemData.text} {...menuItemData} open={open} />
       ))}
     </List>
     <Divider />
     <List>
       {adminMenuItemsData.map((menuItemData) => (
-        <SideBarItem {...menuItemData} open={open} />
+        <SideBarItem key={menuItemData.text} {...menuItemData} open={open} />
       ))}
     </List>
   </SideBarContainer>
