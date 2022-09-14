@@ -18,20 +18,8 @@ const SideBarItem: React.FC<SideBarItemProps> = ({
   Icon,
 }) => (
   <ListItem disablePadding sx={{ display: 'block' }}>
-    <ListItemButton
-      sx={{
-        minHeight: 48,
-        justifyContent: open ? 'initial' : 'center',
-        px: 2.5,
-      }}
-    >
-      <ListItemIcon
-        sx={{
-          minWidth: 0,
-          mr: open ? 3 : 'auto',
-          justifyContent: 'center',
-        }}
-      >
+    <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
+      <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center' }}>
         <Icon />
       </ListItemIcon>
       <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
