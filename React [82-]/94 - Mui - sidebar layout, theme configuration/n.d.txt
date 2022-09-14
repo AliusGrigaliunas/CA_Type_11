@@ -120,3 +120,10 @@
 
   Papildoma:
     https://www.youtube.com/watch?v=CTDZ-5MnETA&ab_channel=TheCleverDev
+
+09-15:
+  Privaloma:
+    * Įsisavinimui
+      Ranka spalvotai perbraižyti 'sidebar-layout-passing-props-down.png' iliustraciją ir atsiųsti nuotrauką į chat'ą
+    * Naujų įgūdžių laviminui
+      arba tą patį dalyką atlikti naudojant (Figma, Sketch, AdobeXD arba Adobe Photoshop)
