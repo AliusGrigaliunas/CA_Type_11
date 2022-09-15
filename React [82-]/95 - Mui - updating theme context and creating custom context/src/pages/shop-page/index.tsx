@@ -4,25 +4,25 @@ import { Box } from '@mui/material';
 import ApplicationBar from './components/application-bar';
 import SideBar from './components/side-bar';
 import MainSection from './components/main-section';
+import DrawerContext from './contexts/drawer-context';
 
 const ShopPage = () => {
   const [open, setOpen] = React.useState(false);
 
-  const openDrawer = () => setOpen(true);
-  const closeDrawer = () => setOpen(false);
+  const drawerContextValue = React.useMemo(() => ({
+    open,
+    openDrawer: () => setOpen(true),
+    closeDrawer: () => setOpen(false),
+  }), [open]);
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <ApplicationBar
-        open={open}
-        openDrawer={openDrawer}
-      />
-      <SideBar
-        open={open}
-        closeDrawer={closeDrawer}
-      />
-      <MainSection />
-    </Box>
+    <DrawerContext.Provider value={drawerContextValue}>
+      <Box sx={{ display: 'flex' }}>
+        <ApplicationBar />
+        <SideBar />
+        <MainSection />
+      </Box>
+    </DrawerContext.Provider>
   );
 };
 

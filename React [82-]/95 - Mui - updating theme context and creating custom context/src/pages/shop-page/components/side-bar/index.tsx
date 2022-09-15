@@ -11,13 +11,9 @@ import MailIcon from '@mui/icons-material/Mail';
 import SideBarContainer from './side-bar-container';
 import DrawerHeader from '../drawer-header';
 import SideBarItem, { SideBarItemProps } from './side-bar-item';
+import DrawerContext from '../../contexts/drawer-context';
 
 type MenuItemData = Pick<SideBarItemProps, 'text' | 'Icon'>;
-
-type SideBarProps = {
-  open: boolean,
-  closeDrawer: VoidFunction,
-};
 
 const userMenuItemsData: MenuItemData[] = [
   { text: 'Inbox', Icon: InboxIcon },
@@ -32,29 +28,30 @@ const adminMenuItemsData: MenuItemData[] = [
   { text: 'Spam', Icon: MailIcon },
 ];
 
-const SideBar: React.FC<SideBarProps> = ({
-  open,
-  closeDrawer,
-}) => (
-  <SideBarContainer variant="permanent" open={open}>
-    <DrawerHeader>
-      <IconButton onClick={closeDrawer}>
-        <ChevronLeftIcon />
-      </IconButton>
-    </DrawerHeader>
-    <Divider />
-    <List>
-      {userMenuItemsData.map((menuItemData) => (
-        <SideBarItem key={menuItemData.text} {...menuItemData} open={open} />
-      ))}
-    </List>
-    <Divider />
-    <List>
-      {adminMenuItemsData.map((menuItemData) => (
-        <SideBarItem key={menuItemData.text} {...menuItemData} open={open} />
-      ))}
-    </List>
-  </SideBarContainer>
-);
+const SideBar: React.FC = () => {
+  const { open, closeDrawer } = React.useContext(DrawerContext);
+
+  return (
+    <SideBarContainer variant="permanent" open={open}>
+      <DrawerHeader>
+        <IconButton onClick={closeDrawer}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
+      <List>
+        {userMenuItemsData.map((menuItemData) => (
+          <SideBarItem key={menuItemData.text} {...menuItemData} />
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {adminMenuItemsData.map((menuItemData) => (
+          <SideBarItem key={menuItemData.text} {...menuItemData} />
+        ))}
+      </List>
+    </SideBarContainer>
+  );
+};
 
 export default SideBar;
