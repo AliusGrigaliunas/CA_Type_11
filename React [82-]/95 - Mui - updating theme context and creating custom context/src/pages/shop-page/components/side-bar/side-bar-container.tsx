@@ -1,13 +1,12 @@
 import {
   Drawer,
-  DrawerProps,
   styled,
   Theme,
   CSSObject,
 } from '@mui/material';
 
-const openedMixin = (theme: Theme, drawerWidth: number): CSSObject => ({
-  width: drawerWidth,
+const openedMixin = (theme: Theme): CSSObject => ({
+  width: theme.common.drawerWidth,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -27,23 +26,16 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-export type SideBarContainerProps = DrawerProps & {
-  drawerWidth: number,
-};
-
-const propsForStyling = ['drawerWidth'];
-const shouldForwardProp = (propName: string) => !propsForStyling.includes(propName);
-
-const SideBarContainer = styled(Drawer, { shouldForwardProp })<SideBarContainerProps>(
-  ({ theme, open, drawerWidth }) => ({
-    width: drawerWidth,
+const SideBarContainer = styled(Drawer)(
+  ({ theme, open }) => ({
+    width: theme.common.drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
     ...(open
       ? ({
-        ...openedMixin(theme, drawerWidth),
-        '& .MuiDrawer-paper': openedMixin(theme, drawerWidth),
+        ...openedMixin(theme),
+        '& .MuiDrawer-paper': openedMixin(theme),
       })
       : ({
         ...closedMixin(theme),

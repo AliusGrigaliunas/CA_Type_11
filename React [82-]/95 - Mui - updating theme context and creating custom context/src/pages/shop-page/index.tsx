@@ -5,8 +5,6 @@ import ApplicationBar from './components/application-bar';
 import SideBar from './components/side-bar';
 import MainSection from './components/main-section';
 
-const drawerWidth = 240;
-
 const ShopPage = () => {
   const [open, setOpen] = React.useState(false);
 
@@ -16,12 +14,10 @@ const ShopPage = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <ApplicationBar
-        ApplicationBarContainerProps={{ drawerWidth }}
         open={open}
         openDrawer={openDrawer}
       />
       <SideBar
-        SideBarContainerProps={{ drawerWidth }}
         open={open}
         closeDrawer={closeDrawer}
       />

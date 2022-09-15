@@ -5,20 +5,18 @@ import {
   IconButton,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import ApplicationBarContainer, { type ApplicationBarContainerProps } from './application-bar-container';
+import ApplicationBarContainer from './application-bar-container';
 
 type ApplicationBarProps = {
-  ApplicationBarContainerProps: Omit<ApplicationBarContainerProps, 'fixed' | 'open'>,
   open: boolean,
   openDrawer: VoidFunction,
 };
 
 const ApplicationBar: React.FC<ApplicationBarProps> = ({
-  ApplicationBarContainerProps,
   open,
   openDrawer,
 }) => (
-  <ApplicationBarContainer position="fixed" open={open} {...ApplicationBarContainerProps}>
+  <ApplicationBarContainer position="fixed" open={open}>
     <Toolbar>
       <IconButton
         color="inherit"
