@@ -4,26 +4,16 @@ import { Box } from '@mui/material';
 import ApplicationBar from './components/application-bar';
 import SideBar from './components/side-bar';
 import MainSection from './components/main-section';
-import DrawerContext from './contexts/drawer-context';
+import { DrawerProvider } from './contexts/drawer-context';
 
-const ShopPage = () => {
-  const [open, setOpen] = React.useState(false);
-
-  const drawerContextValue = React.useMemo(() => ({
-    open,
-    openDrawer: () => setOpen(true),
-    closeDrawer: () => setOpen(false),
-  }), [open]);
-
-  return (
-    <DrawerContext.Provider value={drawerContextValue}>
-      <Box sx={{ display: 'flex' }}>
-        <ApplicationBar />
-        <SideBar />
-        <MainSection />
-      </Box>
-    </DrawerContext.Provider>
-  );
-};
+const ShopPage: React.FC = () => (
+  <DrawerProvider>
+    <Box sx={{ display: 'flex' }}>
+      <ApplicationBar />
+      <SideBar />
+      <MainSection />
+    </Box>
+  </DrawerProvider>
+);
 
 export default ShopPage;
