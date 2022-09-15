@@ -1,3 +1,4 @@
+
 Projekto pateikimas:
   * https://github.com vieša repozitorija.
   * Projekto vystymo darbai atliekami juo skaidant tvarkingai įvardintais commit'ais. 
@@ -5,7 +6,6 @@ Projekto pateikimas:
 ---------------------------------------------------------------------------------------------
 
 Techninės priemonės:
-  * react pusės aplikacija parašyta su TypeScript [-2]
   * React.js
   * FE komponentų Framework'as (Material-ui)
   * react-router-dom 'v5' arba 'v6'
