@@ -1,15 +1,19 @@
 import { createTheme } from '@mui/material';
 
-const { palette } = createTheme();
+// const { palette } = createTheme();
 
 const theme = createTheme({
-  palette: {
+  // palette: {
 
-    manoSpalva: palette.augmentColor({
-      color: {
-        main: '#00ff00',
-      },
-    }),
+  //   manoSpalva: palette.augmentColor({
+  //     color: {
+  //       main: '#00ff00',
+  //     },
+  //   }),
+  // },
+
+  common: {
+    drawerWidth: 240,
   },
 });
 
