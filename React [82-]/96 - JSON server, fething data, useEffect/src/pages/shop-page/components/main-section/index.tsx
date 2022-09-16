@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import CupService from 'services/cup-service';
 import DrawerHeader from '../drawer-header';
-import CupService from '../../../../services/cup-service';
 
 const MainSection = () => {
   const [cups, setCups] = React.useState([]);
