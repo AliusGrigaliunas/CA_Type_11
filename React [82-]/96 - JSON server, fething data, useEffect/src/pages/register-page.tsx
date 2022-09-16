@@ -10,6 +10,16 @@ import {
 import SecurityIcon from '@mui/icons-material/Security';
 import CheckboxGroup, { CheckboxOption } from '../components/form-controls/checkbox-group';
 
+type ContentType = {
+  id: string,
+  title: string
+};
+
+type Topic = {
+  id: string,
+  title: string
+};
+
 const contentType2CheckboxOption = ({ id, title }: ContentType): CheckboxOption => ({
   value: id,
   label: title,

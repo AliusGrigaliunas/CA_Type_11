@@ -4,7 +4,7 @@ import CupService from 'services/cup-service';
 import DrawerHeader from '../drawer-header';
 
 const MainSection = () => {
-  const [cups, setCups] = React.useState([]);
+  const [cups, setCups] = React.useState<Cup[]>([]);
 
   React.useEffect(() => {
     (async () => {
