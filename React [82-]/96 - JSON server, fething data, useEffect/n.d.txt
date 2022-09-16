@@ -143,4 +143,15 @@
 
   Papildomai:
     * https://www.youtube.com/watch?v=T1eKsuqHVjI&ab_channel=AtilaIO
+
+
+09-19:
+  Privaloma:
+    * Peržiūrėti paskaitos įrašą
+    * Susikurti dirbtinai duomenų bazei skirtą json failą
+    * Apsirašyti service'us parsisiųsti duomenis
+    * Susikurti pradinį kontekstą ir filtrus
+
+  Papildomai:
+    * Pasipraktikuoti spręsti JavaScript dalies užduotis su TypeScript.
     
