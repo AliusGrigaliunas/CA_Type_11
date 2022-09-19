@@ -10,7 +10,10 @@ const SideBarContainer = styled(Drawer)(
       whiteSpace: 'nowrap',
       boxSizing: 'border-box',
       ...drawerMixin,
-      '& .MuiDrawer-paper': drawerMixin,
+      '& .MuiDrawer-paper': {
+        padding: theme.spacing(3, 2),
+        ...drawerMixin,
+      },
     };
   },
 );

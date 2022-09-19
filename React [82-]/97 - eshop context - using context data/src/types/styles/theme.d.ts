@@ -39,3 +39,9 @@ declare module '@mui/material/styles/createMixins' {
     }
   }
 }
+
+declare module '@mui/material/styles/zIndex' {
+  export interface ZIndex {
+    drawerButton: number,
+  }
+}
