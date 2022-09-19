@@ -2,8 +2,7 @@ import * as React from 'react';
 
 type DrawerContextType = {
   open: boolean,
-  openDrawer: VoidFunction,
-  closeDrawer: VoidFunction,
+  toggleDrawer: VoidFunction,
 };
 
 const DrawerContext = React.createContext<DrawerContextType>({} as DrawerContextType);
@@ -17,8 +16,7 @@ export const DrawerProvider: React.FC<DrawerProviderProps> = ({ children }) => {
 
   const drawerContextValue = React.useMemo(() => ({
     open,
-    openDrawer: () => setOpen(true),
-    closeDrawer: () => setOpen(false),
+    toggleDrawer: () => setOpen(!open),
   }), [open]);
 
   return (
