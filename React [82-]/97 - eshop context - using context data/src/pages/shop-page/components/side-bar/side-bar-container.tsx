@@ -1,4 +1,9 @@
-import { Drawer, styled } from '@mui/material';
+import {
+  Drawer,
+  styled,
+  type Breakpoint,
+  type CSSObject,
+} from '@mui/material';
 
 const SideBarContainer = styled(Drawer)(
   ({ theme }) => ({
@@ -8,7 +13,12 @@ const SideBarContainer = styled(Drawer)(
     overflowX: 'hidden',
     '& .MuiDrawer-paper': {
       padding: theme.spacing(3, 2),
-      width: theme.common.drawerWidth,
+
+      ...(Object.entries(theme.common.drawerWidth) as [Breakpoint, number][])
+        .reduce<CSSObject>((prevProps, [brName, width]) => ({
+          ...prevProps,
+          [theme.breakpoints.up(brName)]: { width },
+        }), {}),
     },
   }),
 );
