@@ -6,14 +6,16 @@ import SideBar from './components/side-bar';
 import MainSection from './components/main-section';
 import { DrawerProvider } from './contexts/drawer-context';
 import { ShopContextProvider } from './contexts/shop-context';
+import DrawerButton from './components/drawer-button';
 
 const ShopPage: React.FC = () => (
   <ShopContextProvider>
     <DrawerProvider>
-      <Box sx={{ display: 'flex' }}>
+      <Box>
         <ApplicationBar />
         <SideBar />
         <MainSection />
+        <DrawerButton />
       </Box>
     </DrawerProvider>
   </ShopContextProvider>

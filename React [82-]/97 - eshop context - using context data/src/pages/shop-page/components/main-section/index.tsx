@@ -7,9 +7,12 @@ const MainSection = () => {
   const { cups } = React.useContext(ShopContext);
 
   return (
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+    <Box
+      component="main"
+      sx={{ flexGrow: 1, p: 3 }}
+    >
       <DrawerHeader />
-      <Typography component="pre">
+      <Typography sx={{ overflow: 'auto' }}>
         {JSON.stringify(cups, null, 4)}
       </Typography>
     </Box>
