@@ -154,4 +154,10 @@
 
   Papildomai:
     * Pasipraktikuoti spręsti JavaScript dalies užduotis su TypeScript.
+
+09-20
+  Privaloma:
+    * Pasidaryti kintamą puslapio išdėstymą naudojant temos kintamuosius
     
+  Papildomai:
+    * Pasipraktikuoti spręsti JavaScript dalies užduotis su TypeScript.
