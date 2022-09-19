@@ -9,10 +9,7 @@ const theme = createTheme({
   common: {
     drawerWidth: {
       xs: 297,
-      sm: 320,
       md: 340,
-      lg: 360,
-      xl: 460,
     },
   },
 });

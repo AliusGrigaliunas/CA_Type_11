@@ -3,13 +3,23 @@ import { Box, Typography } from '@mui/material';
 import ShopContext from 'pages/shop-page/contexts/shop-context';
 import DrawerHeader from '../drawer-header';
 
-const MainSection = () => {
+type MainSectionProps = {
+  isExtendedLayout: boolean
+};
+
+const MainSection: React.FC<MainSectionProps> = ({ isExtendedLayout }) => {
   const { cups } = React.useContext(ShopContext);
 
   return (
     <Box
       component="main"
-      sx={{ flexGrow: 1, p: 3 }}
+      sx={(theme) => ({
+        flexGrow: 1,
+        p: 3,
+        ...(isExtendedLayout && {
+          ml: `${theme.common.drawerWidth.md}px`,
+        }),
+      })}
     >
       <DrawerHeader />
       <Typography sx={{ overflow: 'auto' }}>

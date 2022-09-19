@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, type Theme } from '@mui/material';
 
 import ApplicationBar from './components/application-bar';
 import SideBar from './components/side-bar';
@@ -8,17 +8,21 @@ import { DrawerProvider } from './contexts/drawer-context';
 import { ShopContextProvider } from './contexts/shop-context';
 import DrawerButton from './components/drawer-button';
 
-const ShopPage: React.FC = () => (
-  <ShopContextProvider>
-    <DrawerProvider>
-      <Box>
-        <ApplicationBar />
-        <SideBar />
-        <MainSection />
-        <DrawerButton />
-      </Box>
-    </DrawerProvider>
-  </ShopContextProvider>
-);
+const ShopPage: React.FC = () => {
+  const isExtendedLayout = useMediaQuery<Theme>((theme) => theme.breakpoints.up('xl'));
+
+  return (
+    <ShopContextProvider>
+      <DrawerProvider>
+        <Box>
+          <ApplicationBar />
+          <SideBar isExtendedLayout={isExtendedLayout} />
+          <MainSection isExtendedLayout={isExtendedLayout} />
+          {!isExtendedLayout && <DrawerButton />}
+        </Box>
+      </DrawerProvider>
+    </ShopContextProvider>
+  );
+};
 
 export default ShopPage;

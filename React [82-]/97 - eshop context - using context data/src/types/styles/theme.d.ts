@@ -1,10 +1,10 @@
-import { CSSObject } from '@mui/material';
+import { CSSObject, Breakpoint } from '@mui/material';
 
 declare module '@mui/material/styles/createTheme' {
   interface ThemeOptions {
     common?: {
       drawerWidth: {
-        [breakpointName: Breakpoint]: number
+        [breakpointName in Breakpoint]?: number
       }
     }
   }
@@ -12,7 +12,7 @@ declare module '@mui/material/styles/createTheme' {
   interface Theme {
     common: {
       drawerWidth: {
-        [breakpointName: Breakpoint]: number
+        [breakpointName in Breakpoint]?: number
       },
     }
   }

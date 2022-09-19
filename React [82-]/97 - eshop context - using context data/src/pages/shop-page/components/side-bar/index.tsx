@@ -8,8 +8,13 @@ import DrawerHeader from '../drawer-header';
 import DrawerContext from '../../contexts/drawer-context';
 import RangeField from '../../../../components/form-controls/range-field/index';
 
-const SideBar: React.FC = () => {
+type SideBarProps = {
+  isExtendedLayout: boolean
+};
+
+const SideBar: React.FC<SideBarProps> = ({ isExtendedLayout }) => {
   const { open } = React.useContext(DrawerContext);
+
   const {
     filters: {
       price: priceFilter,
@@ -19,7 +24,7 @@ const SideBar: React.FC = () => {
   } = React.useContext(ShopContext);
 
   return (
-    <SideBarContainer variant="temporary" open={open}>
+    <SideBarContainer variant={isExtendedLayout ? 'permanent' : 'temporary'} open={open}>
       <DrawerHeader />
       <RangeField
         min={priceFilter.bounds[0]}
