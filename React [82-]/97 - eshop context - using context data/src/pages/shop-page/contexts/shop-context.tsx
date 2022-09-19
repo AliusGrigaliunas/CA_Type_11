@@ -104,7 +104,6 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         categories: {
           ...filters.categories,
           options: categoriesOptions,
-
         },
         materialTypes: {
           ...filters.materialTypes,
