@@ -6,23 +6,11 @@ const baseTheme = createTheme({
   },
 });
 const {
-  // palette,
   transitions,
   common,
-  breakpoints,
-  spacing,
 } = baseTheme;
 
 const theme = createTheme(baseTheme, {
-  // palette: {
-
-  //   manoSpalva: palette.augmentColor({
-  //     color: {
-  //       main: '#00ff00',
-  //     },
-  //   }),
-  // },
-
   mixins: {
     drawer: {
       openedMixin: {
@@ -40,10 +28,7 @@ const theme = createTheme(baseTheme, {
           duration: transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
-        width: `calc(${baseTheme.spacing(7)} + 1px)`,
-        [breakpoints.up('sm')]: {
-          width: `calc(${spacing(8)} + 1px)`,
-        },
+        width: 0,
       },
     },
   },

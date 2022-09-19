@@ -6,7 +6,7 @@ import MaterialTypesService from 'services/material-types-service';
 
 // Component: RangeField
 type RangeFilter = {
-  minMax: NumberRange,
+  bounds: NumberRange,
   currentRange: NumberRange
   urlParamName: string,
   onChange: (newRange: NumberRange) => void,
@@ -37,7 +37,7 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [cups, setCups] = React.useState<Cup[]>([]);
   const [filters, setFilters] = React.useState<Filters>({
     price: {
-      minMax: [0, 0],
+      bounds: [0, 0],
       currentRange: [0, 0],
       urlParamName: 'price',
       onChange: (newCurrentRange) => {
@@ -98,7 +98,7 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
       setFilters({
         price: {
           ...filters.price,
-          minMax: priceRange,
+          bounds: priceRange,
           currentRange: priceRange,
         },
         categories: {
