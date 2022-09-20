@@ -71,12 +71,11 @@ export default CupCard;
   // * 11:35
   // 4. Kaina atvaizduokite po nuotrauka dešinėje pusėje, taip kad netrūkdytų pavadinimui
 
-  * 11:45
+  * 11:50
   5. Sukurkite 2 mygtukus, vienas šalia kito
     * Peržiūrėti - kurį paspaudut atspausdinamas produkto id
     * Dėti į krepšelį - kursį paspaudus atspausdinamas produkto id
-    *
-  * 11:55
+
   6. pritaikykite koretelės reikiamą aukštį naudojant:
     * https://smartdevpreneur.com/5-mui-sx-breakpoint-examples/
         * skiltis - Create Responsive Layout with MUI SX Breakpoints

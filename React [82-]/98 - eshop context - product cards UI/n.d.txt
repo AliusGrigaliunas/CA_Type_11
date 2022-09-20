@@ -161,3 +161,12 @@
     
   Papildomai:
     * Pasipraktikuoti spręsti JavaScript dalies užduotis su TypeScript.
+
+09-21:
+  Privaloma:
+  * Atlikti 4 n.d. iš CAO
+  * Atlikti 5 n.d. iš CAO
+
+  Papildomai:
+  * Pasipraktikuoti spręsti JavaScript dalies užduotis su TypeScript.
+
