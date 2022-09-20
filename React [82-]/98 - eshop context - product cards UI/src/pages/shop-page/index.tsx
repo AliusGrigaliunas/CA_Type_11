@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, useMediaQuery, type Theme } from '@mui/material';
+import { useMediaQuery, type Theme } from '@mui/material';
 
 import ApplicationBar from './components/application-bar';
 import SideBar from './components/side-bar';
@@ -14,12 +14,10 @@ const ShopPage: React.FC = () => {
   return (
     <ShopContextProvider>
       <DrawerProvider>
-        <Box>
-          <ApplicationBar />
-          <SideBar isExtendedLayout={isExtendedLayout} />
-          <MainSection isExtendedLayout={isExtendedLayout} />
-          {!isExtendedLayout && <DrawerButton />}
-        </Box>
+        <ApplicationBar />
+        <SideBar isExtendedLayout={isExtendedLayout} />
+        <MainSection isExtendedLayout={isExtendedLayout} />
+        {!isExtendedLayout && <DrawerButton />}
       </DrawerProvider>
     </ShopContextProvider>
   );
