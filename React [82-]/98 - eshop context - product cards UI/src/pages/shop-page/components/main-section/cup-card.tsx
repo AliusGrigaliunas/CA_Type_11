@@ -51,3 +51,21 @@ const CupCard: React.FC<CupCardProps> = ({
 );
 
 export default CupCard;
+
+/*
+  1. Iškelti Swiper komponentą į globalių komponentų aplanką
+
+  2. Po nuotrauką atvaizduokite Pavadinimą
+
+  3. Išskirkite tekstui (description) ne daugiau nei 4 eilutes. PS. line-clamp
+
+  4. Kaina atvaizduokite po nuotrauke dešinėje pusėje, taip kad netrūkdytų pavadinimui
+
+  5. Sukurkite 2 mygtukus, vienas šalia kito
+    * Peržiūrėti - kurį paspaudut atspausdinamas produkto id
+    * Dėti į krepšelį - kursį paspaudus atspausdinamas produkto id
+
+  6. pritaikykite koretelės reikiamą aukštį naudojant:
+    * https://smartdevpreneur.com/5-mui-sx-breakpoint-examples/
+        * skiltis - Create Responsive Layout with MUI SX Breakpoints
+*/
