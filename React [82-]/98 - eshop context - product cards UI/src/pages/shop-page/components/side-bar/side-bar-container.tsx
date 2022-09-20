@@ -3,8 +3,19 @@ import {
   styled,
   type Breakpoint,
   type CSSObject,
-
+  type Theme,
 } from '@mui/material';
+
+type BreakpointNumberPair = [Breakpoint, number];
+
+const createResponsiveWidthStyles = (theme: Theme): CSSObject => {
+  const breakpointNumberPairs = Object.entries(theme.common.drawerWidth) as BreakpointNumberPair[];
+
+  return breakpointNumberPairs.reduce<CSSObject>((prevProps, [brName, width]) => ({
+    ...prevProps,
+    [theme.breakpoints.up(brName)]: { width },
+  }), {});
+};
 
 const SideBarContainer = styled(Drawer)(
   ({ theme }) => ({
@@ -14,12 +25,7 @@ const SideBarContainer = styled(Drawer)(
     overflowX: 'hidden',
     '& .MuiDrawer-paper': {
       padding: theme.spacing(3, 2),
-
-      ...(Object.entries(theme.common.drawerWidth) as [Breakpoint, number][])
-        .reduce<CSSObject>((prevProps, [brName, width]) => ({
-          ...prevProps,
-          [theme.breakpoints.up(brName)]: { width },
-        }), {}),
+      ...createResponsiveWidthStyles(theme),
     },
   }),
 );
