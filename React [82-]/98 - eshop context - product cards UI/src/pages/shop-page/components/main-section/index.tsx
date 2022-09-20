@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import {
+  Box, Typography, Grid, Divider, Paper,
+} from '@mui/material';
 import ShopContext from 'pages/shop-page/contexts/shop-context';
 import DrawerHeader from '../drawer-header';
 
@@ -22,9 +24,17 @@ const MainSection: React.FC<MainSectionProps> = ({ isExtendedLayout }) => {
       })}
     >
       <DrawerHeader />
-      <Typography sx={{ overflow: 'auto' }}>
-        {JSON.stringify(cups, null, 4)}
-      </Typography>
+      <Typography>Visos prekės</Typography>
+      <Divider sx={{ my: 2 }} />
+      <Grid container spacing={3} sx={{ alignItem: 'stretch' }}>
+        {cups.map((cup) => (
+          <Grid key={cup.id} item xs={3}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              {JSON.stringify(cup, null, 4)}
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };
