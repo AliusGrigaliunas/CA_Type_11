@@ -1,9 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import {
-  Box, Typography, Grid, Divider, Paper,
+  Box,
+  Typography,
+  Grid,
+  Divider,
 } from '@mui/material';
 import ShopContext from 'pages/shop-page/contexts/shop-context';
 import DrawerHeader from '../drawer-header';
+import CupCard from './cup-card';
 
 type MainSectionProps = {
   isExtendedLayout: boolean
@@ -24,15 +28,18 @@ const MainSection: React.FC<MainSectionProps> = ({ isExtendedLayout }) => {
       })}
     >
       <DrawerHeader />
-      <Typography>Visos prekės</Typography>
-      <Divider sx={{ my: 2 }} />
+      <Typography component="h1" variant="h5">Visos prekės</Typography>
+      <Divider sx={{ mt: 2, mb: 3 }} />
       <Grid container spacing={3} sx={{ alignItem: 'stretch' }}>
         {cups.map((cup) => (
-          <Grid key={cup.id} item xs={3}>
-            <Paper elevation={3} sx={{ p: 3 }}>
-              {JSON.stringify(cup, null, 4)}
-            </Paper>
-          </Grid>
+          <CupCard
+            key={cup.id}
+            id={cup.id}
+            title={cup.title}
+            description={cup.description}
+            images={cup.images}
+            price={cup.price}
+          />
         ))}
       </Grid>
     </Box>

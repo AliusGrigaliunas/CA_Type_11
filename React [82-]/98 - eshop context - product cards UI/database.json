@@ -57,6 +57,7 @@
       "description": "tellus sem mollis dui, in sodales elit erat vitae risus. Duis a mi fringilla mi lacinia mattis. Integer eu lacus. Quisque imperdiet, erat",
       "liked": false,
       "price": 1.99,
+      "images": [],
       "categoryId": "2",
       "materialTypeId": "1",
       "colorId": "2"
