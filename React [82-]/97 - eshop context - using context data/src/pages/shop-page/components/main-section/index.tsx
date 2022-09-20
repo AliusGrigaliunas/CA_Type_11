@@ -22,8 +22,8 @@ const MainSection: React.FC<MainSectionProps> = ({ isExtendedLayout }) => {
       })}
     >
       <DrawerHeader />
-      <Typography sx={{ overflow: 'auto' }}>
-        {JSON.stringify(cups, null, 4)}
+      <Typography sx={{ overflow: 'auto' }} component="pre">
+        {JSON.stringify(cups, null, 5)}
       </Typography>
     </Box>
   );
