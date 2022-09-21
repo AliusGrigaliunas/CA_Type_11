@@ -5,8 +5,10 @@ import {
   Slider,
 } from '@mui/material';
 import { RangeInput, InputContainer, RangeInputProps } from './components';
+import FieldLabel from '../field-label';
 
 type RangeFieldProps = {
+  label: string,
   min?: number,
   max?: number,
   value?: NumberRange,
@@ -20,6 +22,7 @@ const DEFAULT_MAX = 100;
 const DEFAULT_RANGE: NumberRange = [DEFAULT_MIN, DEFAULT_MAX];
 
 const RangeField: React.FC<RangeFieldProps> = ({
+  label,
   min,
   max,
   value = DEFAULT_RANGE,
@@ -70,6 +73,7 @@ const RangeField: React.FC<RangeFieldProps> = ({
 
   return (
     <Box>
+      <FieldLabel>{label}</FieldLabel>
       <InputContainer>
         <RangeInput
           value={privateMin}

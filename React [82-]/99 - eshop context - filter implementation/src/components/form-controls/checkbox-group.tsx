@@ -3,9 +3,9 @@ import {
   Box,
   FormControlLabel,
   Checkbox,
-  FormLabel,
   FormGroup,
 } from '@mui/material';
+import FieldLabel from './field-label';
 
 export type CheckboxOption = {
   value: string,
@@ -75,7 +75,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 
   return (
     <Box>
-      <FormLabel sx={{ letterSpacing: '0.04em', mb: 1 }}>{label}</FormLabel>
+      <FieldLabel>{label}</FieldLabel>
       <FormGroup sx={{ display: 'flex', flexDirection: 'column', px: 2 }} ref={checkboxGroupRef}>
         {options.map((option) => (
           <FormControlLabel
