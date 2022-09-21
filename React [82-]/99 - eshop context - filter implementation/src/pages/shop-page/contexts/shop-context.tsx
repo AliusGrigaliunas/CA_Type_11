@@ -105,7 +105,6 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         fetchedMaterialTypes,
       ] = await Promise.all([
         CupService.fetchMany(),
-        CategoriesService.fetchMany(),
         MaterialTypesService.fetchMany(),
       ]);
 
@@ -140,3 +139,10 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
 };
 
 export default ShopContext;
+
+/*
+panaudoti useCheckboxFilter komponente ShopContextProvider ir pašalinti materialTypes
+būsenos dalį iš ShopContextProvider.filter būsenos kintamojo.
+
+Priderinti tipus, pradinius ShopContextProvider.useEffect veiksmus ir konteksto reikšmę
+*/
