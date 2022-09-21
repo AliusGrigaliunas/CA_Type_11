@@ -3,6 +3,7 @@ import * as React from 'react';
 import CategoriesService from 'services/categories-service';
 import CupService from 'services/cup-service';
 import MaterialTypesService from 'services/material-types-service';
+import useCheckboxFilter from '../hooks/use-checkbox-filter';
 
 // Component: RangeField
 type RangeFilter = {
@@ -22,19 +23,38 @@ type CheckboxFilter = {
 
 type Filters = {
   price: RangeFilter,
-  categories: CheckboxFilter,
   materialTypes: CheckboxFilter,
 };
 
 type ShopContextValue = {
   cups: Cup[],
-  filters: Filters
+  filters: Filters & {
+    categories: {
+      options: CheckboxOption[],
+      selectedOptions: CheckboxOption[],
+      onChange: (newSelectedOptions: CheckboxOption[]) => void,
+    }
+  }
+};
+
+const fetchCategoryOptions = async () => {
+  const fetchedCategories = await CategoriesService.fetchMany();
+
+  return fetchedCategories.map(({ id, title }) => ({
+    value: id,
+    label: title,
+  }));
 };
 
 const ShopContext = React.createContext({} as ShopContextValue);
 
 export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cups, setCups] = React.useState<Cup[]>([]);
+  const [selectedCategories, setSelectedCategories, categoriesOptions] = useCheckboxFilter({
+    urlParamName: 'categories',
+    fetchOptions: fetchCategoryOptions,
+  });
+
   const [filters, setFilters] = React.useState<Filters>({
     price: {
       bounds: [0, 0],
@@ -46,20 +66,6 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
           price: {
             ...currentFilters.price,
             currentRange: newCurrentRange,
-          },
-        }));
-      },
-    },
-    categories: {
-      options: [],
-      selectedOptions: [],
-      urlParamName: 'categories',
-      onChange: (newSelectedOptions: CheckboxOption[]) => {
-        setFilters((currentFilters) => ({
-          ...currentFilters,
-          categories: {
-            ...currentFilters.categories,
-            selectedOptions: newSelectedOptions,
           },
         }));
       },
@@ -80,16 +86,22 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     },
   });
 
-  const shopContextValue = React.useMemo(() => ({
+  const shopContextValue: ShopContextValue = React.useMemo(() => ({
     cups,
-    filters,
-  }), [cups, filters]);
+    filters: {
+      ...filters,
+      categories: {
+        options: categoriesOptions,
+        selectedOptions: selectedCategories,
+        onChange: setSelectedCategories,
+      },
+    },
+  }), [cups, filters, selectedCategories]);
 
   React.useEffect(() => {
     (async () => {
       const [
         fetchedCups,
-        fetchedCategories,
         fetchedMaterialTypes,
       ] = await Promise.all([
         CupService.fetchMany(),
@@ -100,11 +112,6 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
       // Loginė dalį turėtų atlikti serveris. FE tik nustatymas
       const priceArray = fetchedCups.map((x) => x.price).sort((x, y) => x - y);
       const priceRange: NumberRange = [priceArray[0], priceArray[priceArray.length - 1]];
-
-      const categoriesOptions = fetchedCategories.map(({ id, title }) => ({
-        value: id,
-        label: title,
-      }));
 
       const materialTypesOptions = fetchedMaterialTypes.map(({ id, title }) => ({
         value: id,
@@ -119,10 +126,6 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
           bounds: priceRange,
           currentRange: priceRange,
         },
-        categories: {
-          ...filters.categories,
-          options: categoriesOptions,
-        },
         materialTypes: {
           ...filters.materialTypes,
           options: materialTypesOptions,
@@ -131,7 +134,9 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     })();
   }, []);
 
-  return <ShopContext.Provider value={shopContextValue}>{children}</ShopContext.Provider>;
+  return (
+    <ShopContext.Provider value={shopContextValue}>{children}</ShopContext.Provider>
+  );
 };
 
 export default ShopContext;
