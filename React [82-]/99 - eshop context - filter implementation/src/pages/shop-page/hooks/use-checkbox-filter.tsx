@@ -12,6 +12,7 @@ type UseCheckboxFilter = (props: CheckboxFilterOptions) => [
   CheckboxOption[],
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) => {
   const [options, setOptions] = React.useState<CheckboxOption[]>([]);
   const [selectedOptions, setSelectedOptions] = React.useState<CheckboxOption[]>([]);
@@ -20,9 +21,6 @@ const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) =>
     const fetchedOptions = await fetchOptions();
     setOptions(fetchedOptions);
   };
-
-  // TODO: susinchronizuoti su URL parametrais
-  if (urlParamName) console.log(urlParamName);
 
   React.useEffect(() => {
     initializeOptions();

@@ -57,6 +57,8 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     fetchOptions: fetchCategoryOptions,
   });
 
+  console.log('Persikrove Provider');
+
   const [materialTypes, setMaterialTypes, materialTypesOptions] = useCheckboxFilter({
     urlParamName: 'materialTypes',
     fetchOptions: fetchMaterialTypesOptions,

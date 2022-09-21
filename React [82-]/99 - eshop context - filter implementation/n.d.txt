@@ -164,9 +164,18 @@
 
 09-21:
   Privaloma:
-  * Atlikti 4 n.d. iš CAO
-  * Atlikti 5 n.d. iš CAO
+    * Atlikti 4 n.d. iš CAO
+    * Atlikti 5 n.d. iš CAO
 
   Papildomai:
-  * Pasipraktikuoti spręsti JavaScript dalies užduotis su TypeScript.
+    * Pasipraktikuoti spręsti JavaScript dalies užduotis su TypeScript.
+
+09-22:
+  Privaloma:
+    * https://www.youtube.com/watch?v=6ThXsUwLWvc&t=4s&ab_channel=WebDevSimplified
+    * Sukurti useRangeFilter hook'są
+
+  Papildomai:
+    * Pasipraktikuoti spręsti JavaScript dalies užduotis su TypeScript.
+
 
