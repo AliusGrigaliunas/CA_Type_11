@@ -33,7 +33,7 @@ const SideBar: React.FC<SideBarProps> = ({ isExtendedLayout }) => {
         value={priceFilter.currentRange}
         onChange={(_, newRange) => priceFilter.onChange(newRange)}
       />
-      <Divider />
+      <Divider sx={{ my: 2 }} />
       <CheckboxGroup
         label="Kategorijos"
         name="categories"
@@ -41,7 +41,7 @@ const SideBar: React.FC<SideBarProps> = ({ isExtendedLayout }) => {
         value={categoriesFilter.selectedOptions}
         onChange={(_, newCatgories) => categoriesFilter.onChange(newCatgories)}
       />
-      <Divider />
+      <Divider sx={{ my: 2 }} />
       <CheckboxGroup
         label="Medžiagos tipai"
         name="materialTypes"
