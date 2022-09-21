@@ -13,23 +13,16 @@ type RangeFilter = {
   onChange: (newRange: NumberRange) => void,
 };
 
-// Component: CheckboxGroupField
-type CheckboxFilter = {
-  options: CheckboxOption[],
-  selectedOptions: CheckboxOption[],
-  urlParamName: string
-  onChange: (newSelectedOptions: CheckboxOption[]) => void,
-};
-
-type Filters = {
-  price: RangeFilter,
-  materialTypes: CheckboxFilter,
-};
-
 type ShopContextValue = {
   cups: Cup[],
-  filters: Filters & {
+  filters: {
+    price: RangeFilter,
     categories: {
+      options: CheckboxOption[],
+      selectedOptions: CheckboxOption[],
+      onChange: (newSelectedOptions: CheckboxOption[]) => void,
+    },
+    materialTypes: {
       options: CheckboxOption[],
       selectedOptions: CheckboxOption[],
       onChange: (newSelectedOptions: CheckboxOption[]) => void,
@@ -46,89 +39,72 @@ const fetchCategoryOptions = async () => {
   }));
 };
 
+const fetchMaterialTypesOptions = async () => {
+  const fetchedMaterialTypes = await MaterialTypesService.fetchMany();
+
+  return fetchedMaterialTypes.map(({ id, title }) => ({
+    value: id,
+    label: title,
+  }));
+};
+
 const ShopContext = React.createContext({} as ShopContextValue);
 
 export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cups, setCups] = React.useState<Cup[]>([]);
-  const [selectedCategories, setSelectedCategories, categoriesOptions] = useCheckboxFilter({
+  const [categories, setCategories, categoriesOptions] = useCheckboxFilter({
     urlParamName: 'categories',
     fetchOptions: fetchCategoryOptions,
   });
 
-  const [filters, setFilters] = React.useState<Filters>({
-    price: {
-      bounds: [0, 0],
-      currentRange: [0, 0],
-      urlParamName: 'price',
-      onChange: (newCurrentRange) => {
-        setFilters((currentFilters) => ({
-          ...currentFilters,
-          price: {
-            ...currentFilters.price,
-            currentRange: newCurrentRange,
-          },
-        }));
-      },
-    },
-    materialTypes: {
-      options: [],
-      selectedOptions: [],
-      urlParamName: 'materialTypes',
-      onChange: (newSelectedOptions: CheckboxOption[]) => {
-        setFilters((currentFilters) => ({
-          ...currentFilters,
-          materialTypes: {
-            ...currentFilters.materialTypes,
-            selectedOptions: newSelectedOptions,
-          },
-        }));
-      },
+  const [materialTypes, setMaterialTypes, materialTypesOptions] = useCheckboxFilter({
+    urlParamName: 'materialTypes',
+    fetchOptions: fetchMaterialTypesOptions,
+  });
+
+  const [priceFilter, setPriceFilter] = React.useState<RangeFilter>({
+    bounds: [0, 0],
+    currentRange: [0, 0],
+    urlParamName: 'price',
+    onChange: (newCurrentRange) => {
+      setPriceFilter((currPriceFilter) => ({
+        ...currPriceFilter,
+        currentRange: newCurrentRange,
+      }));
     },
   });
 
   const shopContextValue: ShopContextValue = React.useMemo(() => ({
     cups,
     filters: {
-      ...filters,
+      price: priceFilter,
       categories: {
         options: categoriesOptions,
-        selectedOptions: selectedCategories,
-        onChange: setSelectedCategories,
+        selectedOptions: categories,
+        onChange: setCategories,
+      },
+      materialTypes: {
+        options: materialTypesOptions,
+        selectedOptions: materialTypes,
+        onChange: setMaterialTypes,
       },
     },
-  }), [cups, filters, selectedCategories]);
+  }), [cups, priceFilter, categories, materialTypes]);
 
   React.useEffect(() => {
     (async () => {
-      const [
-        fetchedCups,
-        fetchedMaterialTypes,
-      ] = await Promise.all([
-        CupService.fetchMany(),
-        MaterialTypesService.fetchMany(),
-      ]);
+      const fetchedCups = await CupService.fetchMany();
 
       // Loginė dalį turėtų atlikti serveris. FE tik nustatymas
       const priceArray = fetchedCups.map((x) => x.price).sort((x, y) => x - y);
       const priceRange: NumberRange = [priceArray[0], priceArray[priceArray.length - 1]];
 
-      const materialTypesOptions = fetchedMaterialTypes.map(({ id, title }) => ({
-        value: id,
-        label: title,
-      }));
-
       // Loginė dalį turėtų atlikti serveris. FE tik nustatymas
       setCups(fetchedCups);
-      setFilters({
-        price: {
-          ...filters.price,
-          bounds: priceRange,
-          currentRange: priceRange,
-        },
-        materialTypes: {
-          ...filters.materialTypes,
-          options: materialTypesOptions,
-        },
+      setPriceFilter({
+        ...priceFilter,
+        bounds: priceRange,
+        currentRange: priceRange,
       });
     })();
   }, []);
@@ -139,10 +115,3 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
 };
 
 export default ShopContext;
-
-/*
-panaudoti useCheckboxFilter komponente ShopContextProvider ir pašalinti materialTypes
-būsenos dalį iš ShopContextProvider.filter būsenos kintamojo.
-
-Priderinti tipus, pradinius ShopContextProvider.useEffect veiksmus ir konteksto reikšmę
-*/
