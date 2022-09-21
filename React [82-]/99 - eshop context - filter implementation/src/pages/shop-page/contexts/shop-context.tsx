@@ -41,7 +41,13 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
       currentRange: [0, 0],
       urlParamName: 'price',
       onChange: (newCurrentRange) => {
-        console.log(newCurrentRange);
+        setFilters((currentFilters) => ({
+          ...currentFilters,
+          price: {
+            ...currentFilters.price,
+            currentRange: newCurrentRange,
+          },
+        }));
       },
     },
     categories: {
@@ -49,7 +55,13 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
       selectedOptions: [],
       urlParamName: 'categories',
       onChange: (newSelectedOptions: CheckboxOption[]) => {
-        console.log('categories', newSelectedOptions);
+        setFilters((currentFilters) => ({
+          ...currentFilters,
+          categories: {
+            ...currentFilters.categories,
+            selectedOptions: newSelectedOptions,
+          },
+        }));
       },
     },
     materialTypes: {
@@ -57,7 +69,13 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
       selectedOptions: [],
       urlParamName: 'materialTypes',
       onChange: (newSelectedOptions: CheckboxOption[]) => {
-        console.log('materialTypes', newSelectedOptions);
+        setFilters((currentFilters) => ({
+          ...currentFilters,
+          materialTypes: {
+            ...currentFilters.materialTypes,
+            selectedOptions: newSelectedOptions,
+          },
+        }));
       },
     },
   });
