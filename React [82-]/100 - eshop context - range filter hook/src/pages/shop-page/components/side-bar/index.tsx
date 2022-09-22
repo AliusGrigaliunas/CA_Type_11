@@ -30,7 +30,7 @@ const SideBar: React.FC<SideBarProps> = ({ isExtendedLayout }) => {
         label="Kaina"
         min={priceFilter.bounds[0]}
         max={priceFilter.bounds[1]}
-        value={priceFilter.currentRange}
+        value={priceFilter.range}
         onChange={(_, newRange) => priceFilter.onChange(newRange)}
       />
       <Divider sx={{ my: 2 }} />
