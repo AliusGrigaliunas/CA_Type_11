@@ -10,9 +10,8 @@ type UseRangeField = (props: {
     NumberRange,
   ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_searchParams, setSearchParams] = useSearchParams();
   const [range, setRange] = React.useState<NumberRange>([0, 0]);
   const [bounds, setBounds] = React.useState<NumberRange>([0, 0]);
 
@@ -26,10 +25,21 @@ const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
   }, []);
 
   React.useEffect(() => {
-    setSearchParams({
-      price_gte: String(range[0]),
-      price_lte: String(range[1]),
-    });
+    if (urlParamName) {
+      const [min, max] = range;
+      const [lowerBound, higherBound] = bounds;
+      const newSearchParams: { [k: string]: string } = {};
+
+      if (min > lowerBound) {
+        newSearchParams[`${urlParamName}_min`] = String(min);
+      }
+
+      if (max < higherBound) {
+        newSearchParams[`${urlParamName}_max`] = String(max);
+      }
+
+      setSearchParams(newSearchParams);
+    }
   }, range);
 
   return [
