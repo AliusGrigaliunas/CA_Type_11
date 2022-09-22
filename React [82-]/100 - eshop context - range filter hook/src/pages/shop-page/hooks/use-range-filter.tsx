@@ -11,7 +11,7 @@ type UseRangeField = (props: {
   ];
 
 const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
-  const [_searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [range, setRange] = React.useState<NumberRange>([0, 0]);
   const [bounds, setBounds] = React.useState<NumberRange>([0, 0]);
 
@@ -31,11 +31,11 @@ const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
       const newSearchParams: { [k: string]: string } = {};
 
       if (min > lowerBound) {
-        newSearchParams[`${urlParamName}_min`] = String(min);
+        newSearchParams[`${urlParamName}_gte`] = String(min);
       }
 
       if (max < higherBound) {
-        newSearchParams[`${urlParamName}_max`] = String(max);
+        newSearchParams[`${urlParamName}_lte`] = String(max);
       }
 
       setSearchParams(newSearchParams);

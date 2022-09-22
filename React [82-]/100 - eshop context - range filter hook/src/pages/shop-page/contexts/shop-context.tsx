@@ -1,5 +1,6 @@
 import { CheckboxOption } from 'components/form-controls/checkbox-group';
 import * as React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import CategoriesService from 'services/categories-service';
 import CupService from 'services/cup-service';
 import MaterialTypesService from 'services/material-types-service';
@@ -48,6 +49,7 @@ const fetchMaterialTypesOptions = async () => {
 const ShopContext = React.createContext({} as ShopContextValue);
 
 export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [searchParams] = useSearchParams();
   const [cups, setCups] = React.useState<Cup[]>([]);
   const [categories, setCategories, categoriesOptions] = useCheckboxFilter({
     urlParamName: 'categories',
@@ -87,11 +89,11 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
   React.useEffect(() => {
     (async () => {
-      const fetchedCups = await CupService.fetchMany();
+      const fetchedCups = await CupService.fetchMany(searchParams.toString());
 
       setCups(fetchedCups);
     })();
-  }, []);
+  }, [searchParams]);
 
   return (
     <ShopContext.Provider value={shopContextValue}>{children}</ShopContext.Provider>

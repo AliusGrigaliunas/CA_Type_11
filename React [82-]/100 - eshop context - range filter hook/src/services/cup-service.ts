@@ -3,8 +3,11 @@ import config from 'config';
 const { serverAddress } = config;
 const collectionName = 'cups';
 
-const fetchMany = async (): Promise<Cup[]> => {
-  const response = await fetch(`${serverAddress}/${collectionName}`);
+const fetchMany = async (urlParams?: string): Promise<Cup[]> => {
+  let url = `${serverAddress}/${collectionName}`;
+  if (urlParams) url += `?${urlParams}`;
+
+  const response = await fetch(url);
   const fetchedCups = await response.json();
 
   return fetchedCups as Cup[];
