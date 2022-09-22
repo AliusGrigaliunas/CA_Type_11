@@ -59,15 +59,18 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     fetchOptions: fetchMaterialTypesOptions,
   });
 
-  const [priceRange, setPriceRange, priceBounds] = useRangeField();
+  const [priceRange, setPriceRange, priceBounds] = useRangeField({
+    urlParamName: 'price',
+    fetchRange: CupService.fetchPriceRange,
+  });
 
   const shopContextValue: ShopContextValue = React.useMemo(() => ({
     cups,
     filters: {
       price: {
         range: priceRange,
-        onChange: setPriceRange,
         bounds: priceBounds,
+        onChange: setPriceRange,
       },
       categories: {
         options: categoriesOptions,
