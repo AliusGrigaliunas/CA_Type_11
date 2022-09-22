@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 type UseRangeField = (props: {
   urlParamName?: string
@@ -11,6 +12,7 @@ type UseRangeField = (props: {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [range, setRange] = React.useState<NumberRange>([0, 0]);
   const [bounds, setBounds] = React.useState<NumberRange>([0, 0]);
 
@@ -22,6 +24,13 @@ const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
       setBounds(fetchedRange);
     })();
   }, []);
+
+  React.useEffect(() => {
+    setSearchParams({
+      price_gte: String(range[0]),
+      price_lte: String(range[1]),
+    });
+  }, range);
 
   return [
     range,
