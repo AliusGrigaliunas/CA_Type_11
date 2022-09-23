@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { CheckboxOption } from 'components/form-controls/checkbox-group';
+import { useSearchParams } from 'react-router-dom';
 
 type CheckboxFilterOptions = {
   urlParamName?: string
@@ -12,10 +13,10 @@ type UseCheckboxFilter = (props: CheckboxFilterOptions) => [
   CheckboxOption[],
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) => {
   const [options, setOptions] = React.useState<CheckboxOption[]>([]);
   const [selectedOptions, setSelectedOptions] = React.useState<CheckboxOption[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const initializeOptions = async () => {
     const fetchedOptions = await fetchOptions();
@@ -25,6 +26,15 @@ const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) =>
   React.useEffect(() => {
     initializeOptions();
   }, []);
+
+  React.useEffect(() => {
+    if (urlParamName !== undefined) {
+      searchParams.delete(urlParamName);
+      selectedOptions.forEach(({ value }) => searchParams.append(urlParamName, value));
+
+      setSearchParams(searchParams);
+    }
+  }, urlParamName !== undefined ? [selectedOptions] : []);
 
   return [
     selectedOptions,

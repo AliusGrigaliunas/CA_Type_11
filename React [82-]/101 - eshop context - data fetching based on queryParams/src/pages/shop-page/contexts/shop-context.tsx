@@ -55,12 +55,12 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
   });
 
   const [categories, setCategories, categoriesOptions] = useCheckboxFilter({
-    urlParamName: 'categories',
+    urlParamName: 'categoryId',
     fetchOptions: fetchCategoryOptions,
   });
 
   const [materialTypes, setMaterialTypes, materialTypesOptions] = useCheckboxFilter({
-    urlParamName: 'materialTypes',
+    urlParamName: 'materialTypeId',
     fetchOptions: fetchMaterialTypesOptions,
   });
 

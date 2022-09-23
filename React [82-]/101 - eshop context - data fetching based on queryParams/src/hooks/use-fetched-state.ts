@@ -17,6 +17,7 @@ const useFetchedState = <T>({ fetchEntities, watchUrl }: UseFetchedStateProps<T>
       setEntities(fetchedEntities);
     })();
   }, watchUrl ? [searchParams] : []);
+
   return entities;
 };
 
