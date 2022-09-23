@@ -30,22 +30,21 @@ const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) =>
     (async () => {
       const fetchedOptions = await fetchOptions();
 
-      setOptions(fetchedOptions);
-      if (urlParamName) {
+      if (urlParamName !== undefined) {
         const urlValues = searchParams.getAll(urlParamName);
         const urlOptions = fetchedOptions.filter(({ value }) => urlValues.includes(value));
 
-        setSelectedOptions(urlOptions);
+        if (urlOptions.length > 0) setSelectedOptions(urlOptions);
       }
+      setOptions(fetchedOptions);
     })();
   }, []);
 
   React.useEffect(() => {
     if (urlParamName !== undefined && isMounted) {
       const urlValues = searchParams.getAll(urlParamName);
-      const shouldUpdate = urlValuesNotInOptions(urlValues, selectedOptions);
 
-      if (shouldUpdate) {
+      if (urlValuesNotInOptions(urlValues, selectedOptions)) {
         searchParams.delete(urlParamName);
         selectedOptions.forEach(({ value }) => searchParams.append(urlParamName, value));
 
