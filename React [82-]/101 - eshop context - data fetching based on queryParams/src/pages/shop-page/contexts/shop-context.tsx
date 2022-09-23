@@ -4,7 +4,7 @@ import CategoriesService from 'services/categories-service';
 import CupService from 'services/cup-service';
 import MaterialTypesService from 'services/material-types-service';
 import useCheckboxFilter from '../hooks/use-checkbox-filter';
-import useRangeField from '../hooks/use-range-filter';
+import useRangeFilter from '../hooks/use-range-filter';
 import useFetchedState from '../../../hooks/use-fetched-state';
 
 type ShopContextValue = {
@@ -64,8 +64,8 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     fetchOptions: fetchMaterialTypesOptions,
   });
 
-  const [priceRange, setPriceRange, priceBounds] = useRangeField({
-    urlParamName: 'price',
+  const [priceRange, setPriceRange, priceBounds] = useRangeFilter({
+    urlParamNames: ['price_gte', 'price_lte'],
     fetchRange: CupService.fetchPriceRange,
   });
 

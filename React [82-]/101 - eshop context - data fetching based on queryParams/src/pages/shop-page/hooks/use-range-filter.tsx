@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 type UseRangeField = (props: {
-  urlParamName?: string
+  urlParamNames?: [string, string]
   fetchRange: () => Promise<NumberRange>
 }) => [
     NumberRange,
@@ -10,7 +10,7 @@ type UseRangeField = (props: {
     NumberRange,
   ];
 
-const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
+const useRangeFilter: UseRangeField = ({ urlParamNames, fetchRange }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [range, setRange] = React.useState<NumberRange>([0, 0]);
   const [bounds, setBounds] = React.useState<NumberRange>([0, 0]);
@@ -25,22 +25,25 @@ const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
   }, []);
 
   React.useEffect(() => {
-    if (urlParamName) {
+    if (urlParamNames) {
       const [min, max] = range;
       const [lowerBound, higherBound] = bounds;
-      const newSearchParams: { [k: string]: string } = {};
+      const [minUrlParamName, maxUrlParamName] = urlParamNames;
+
+      searchParams.delete(minUrlParamName);
+      searchParams.delete(maxUrlParamName);
 
       if (min > lowerBound) {
-        newSearchParams[`${urlParamName}_gte`] = String(min);
+        searchParams.set(minUrlParamName, String(min));
       }
 
       if (max < higherBound) {
-        newSearchParams[`${urlParamName}_lte`] = String(max);
+        searchParams.set(minUrlParamName, String(max));
       }
 
-      setSearchParams(newSearchParams);
+      setSearchParams(searchParams);
     }
-  }, range);
+  }, urlParamNames ? [range] : []);
 
   return [
     range,
@@ -49,4 +52,4 @@ const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
   ];
 };
 
-export default useRangeField;
+export default useRangeFilter;
