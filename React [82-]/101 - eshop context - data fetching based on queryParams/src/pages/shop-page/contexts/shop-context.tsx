@@ -101,13 +101,3 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
 };
 
 export default ShopContext;
-
-/*
-  1. Iškelti visą logigą susijusią su puodeliais į hooksa useProducts
-
-  2. Susinchronizuoti 'useCheckboxFilter' komponento parametrus
-    * Atkreipti dėmesį į parametrų formatą JSON dokumentacijoje:
-      https://github.com/typicode/json-server#filter
-    * Įvertinti, kad tiek 'useCheckboxFilter' tiek 'useRangeField' parametrų sinchronizavimas
-      neturi įtakoti kitų (jau egiztuojančių parametrų)
-*/
