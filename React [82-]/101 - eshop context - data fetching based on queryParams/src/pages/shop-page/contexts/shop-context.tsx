@@ -1,31 +1,16 @@
-import { CheckboxOption } from 'components/form-controls/checkbox-group';
 import * as React from 'react';
 import CategoriesService from 'services/categories-service';
 import CupService from 'services/cup-service';
 import MaterialTypesService from 'services/material-types-service';
-import useCheckboxFilter from '../hooks/use-checkbox-filter';
-import useRangeFilter from '../hooks/use-range-filter';
+import useCheckboxFilter, { type CheckboxFilter } from '../hooks/use-checkbox-filter';
+import useRangeFilter, { type RangeFilter } from '../hooks/use-range-filter';
 import useFetchedState from '../../../hooks/use-fetched-state';
 
 type ShopContextValue = {
   cups: Cup[],
-  filters: {
-    price: {
-      range: NumberRange,
-      bounds: NumberRange,
-      onChange: (newRange: NumberRange) => void,
-    },
-    categories: {
-      options: CheckboxOption[],
-      selectedOptions: CheckboxOption[],
-      onChange: (newSelectedOptions: CheckboxOption[]) => void,
-    },
-    materialTypes: {
-      options: CheckboxOption[],
-      selectedOptions: CheckboxOption[],
-      onChange: (newSelectedOptions: CheckboxOption[]) => void,
-    }
-  }
+  priceFilter: RangeFilter,
+  categoriesFilter: CheckboxFilter,
+  materialTypesFilter: CheckboxFilter
 };
 
 const fetchCategoryOptions = async () => {
@@ -54,41 +39,27 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     watchUrl: true,
   });
 
-  const [categories, setCategories, categoriesOptions] = useCheckboxFilter({
+  const categoriesFilter = useCheckboxFilter({
     urlParamName: 'categoryId',
     fetchOptions: fetchCategoryOptions,
   });
 
-  const [materialTypes, setMaterialTypes, materialTypesOptions] = useCheckboxFilter({
+  const materialTypesFilter = useCheckboxFilter({
     urlParamName: 'materialTypeId',
     fetchOptions: fetchMaterialTypesOptions,
   });
 
-  const [priceRange, setPriceRange, priceBounds] = useRangeFilter({
+  const priceFilter = useRangeFilter({
     urlParamNames: ['price_gte', 'price_lte'],
     fetchRange: CupService.fetchPriceRange,
   });
 
   const shopContextValue: ShopContextValue = React.useMemo(() => ({
     cups,
-    filters: {
-      price: {
-        range: priceRange,
-        bounds: priceBounds,
-        onChange: setPriceRange,
-      },
-      categories: {
-        options: categoriesOptions,
-        selectedOptions: categories,
-        onChange: setCategories,
-      },
-      materialTypes: {
-        options: materialTypesOptions,
-        selectedOptions: materialTypes,
-        onChange: setMaterialTypes,
-      },
-    },
-  }), [cups, priceRange, categories, materialTypes]);
+    priceFilter,
+    categoriesFilter,
+    materialTypesFilter,
+  }), [cups, priceFilter, categoriesFilter, materialTypesFilter]);
 
   return (
     <ShopContext.Provider value={shopContextValue}>{children}</ShopContext.Provider>

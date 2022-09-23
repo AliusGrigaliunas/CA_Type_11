@@ -3,16 +3,18 @@ import { CheckboxOption } from 'components/form-controls/checkbox-group';
 import { useSearchParams } from 'react-router-dom';
 import useMounted from 'hooks/use-mounted';
 
-type CheckboxFilterOptions = {
+type CheckboxFilterProps = {
   urlParamName?: string
   fetchOptions: () => Promise<CheckboxOption[]>
 };
 
-type UseCheckboxFilter = (props: CheckboxFilterOptions) => [
-  CheckboxOption[],
-  (newSelectedOptions: CheckboxOption[]) => void,
-  CheckboxOption[],
-];
+export type CheckboxFilter = {
+  options: CheckboxOption[],
+  selectedOptions: CheckboxOption[],
+  onChange: (newSelectedOptions: CheckboxOption[]) => void,
+};
+
+type UseCheckboxFilter = (props: CheckboxFilterProps) => CheckboxFilter;
 
 const urlValuesNotInOptions = (values: string[], options: CheckboxOption[]) => {
   const optionsValues = options.map(({ value }) => value);
@@ -22,9 +24,9 @@ const urlValuesNotInOptions = (values: string[], options: CheckboxOption[]) => {
 
 const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) => {
   const isMounted = useMounted();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [options, setOptions] = React.useState<CheckboxOption[]>([]);
   const [selectedOptions, setSelectedOptions] = React.useState<CheckboxOption[]>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   React.useEffect(() => {
     (async () => {
@@ -53,11 +55,11 @@ const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) =>
     }
   }, urlParamName !== undefined ? [selectedOptions] : []);
 
-  return [
+  return {
     selectedOptions,
-    setSelectedOptions,
     options,
-  ];
+    onChange: setSelectedOptions,
+  };
 };
 
 export default useCheckboxFilter;

@@ -2,24 +2,28 @@ import useMounted from 'hooks/use-mounted';
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-type UseRangeField = (props: {
+type RangeFilterProps = {
   urlParamNames?: [string, string]
   fetchRange: () => Promise<NumberRange>
-}) => [
-    NumberRange,
-    (newRange: NumberRange) => void,
-    NumberRange,
-  ];
+};
+
+export type RangeFilter = {
+  range: NumberRange,
+  bounds: NumberRange,
+  onChange: (newRange: NumberRange) => void,
+};
+
+type UseRangeFilter = (props: RangeFilterProps) => RangeFilter;
 
 const isNumericUrlParam = (
   urlParam: string | null,
 ): boolean => urlParam !== null && !Number.isNaN(urlParam);
 
-const useRangeFilter: UseRangeField = ({ urlParamNames, fetchRange }) => {
+const useRangeFilter: UseRangeFilter = ({ urlParamNames, fetchRange }) => {
   const isMounted = useMounted();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [range, setRange] = React.useState<NumberRange>([0, 0]);
   const [bounds, setBounds] = React.useState<NumberRange>([0, 0]);
+  const [range, setRange] = React.useState<NumberRange>([0, 0]);
 
   React.useEffect(() => {
     (async () => {
@@ -70,11 +74,11 @@ const useRangeFilter: UseRangeField = ({ urlParamNames, fetchRange }) => {
     }
   }, urlParamNames !== undefined ? [range] : []);
 
-  return [
+  return {
     range,
-    setRange,
     bounds,
-  ];
+    onChange: setRange,
+  };
 };
 
 export default useRangeFilter;

@@ -15,13 +15,7 @@ type SideBarProps = {
 const SideBar: React.FC<SideBarProps> = ({ isExtendedLayout }) => {
   const { open } = React.useContext(DrawerContext);
 
-  const {
-    filters: {
-      price: priceFilter,
-      categories: categoriesFilter,
-      materialTypes: materialTypesFilter,
-    },
-  } = React.useContext(ShopContext);
+  const { priceFilter, categoriesFilter, materialTypesFilter } = React.useContext(ShopContext);
 
   return (
     <SideBarContainer variant={isExtendedLayout ? 'permanent' : 'temporary'} open={open}>
