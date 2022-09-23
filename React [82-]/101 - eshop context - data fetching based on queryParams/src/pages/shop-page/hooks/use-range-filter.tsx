@@ -63,7 +63,7 @@ const useRangeFilter: UseRangeField = ({ urlParamNames, fetchRange }) => {
 
         if (min > lowerBound) searchParams.set(minUrlParamName, String(min));
 
-        if (max < higherBound) searchParams.set(minUrlParamName, String(max));
+        if (max < higherBound) searchParams.set(maxUrlParamName, String(max));
 
         setSearchParams(searchParams);
       }
