@@ -187,3 +187,6 @@
     * Įvertinti, kad tiek 'useCheckboxFilter' tiek 'useRangeField' parametrų sinchronizavimas
       neturi įtakoti kitų (jau egiztuojančių parametrų)
 
+09-26:
+  * Sukurti savo puslapio idėjos dalį - filtruojamą duomenų aprsiuntimą naudojant url parametrus.
+
