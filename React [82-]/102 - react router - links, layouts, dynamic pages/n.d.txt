@@ -194,4 +194,12 @@
 
 ---------------------------------------- React - Penkta Savaitė ------------------------------------
 
+09-27: 
+  * Sugalvoti visos savo projekto idėjos puslapius
+    * Juos sugrupuoti pagal išdėstymus (Layout'us). Route group'sai gali būti kitų route group'sų dalis.
+    * Apgalvokite, ką galės matyti Skirtingų rolių vartotojai (ADMIN, USER, GUEST)
+  * Sukurkite savo projekte tuščius puslapius, sustruktūrizuotus pagal sugalvotą grupavimą
+  * Sukurkite savo projekte <Routes> struktūrą ir kelius iki puslapių
+  * Sukurkite savo projekte Route group'sam pritaikykite layout'us
+    
 
