@@ -1,0 +1,4 @@
+Kraunant Shop puslapį su url parametrais
+  * price range išsitrynė
+  * useCheckboxFilter parametrai nenusistatė
+  * prieš atsiunčiant reikiamus produktus, parsisiuntė visi
