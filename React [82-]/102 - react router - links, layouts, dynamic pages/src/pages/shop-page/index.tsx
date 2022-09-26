@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useMediaQuery, type Theme } from '@mui/material';
 
-import ApplicationBar from './components/application-bar';
 import SideBar from './components/side-bar';
 import MainSection from './components/main-section';
 import { DrawerProvider } from './contexts/drawer-context';
@@ -14,7 +13,6 @@ const ShopPage: React.FC = () => {
   return (
     <ShopContextProvider>
       <DrawerProvider>
-        <ApplicationBar />
         <SideBar isExtendedLayout={isExtendedLayout} />
         <MainSection isExtendedLayout={isExtendedLayout} />
         {!isExtendedLayout && <DrawerButton />}
