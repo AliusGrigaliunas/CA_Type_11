@@ -1,21 +1,22 @@
 import * as React from 'react';
 import { CheckboxOption } from 'components/form-controls/checkbox-group';
+import { useSearchParams } from 'react-router-dom';
 
-type CheckboxFilterOptions = {
+type CheckboxFilterOptions = (props: {
   urlParamName?: string
   fetchOptions: () => Promise<CheckboxOption[]>
-};
-
-type UseCheckboxFilter = (props: CheckboxFilterOptions) => [
+}) => [
   CheckboxOption[],
   (newSelectedOptions: CheckboxOption[]) => void,
   CheckboxOption[],
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) => {
+const useCheckboxFilter: CheckboxFilterOptions = ({ urlParamName, fetchOptions }) => {
   const [options, setOptions] = React.useState<CheckboxOption[]>([]);
   const [selectedOptions, setSelectedOptions] = React.useState<CheckboxOption[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const initializeOptions = async () => {
     const fetchedOptions = await fetchOptions();
@@ -25,6 +26,19 @@ const useCheckboxFilter: UseCheckboxFilter = ({ urlParamName, fetchOptions }) =>
   React.useEffect(() => {
     initializeOptions();
   }, []);
+
+  React.useEffect(() => {
+    if (urlParamName) {
+      searchParams.delete(urlParamName);
+      selectedOptions.forEach(
+        (option) => searchParams.append(urlParamName, option.value),
+      );
+
+      setSearchParams(searchParams);
+    }
+  }, [selectedOptions]);
+
+  // console.log(String(searchParams));
 
   return [
     selectedOptions,

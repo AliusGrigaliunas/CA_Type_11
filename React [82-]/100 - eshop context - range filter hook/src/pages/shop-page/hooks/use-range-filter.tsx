@@ -11,6 +11,7 @@ type UseRangeField = (props: {
   ];
 
 const useRangeField: UseRangeField = ({ urlParamName, fetchRange }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const [range, setRange] = React.useState<NumberRange>([0, 0]);
   const [bounds, setBounds] = React.useState<NumberRange>([0, 0]);

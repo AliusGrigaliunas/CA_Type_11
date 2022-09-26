@@ -4,6 +4,8 @@ const config = {
   serverAddress,
 };
 
+console.log(config.serverAddress);
+
 export const checkConfig = () => {
   if (serverAddress === undefined) {
     throw new Error('Please define constants in .env file');

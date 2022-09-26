@@ -5,6 +5,7 @@ import CategoriesService from 'services/categories-service';
 import CupService from 'services/cup-service';
 import MaterialTypesService from 'services/material-types-service';
 import useCheckboxFilter from '../hooks/use-checkbox-filter';
+import useItem from '../hooks/use-products';
 import useRangeField from '../hooks/use-range-filter';
 
 type ShopContextValue = {
@@ -49,15 +50,15 @@ const fetchMaterialTypesOptions = async () => {
 const ShopContext = React.createContext({} as ShopContextValue);
 
 export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams] = useSearchParams();
-  const [cups, setCups] = React.useState<Cup[]>([]);
   const [categories, setCategories, categoriesOptions] = useCheckboxFilter({
-    urlParamName: 'categories',
+    urlParamName: 'categoryId',
     fetchOptions: fetchCategoryOptions,
   });
 
   const [materialTypes, setMaterialTypes, materialTypesOptions] = useCheckboxFilter({
-    urlParamName: 'materialTypes',
+    urlParamName: 'materialTypeId',
     fetchOptions: fetchMaterialTypesOptions,
   });
 
@@ -65,6 +66,8 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     urlParamName: 'price',
     fetchRange: CupService.fetchPriceRange,
   });
+
+  const cups = useItem(() => CupService.fetchMany(String(searchParams)));
 
   const shopContextValue: ShopContextValue = React.useMemo(() => ({
     cups,
@@ -86,14 +89,6 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
       },
     },
   }), [cups, priceRange, categories, materialTypes]);
-
-  React.useEffect(() => {
-    (async () => {
-      const fetchedCups = await CupService.fetchMany(searchParams.toString());
-
-      setCups(fetchedCups);
-    })();
-  }, [searchParams]);
 
   return (
     <ShopContext.Provider value={shopContextValue}>{children}</ShopContext.Provider>

@@ -1,0 +1,92 @@
+{
+    "Categories": [
+        {
+          "id": "1",
+          "title": "String Instruments"
+        },
+        {
+          "id": "2",
+          "title": "Wind Instruments"
+        },
+        {
+          "id": "3",
+          "title": "Drum Instruments"
+        },
+        {
+          "id": "4",
+          "title": "Other Instruments"
+        }
+    ],
+    "Instruments": [
+        {
+          "id": "1,",
+          "categoryId": "1,",
+          "Title": "Oud,",
+          "description": "This oud was directly made and imported from Egypt and it comes from of the latest collection of Egyptian manufacturer Gawharet El Fan. This oud is composed of Oak and Padauk woods with a Spruce top.",
+          "price": "350"
+        },
+        {
+          "id": "2,",
+          "categoryId": "1,",
+          "title": "Laouto,",
+          "description": "Handmade Student Traditional 8 String Laouto from Mainland & Islands",
+          "price": "667"
+        },
+        {
+          "id": "3",
+          "categoryId": "1,",
+          "title": "Bouzouki,",
+          "description": "Traditional handmade 8 string bouzouki. Body is made from 15 stripes of solid beech and  maple",
+          "price": "435"
+        },
+         {
+          "id": "4",
+          "CaterodyId": "2,",
+          "title": "Aulos,",
+          "description": "The ancient Greeks first played the Aulos, a wind instrument initially made of a pair of reeds as pipes.",
+          "price": "300"
+        },
+        {
+          "id": "5,",
+          "categoryId": "2,",
+          "title": "Salpinx,",
+          "description": "The Salpinx is a wind instrument or aerophone typically made of bronze that is a type of ancient trumpet from Greece.",
+          "price": "500"
+        },
+        {
+          "id": "6,",
+          "categoryId": "3,",
+          "title": "Daoli,",
+          "description": "The Daouli is a double-headed drum played in Greece, Turkey, and other Arab countries that is used as a rhythm instrument in folk dancing.",
+          "price": "600"
+        },
+        {
+          "id": "7,",
+          "CatergoryId": "4,",
+          "title": "Sistrum,",
+          "description": "The Sistrum in an instrument that originated in ancient Egypt and is a type of rattle used for ceremonial religious purposes.",
+          "price": "500"
+        },
+         {
+          "id": "8,",
+          "categoryId": "3,",
+          "title": "Toubeleki,",
+          "description": "The Toubeleki is a metal or clay drum shaped like the doumbek or the African djembe. Nowadays, it is made of metal. It has a conical open pedestal and a single drumhead beaten with both hands to create different rhythms.",
+          "price": "250"
+        },
+         {
+          "id": "9,",
+          "categoryId": "2,",
+          "title": "Tsambouna,",
+          "description": "The Tsambouna, also known as the tsampouna, is the Mykonos bagpipe and has been used for centuries, although there are now fears that playing the instrument is a dying art.",
+          "price": "460"
+        },
+         {
+          "id": "10,",
+          "categoryId": "2,",
+          "title": "Zurna,",
+          "description": "The Zurna is a type of double reed instrument that is a member of the woodwind family.",
+          "price": "300"
+        }
+    ]
+  }
