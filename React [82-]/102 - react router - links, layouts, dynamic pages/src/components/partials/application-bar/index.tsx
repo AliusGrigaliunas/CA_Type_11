@@ -32,8 +32,8 @@ const ApplicationBar: React.FC = () => (
         <Link to="/" end>Pagrindinis</Link>
       </Box>
       <Box sx={{ display: 'flex' }}>
-        <Link to="/login">Prisijungimas</Link>
-        <Link to="/register">Registracija</Link>
+        <Link to="/auth/login">Prisijungimas</Link>
+        <Link to="/auth/register">Registracija</Link>
       </Box>
 
     </Toolbar>
