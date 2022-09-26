@@ -1,13 +1,7 @@
 import * as React from 'react';
-import {
-  Paper,
-  Typography,
-  TextField,
-  Button,
-  Autocomplete,
-} from '@mui/material';
-import SecurityIcon from '@mui/icons-material/Security';
+import { TextField, Autocomplete } from '@mui/material';
 import CheckboxGroup, { CheckboxOption } from 'components/form-controls/checkbox-group';
+import AuthForm from './components/auth-form';
 
 type ContentType = {
   id: string,
@@ -72,20 +66,7 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <Paper
-      component="form"
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 4,
-        width: 400,
-        p: 4,
-      }}
-      elevation={10}
-      onSubmit={handleSubmit}
-    >
-      <SecurityIcon sx={{ fontSize: 50, alignSelf: 'center' }} color="primary" />
-      <Typography component="h1" variant="h4" align="center">Registracija</Typography>
+    <AuthForm title="Registracija" submitText="Registruotis" onSubmit={handleSubmit}>
       <TextField
         variant="filled"
         label="El. paštas"
@@ -121,15 +102,7 @@ const RegisterPage: React.FC = () => {
         value={selectedContentTypes}
         onChange={(_, newContentTypes) => setSelectedContentTypes(newContentTypes)}
       />
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ height: 60 }}
-        size="large"
-      >
-        Registruotis
-      </Button>
-    </Paper>
+    </AuthForm>
   );
 };
 

@@ -1,13 +1,7 @@
 import * as React from 'react';
-import {
-  Paper,
-  Typography,
-  TextField,
-  Button,
-  FormControlLabel,
-} from '@mui/material';
-import SecurityIcon from '@mui/icons-material/Security';
+import { TextField, FormControlLabel } from '@mui/material';
 import CustomSizeCheckbox from 'components/form-controls/custom-size-checkbox';
+import AuthForm from './components/auth-form';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
@@ -26,20 +20,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <Paper
-      component="form"
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 4,
-        width: 400,
-        p: 4,
-      }}
-      elevation={10}
-      onSubmit={handleSubmit}
-    >
-      <SecurityIcon sx={{ fontSize: 50, alignSelf: 'center' }} color="primary" />
-      <Typography component="h1" variant="h4" align="center">Prisijungimas</Typography>
+    <AuthForm title="Prisijungimas" submitText="Prisijungti" onSubmit={handleSubmit}>
       <TextField
         variant="filled"
         label="El. paštas"
@@ -63,15 +44,7 @@ const LoginPage: React.FC = () => {
         )}
         label="Įsiminti prisijungimo duomenis"
       />
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ height: 60 }}
-        size="large"
-      >
-        Prisijungti
-      </Button>
-    </Paper>
+    </AuthForm>
   );
 };
 
