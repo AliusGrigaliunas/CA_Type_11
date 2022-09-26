@@ -3,9 +3,9 @@ import { useMediaQuery, type Theme } from '@mui/material';
 
 import SideBar from './components/side-bar';
 import MainSection from './components/main-section';
+import DrawerButton from './components/drawer-button';
 import { DrawerProvider } from './contexts/drawer-context';
 import { ShopContextProvider } from './contexts/shop-context';
-import DrawerButton from './components/drawer-button';
 
 const ShopPage: React.FC = () => {
   const isExtendedLayout = useMediaQuery<Theme>((theme) => theme.breakpoints.up('xl'));

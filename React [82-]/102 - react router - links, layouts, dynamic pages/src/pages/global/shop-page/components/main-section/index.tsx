@@ -5,7 +5,7 @@ import {
   Grid,
   Divider,
 } from '@mui/material';
-import ShopContext from 'pages/shop-page/contexts/shop-context';
+import ShopContext from '../../contexts/shop-context';
 import DrawerHeader from '../drawer-header';
 import CupCard from './cup-card';
 

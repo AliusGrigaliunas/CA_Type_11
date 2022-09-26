@@ -2,9 +2,9 @@ import * as React from 'react';
 import CategoriesService from 'services/categories-service';
 import CupService from 'services/cup-service';
 import MaterialTypesService from 'services/material-types-service';
+import useFetchedState from 'hooks/use-fetched-state';
 import useCheckboxFilter, { type CheckboxFilter } from '../hooks/use-checkbox-filter';
 import useRangeFilter, { type RangeFilter } from '../hooks/use-range-filter';
-import useFetchedState from '../../../hooks/use-fetched-state';
 
 type ShopContextValue = {
   cups: Cup[],

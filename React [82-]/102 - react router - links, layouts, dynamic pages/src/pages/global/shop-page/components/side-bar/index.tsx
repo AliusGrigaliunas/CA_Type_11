@@ -1,11 +1,11 @@
 import React from 'react';
 import { Divider } from '@mui/material';
 
-import ShopContext from 'pages/shop-page/contexts/shop-context';
 import CheckboxGroup from 'components/form-controls/checkbox-group';
 import RangeField from 'components/form-controls/range-field/index';
 import SideBarContainer from './side-bar-container';
 import DrawerHeader from '../drawer-header';
+import ShopContext from '../../contexts/shop-context';
 import DrawerContext from '../../contexts/drawer-context';
 
 type SideBarProps = {
