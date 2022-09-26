@@ -4,6 +4,7 @@ import {
   Route,
   BrowserRouter,
 } from 'react-router-dom';
+import NotFoundPage from 'pages/not-found-page';
 import ShopPage from './pages/shop-page';
 import LoginPage from './pages/login-page';
 import RegisterPage from './pages/register-page';
@@ -14,6 +15,7 @@ const App: React.FC = () => (
       <Route path="/" element={<ShopPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/*" element={<NotFoundPage />} />
     </Routes>
   </BrowserRouter>
 );
