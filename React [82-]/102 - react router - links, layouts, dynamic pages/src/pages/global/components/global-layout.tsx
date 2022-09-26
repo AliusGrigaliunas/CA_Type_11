@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
-import ApplicationBar from 'components/partials/application-bar';
+import ApplicationBar from './application-bar';
 
 const GlobalLayout: React.FC = () => (
   <Box>

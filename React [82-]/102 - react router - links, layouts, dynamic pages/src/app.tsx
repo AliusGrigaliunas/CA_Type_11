@@ -4,10 +4,12 @@ import {
   Route,
   BrowserRouter,
 } from 'react-router-dom';
+
 import NotFoundPage from 'pages/global/not-found-page';
-import GlobalLayout from 'components/layouts/global-layout';
-import AuthLayout from 'pages/auth/auth-layout';
+import GlobalLayout from 'pages/global/components/global-layout';
 import ShopPage from 'pages/global/shop-page';
+
+import AuthLayout from 'pages/auth/components/auth-layout';
 import LoginPage from 'pages/auth/login-page';
 import RegisterPage from 'pages/auth/register-page';
 
@@ -24,6 +26,7 @@ const App: React.FC = () => (
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
       </Route>
+
     </Routes>
   </BrowserRouter>
 );
