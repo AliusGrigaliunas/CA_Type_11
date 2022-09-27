@@ -8,6 +8,7 @@ import {
 import NotFoundPage from 'pages/global/not-found-page';
 import GlobalLayout from 'pages/global/components/global-layout';
 import ShopPage from 'pages/global/shop-page';
+import CupPage from 'pages/global/cup-page';
 
 import AuthLayout from 'pages/auth/components/auth-layout';
 import LoginPage from 'pages/auth/login-page';
@@ -19,6 +20,7 @@ const App: React.FC = () => (
 
       <Route path="/" element={<GlobalLayout />}>
         <Route index element={<ShopPage />} />
+        <Route path="cup/:id" element={<CupPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 
