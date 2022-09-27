@@ -6,7 +6,6 @@ import {
   Divider,
 } from '@mui/material';
 import ShopContext from '../../contexts/shop-context';
-import DrawerHeader from '../drawer-header';
 import CupCard from './cup-card';
 
 type MainSectionProps = {
@@ -27,7 +26,6 @@ const MainSection: React.FC<MainSectionProps> = ({ isExtendedLayout }) => {
         }),
       })}
     >
-      <DrawerHeader />
       <Typography component="h1" variant="h5">Visos prekės</Typography>
       <Divider sx={{ mt: 2, mb: 3 }} />
       <Grid container spacing={3} sx={{ alignItem: 'stretch' }}>

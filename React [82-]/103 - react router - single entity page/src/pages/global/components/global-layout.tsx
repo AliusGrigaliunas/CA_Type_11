@@ -6,6 +6,7 @@ import ApplicationBar from './application-bar';
 const GlobalLayout: React.FC = () => (
   <Box>
     <ApplicationBar />
+    <Box sx={(theme) => theme.mixins.toolbar} />
     <Outlet />
   </Box>
 );
