@@ -1,11 +1,13 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 
 const CupPage = () => {
-  const params = useParams();
+  const { id } = useParams();
+
+  if (id === undefined) return <Navigate to="/page-not-found" />;
 
   return (
-    <div>{JSON.stringify(params)}</div>
+    <div>{JSON.stringify(id)}</div>
   );
 };
 
