@@ -9,6 +9,7 @@ import {
   InputBase,
   Paper,
   IconButton,
+  Divider,
 } from '@mui/material';
 import Swiper from 'components/swiper';
 import CupService from 'services/cup-service';
@@ -30,59 +31,83 @@ const CupPage: React.FC = () => {
   }, []);
 
   return (
-    <Container sx={{ mt: 2 }}>
+    <Container sx={{ mt: 4 }}>
       {cup ? (
-        <>
-          <Swiper images={cup.images} sx={{ height: 300 }} />
-          <Box sx={{
+        <Paper
+          elevation={0}
+          sx={(theme) => ({
+            mx: 'auto',
+            maxWidth: { xs: 400, md: 'initial' },
+            p: { xs: 3 },
+            boxShadow: { xs: theme.shadows[3] },
             display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 2,
+          })}
+        >
+          <Box sx={{ width: { md: 500 } }}>
+            <Swiper
+              images={cup.images}
+              sx={{ height: { xs: 300, md: 500 } }}
+            />
+          </Box>
+          <Box sx={{
+            flexGrow: { md: 1 },
+            display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'space-between',
-            my: 2,
           }}
           >
-            <Typography component="h1" variant="h4">{cup.title}</Typography>
-            <Typography
-              component="div"
-              variant="h5"
-              color="success.main"
-              sx={{
-                fontWeight: 'medium',
-                whiteSpace: 'nowrap',
-                pt: 0.5,
-              }}
-            >
-              {`${cup.price} $`}
-            </Typography>
-          </Box>
-
-          <Typography
-            variant="body1"
-            sx={{ fontWeight: 'medium', my: 2 }}
-          >
-            {cup.description}
-          </Typography>
-
-          <Paper
-            elevation={3}
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              py: 0.5,
-              px: 2,
-              mb: 2,
-            }}
-          >
-            <Typography>Kiekis</Typography>
             <Box>
-              <IconButton><AddIcon /></IconButton>
-              <InputBase value={2} sx={{ width: 40 }} inputProps={{ sx: { textAlign: 'center' } }} />
-              <IconButton><RemoveIcon /></IconButton>
-            </Box>
-          </Paper>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography component="h1" variant="h4">{cup.title}</Typography>
+                <Typography
+                  component="div"
+                  variant="h5"
+                  color="success.main"
+                  sx={{
+                    fontWeight: 'medium',
+                    whiteSpace: 'nowrap',
+                    pt: 0.5,
+                  }}
+                >
+                  {`${cup.price} $`}
+                </Typography>
+              </Box>
 
-          <Button variant="contained" fullWidth size="large">Pridėti į krepšelį</Button>
-        </>
+              <Divider textAlign="left" sx={{ my: 2 }}>Pagrindinė informacija</Divider>
+
+              <Typography variant="body1" sx={{ fontWeight: 'medium', my: 2 }}>
+                {cup.description}
+              </Typography>
+            </Box>
+
+            <Box>
+              <Divider textAlign="left" sx={{ my: 2 }}>Komercija</Divider>
+              <Paper
+                elevation={3}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  py: 0.5,
+                  px: 2,
+                  mb: 2,
+                }}
+              >
+                <Typography>Kiekis</Typography>
+                <Box>
+                  <IconButton><AddIcon /></IconButton>
+                  <InputBase value={2} sx={{ width: 40 }} inputProps={{ sx: { textAlign: 'center' } }} />
+                  <IconButton><RemoveIcon /></IconButton>
+                </Box>
+              </Paper>
+
+              <Button variant="contained" fullWidth size="large">Pridėti į krepšelį</Button>
+            </Box>
+
+          </Box>
+        </Paper>
       ) : (
         <>
           <Skeleton variant="rectangular" width="100%" height={300} sx={{ mb: 3 }} />
