@@ -13,6 +13,13 @@ const fetchMany = async (urlParams?: string): Promise<Cup[]> => {
   return fetchedCups as Cup[];
 };
 
+const fetchOne = async (id: string): Promise<Cup> => {
+  const response = await fetch(`${serverAddress}/${collectionName}/${id}`);
+  const fetchedCup = await response.json();
+
+  return fetchedCup as Cup;
+};
+
 const fetchPriceRange = async (): Promise<NumberRange> => {
   // TODO: Ateityje duomenų formavimas ir skaičiacimai turėtų būti atliekami
   // TODO: serverio pusėje
@@ -25,6 +32,7 @@ const fetchPriceRange = async (): Promise<NumberRange> => {
 
 const CupService = {
   fetchMany,
+  fetchOne,
   fetchPriceRange,
 };
 

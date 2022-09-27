@@ -13,9 +13,14 @@ import { useParams, Navigate } from 'react-router-dom';
 
 const CupPage: React.FC = () => {
   const { id } = useParams();
+  // 2. Naudoti useState saugoti parsiunčiamiems duomenims
+  const [cup, setCup] = ...
 
   if (id === undefined) return <Navigate to="/page-not-found" />;
 
+
+  // 3. Naudoti useEffect komponento sukūrimo metu, tam kad parsiųsti ir įrašyti duomenis į state.
+  React.useEffect(funkcijaKuriąReikVykdyti, masyvasSuDuomenimis)
   return (
     <div>{JSON.stringify(id)}</div>
   );
