@@ -5,9 +5,15 @@ import {
   Container,
   Typography,
   Skeleton,
+  Button,
+  InputBase,
+  Paper,
+  IconButton,
 } from '@mui/material';
 import Swiper from 'components/swiper';
 import CupService from 'services/cup-service';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const CupPage: React.FC = () => {
   const { id } = useParams();
@@ -28,7 +34,54 @@ const CupPage: React.FC = () => {
       {cup ? (
         <>
           <Swiper images={cup.images} sx={{ height: 300 }} />
-          <Typography>{cup.title}</Typography>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            my: 2,
+          }}
+          >
+            <Typography component="h1" variant="h4">{cup.title}</Typography>
+            <Typography
+              component="div"
+              variant="h5"
+              color="success.main"
+              sx={{
+                fontWeight: 'medium',
+                whiteSpace: 'nowrap',
+                pt: 0.5,
+              }}
+            >
+              {`${cup.price} $`}
+            </Typography>
+          </Box>
+
+          <Typography
+            variant="body1"
+            sx={{ fontWeight: 'medium', my: 2 }}
+          >
+            {cup.description}
+          </Typography>
+
+          <Paper
+            elevation={3}
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              py: 0.5,
+              px: 2,
+              mb: 2,
+            }}
+          >
+            <Typography>Kiekis</Typography>
+            <Box>
+              <IconButton><AddIcon /></IconButton>
+              <InputBase value={2} sx={{ width: 40 }} inputProps={{ sx: { textAlign: 'center' } }} />
+              <IconButton><RemoveIcon /></IconButton>
+            </Box>
+          </Paper>
+
+          <Button variant="contained" fullWidth size="large">Pridėti į krepšelį</Button>
         </>
       ) : (
         <>
