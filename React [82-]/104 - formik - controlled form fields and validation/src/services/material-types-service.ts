@@ -7,7 +7,7 @@ const fetchMany = async (): Promise<MaterialType[]> => {
   const response = await fetch(`${serverAddress}/${collectionName}`);
   const fetchedMaterialTypes = await response.json();
 
-  return fetchedMaterialTypes as Cup[];
+  return fetchedMaterialTypes as MaterialType[];
 };
 
 const MaterialTypesService = {

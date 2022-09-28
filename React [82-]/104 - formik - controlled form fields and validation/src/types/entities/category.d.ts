@@ -1,4 +1,4 @@
-type MarketingIntrest = {
+type Category = {
   id: string,
   title: string,
 };
