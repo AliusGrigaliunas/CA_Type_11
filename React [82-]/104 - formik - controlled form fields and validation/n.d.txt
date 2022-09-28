@@ -203,7 +203,7 @@
   * Sukurkite savo projekte Route group'sam pritaikykite layout'us
 
 09-28:
-  * Savo puslapiui sukurti atskirus esybių puslapius, naudojant responsive Routes
+  * Savo puslapiui sukurti atskirus esybių puslapius, naudojant dinaminius Route'us
     * parsiųskite duomenis naudodami dinaminio route'o id
     * Atvaizduokite gautus duomenis visiems ekrano dydžiamas (nepersistenkit anksčiau laiko)
     

@@ -115,6 +115,7 @@ const CupPage: React.FC = () => {
           <Skeleton variant="rectangular" width="100%" height={60} sx={{ mb: 3 }} />
         </>
       )}
+
     </Container>
   );
 };
