@@ -29,7 +29,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
       gap: 4,
       width: 380,
       p: 4,
-      ml: 40,
     }}
     elevation={10}
     onSubmit={onSubmit}

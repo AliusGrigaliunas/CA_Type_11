@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { TextField, FormControlLabel, Paper } from '@mui/material';
+import { TextField, FormControlLabel } from '@mui/material';
 import CustomSizeCheckbox from 'components/form-controls/custom-size-checkbox';
-import { useFormik, type FormikErrors } from 'formik';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import AuthForm from './components/auth-form';
 
 type LoginValues = {
@@ -10,13 +11,20 @@ type LoginValues = {
   remember: boolean,
 };
 
-type LoginErrors = FormikErrors<LoginValues>;
+const validationSchema = yup.object({
+  email: yup.string()
+    .required('Paštas privalomas')
+    .email('Neteisingas pašto formatas'),
+  password: yup.string()
+    .required('Slaptažodis privalomas')
+    .min(8, 'Mažiausiai 8 simboliai'),
+});
 
 const LoginPage: React.FC = () => {
   const {
     values, touched, errors, isValid, dirty,
     handleChange, handleBlur,
-  } = useFormik({
+  } = useFormik<LoginValues>({
     initialValues: {
       email: '',
       password: '',
@@ -27,15 +35,7 @@ const LoginPage: React.FC = () => {
       console.log(formValues);
     },
 
-    validate({ email, password }) {
-      console.log('ATLIEKAMA VALIDACIJA');
-      const newErrors: LoginErrors = {};
-
-      if (email === '') newErrors.email = 'Negali būti tuščias';
-      if (password === '') newErrors.password = 'Negali būti tuščias';
-
-      return newErrors;
-    },
+    validationSchema,
   });
 
   return (
@@ -45,20 +45,6 @@ const LoginPage: React.FC = () => {
       onSubmit={() => { }}
       isValid={isValid && dirty}
     >
-      <Paper
-        elevation={3}
-        sx={{
-          p: 3, position: 'fixed', top: 100, left: 20,
-        }}
-      >
-        <h1>Formik state</h1>
-        <pre>
-          {JSON.stringify({
-            values, touched, errors, dirty,
-          }, null, 4)}
-        </pre>
-      </Paper>
-
       <TextField
         name="email"
         variant="filled"
