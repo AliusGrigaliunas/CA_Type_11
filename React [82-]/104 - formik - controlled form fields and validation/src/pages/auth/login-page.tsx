@@ -16,14 +16,13 @@ const validationSchema = yup.object({
     .required('Paštas privalomas')
     .email('Neteisingas pašto formatas'),
   password: yup.string()
-    .required('Slaptažodis privalomas')
-    .min(8, 'Mažiausiai 8 simboliai'),
+    .required('Slaptažodis privalomas'),
 });
 
 const LoginPage: React.FC = () => {
   const {
     values, touched, errors, isValid, dirty,
-    handleChange, handleBlur,
+    handleChange, handleBlur, handleSubmit,
   } = useFormik<LoginValues>({
     initialValues: {
       email: '',
@@ -42,7 +41,7 @@ const LoginPage: React.FC = () => {
     <AuthForm
       title="Prisijungimas"
       submitText="Prisijungti"
-      onSubmit={() => { }}
+      onSubmit={handleSubmit}
       isValid={isValid && dirty}
     >
       <TextField
