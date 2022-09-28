@@ -3,66 +3,29 @@ import { TextField, Autocomplete } from '@mui/material';
 import CheckboxGroup, { CheckboxOption } from 'components/form-controls/checkbox-group';
 import AuthForm from './components/auth-form';
 
-type ContentType = {
-  id: string,
-  title: string
-};
-
-type Topic = {
-  id: string,
-  title: string
-};
-
-const contentType2CheckboxOption = ({ id, title }: ContentType): CheckboxOption => ({
-  value: id,
-  label: title,
-});
-
-const checkboxOptionToContentType = ({ value, label }: CheckboxOption): ContentType => ({
-  id: value,
-  title: label,
-});
-
-const topics: Topic[] = [
-  { id: '1', title: 'HTML' },
-  { id: '2', title: 'CSS' },
-  { id: '3', title: 'JavaScript' },
-  { id: '4', title: 'DOM' },
-  { id: '5', title: 'TypeScript' },
-  { id: '6', title: 'Webpack' },
-  { id: '7', title: 'GIT' },
-  { id: '8', title: 'React' },
-  { id: '9', title: 'Node' },
-  { id: '10', title: 'Express' },
-  { id: '11', title: 'SQL' },
-  { id: '12', title: 'MongoDB' },
-];
-
-const contentTypes: ContentType[] = [
-  { id: '1', title: 'Straipsniai' },
-  { id: '2', title: 'Vaizdo įrašai' },
-  { id: '3', title: 'Klausimai' },
-  { id: '4', title: 'Užduotys' },
-];
-
-const contentTypeOptions = contentTypes.map(contentType2CheckboxOption);
-
+/*
+  1. Parsiųsti ir būsenos kintamuosiuose išsaugoti categories ir marketingIntrests duomenis
+    * categories duomenis pritaikykite ir pateikite Autocomplete field'ui 
+    * marketingIntrests duomenis pritaikykite ir pateikite CheckboxGroup field'ui 
+  2. Sukurti Formik helper'ius naudojant useFormik hook'są
+    * Įrašykite pradines reikšmes:
+    * Įrašykite onSubmit funkciją
+  3. Įgalinkite TextField laukams:
+    * įgalinkite įvedamų reikšmių dvipusį susiejimą su formik.values
+    * paliestumo būsenos saugojimą formik.fields objekte
+    * pateikite validacijos schemą (KOLKAS TIK TextField LAUKAMS)
+    * įgalinkite klaidų rodymą
+  4. Pritaikykite AuthForm komponentui validumo reikšmė naudojant formik.dirty ir formik.isValid helper'ius 
+*/
 const RegisterPage: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [selectedTopics, setSelectedTopics] = React.useState<Topic[]>([]);
-  const [selectedContentTypes, setSelectedContentTypes] = React.useState<CheckboxOption[]>([]);
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     console.log('Siunčiami duomenys į serverį, naudojant globalios būsenos valdymo įrankį:');
-    console.log({
-      email,
-      password,
-      selectedTopics,
-      selectedContentTypes: selectedContentTypes.map(checkboxOptionToContentType),
-    });
   };
 
   return (
@@ -82,25 +45,21 @@ const RegisterPage: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Autocomplete
-        options={topics}
+        options={...}
         multiple
-        getOptionLabel={({ title }) => title}
-        value={selectedTopics}
-        onChange={(_, newSelectedTopics) => setSelectedTopics(newSelectedTopics)}
+        getOptionLabel={...}
         renderInput={(inputProps) => (
           <TextField
-            label="Dominančios temos"
+            label="..."
             variant="filled"
             {...inputProps}
           />
         )}
       />
       <CheckboxGroup
-        label="Dominantys informacijos tipai"
-        name="instrests-types"
-        options={contentTypeOptions}
-        value={selectedContentTypes}
-        onChange={(_, newContentTypes) => setSelectedContentTypes(newContentTypes)}
+        label="..."
+        name="..."
+        options={...}
       />
     </AuthForm>
   );

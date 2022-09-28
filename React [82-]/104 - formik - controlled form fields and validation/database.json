@@ -97,5 +97,19 @@
       "id": "2",
       "title": "Molis"
     }
+  ],
+  "marketingIntrests": [
+    {
+      "id": "1",
+      "title": "Akcijos"
+    },
+    {
+      "id": "2",
+      "title": "Prekių pristatymai"
+    },
+    {
+      "id": "3",
+      "title": "Išpardavimai"
+    }
   ]
 }
